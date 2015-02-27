@@ -1,0 +1,11 @@
+<h1><%= library.name %></h1>
+
+<h2>Albums</h2>
+
+<ul>
+  <% @albums.each do |album| %>
+    <% unless album.photos.empty? %>
+      <li><%= link_to album %></li>
+    <% end %>
+  <% end %>
+</ul>
