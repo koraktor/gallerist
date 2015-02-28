@@ -8,8 +8,6 @@ $LOAD_PATH << 'lib'
 require 'gallerist'
 require 'gallerist/app'
 
-Gallerist::App.set :library_path, ENV['GALLERIST_LIBRARY']
-
 warmup { |app| Rack::MockRequest.new(app).get '/' }
 
 run Gallerist::App

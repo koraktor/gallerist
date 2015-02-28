@@ -17,6 +17,7 @@ class Gallerist::App < Sinatra::Base
   configure do
     enable :logging
 
+    set :library_path, ENV['GALLERIST_LIBRARY']
     set :views, File.join(settings.root, '..', '..', 'views')
   end
 
