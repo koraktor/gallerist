@@ -14,4 +14,8 @@ class Gallerist::ModelResource < ActiveRecord::Base
   alias_attribute :model_type, :attachedModelType
   alias_attribute :uuid, :resourceUuid
 
+  def inspect
+    '%s{id: %d, uuid: %s, file_name: %s}' % [ self.class, id, uuid, file_name ]
+  end
+
 end

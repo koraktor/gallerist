@@ -11,4 +11,11 @@ class AlbumPhoto < ActiveRecord::Base
   has_one :album, primary_key: 'albumId', foreign_key: 'modelId'
   has_one :photo, primary_key: 'versionId', foreign_key: 'modelId'
 
+  alias_attribute :album_id, :albumId
+  alias_attribute :photo_id, :versionId
+
+  def inspect
+    '%s{album_id: %d, photo_id: %d}' % [ self.class, album_id, photo_id ]
+  end
+
 end

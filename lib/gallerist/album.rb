@@ -23,4 +23,8 @@ class Gallerist::Album < ActiveRecord::Base
   }
   scope :visible, -> { where(trashed: false, hidden: false) }
 
+  def inspect
+    "%s{id: %d, uuid: %s, name: '%s'}" % [ self.class, id, uuid, name ]
+  end
+
 end

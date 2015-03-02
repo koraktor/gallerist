@@ -29,7 +29,7 @@ class Gallerist::Photo < ActiveRecord::Base
   end
 
   def inspect
-    "#{self.class}{uuid: %s, file_name: %s}" % [ uuid, file_name ] 
+    "%s{id: %d, uuid: %s, file_name: '%s'}" % [ self.class, id, uuid, file_name ]
   end
 
   def path

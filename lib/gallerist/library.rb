@@ -29,4 +29,8 @@ class Gallerist::Library
     File.join @path, 'Database', 'ImageProxies.apdb'
   end
 
+  def inspect
+    "%s{path: '%s'}" % [ self.class, path ]
+  end
+
 end

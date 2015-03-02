@@ -9,6 +9,11 @@ class Gallerist::PhotoMaster < ActiveRecord::Base
   self.primary_key = 'modelId'
   self.table_name = 'RKMaster'
 
+  alias_attribute :file_name, :fileName
   alias_attribute :path, :imagePath
+
+  def inspect
+    "%s{id: %d, uuid: %s, name: '%s'}" % [ self.class, id, uuid, file_name ]
+  end
 
 end
