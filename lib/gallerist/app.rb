@@ -70,7 +70,9 @@ class Gallerist::App < Sinatra::Base
       halt 404
     end
 
-    send_file File.join(library.path, photo.image_path)
+    send_file File.join(library.path, photo.image_path),
+      disposition: :inline,
+      filename: photo.file_name
   end
 
   get '/thumbs/:id' do
@@ -94,7 +96,9 @@ class Gallerist::App < Sinatra::Base
       halt 404
     end
 
-    send_file thumbnail_path
+    send_file thumbnail_path,
+      disposition: :inline,
+      filename: 'thumb_%s' % [ photo.file_name ]
   end
 
 end
