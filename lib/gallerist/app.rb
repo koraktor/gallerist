@@ -62,7 +62,7 @@ class Gallerist::App < Sinatra::Base
   def self.setup_default_middleware(builder)
     builder.use Sinatra::ExtendedRack
     builder.use Gallerist::ShowExceptions
-    setup_logging    builder
+    setup_logging builder
   end
 
   get '/' do
@@ -84,7 +84,7 @@ class Gallerist::App < Sinatra::Base
       photo = Gallerist::Photo.find params[:id]
     rescue ActiveRecord::RecordNotFound
       logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
-      halt 404
+      not_found
     end
 
     send_file photo.image_path,
@@ -97,7 +97,7 @@ class Gallerist::App < Sinatra::Base
       photo = Gallerist::Photo.find params[:id]
     rescue ActiveRecord::RecordNotFound
       logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
-      halt 404
+      not_found
     end
 
     send_file photo.small_thumbnail_path,
