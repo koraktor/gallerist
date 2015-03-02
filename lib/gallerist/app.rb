@@ -67,21 +67,38 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/photos/:id' do
-    photo = Gallerist::Photo.find params[:id]
+    begin
+      photo = Gallerist::Photo.find params[:id]
+    rescue ActiveRecord::RecordNotFound
+      logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
+      halt 404
+    end
 
     send_file File.join(library.path, photo.image_path)
   end
 
   get '/thumbs/:id' do
-    photo = Gallerist::Photo.find params[:id]
+    begin
+      photo = Gallerist::Photo.find params[:id]
+    rescue ActiveRecord::RecordNotFound
+      logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
+      halt 404
+    end
 
     candidates = []
     candidates << photo.thumbnail_uuid_thumb_path
     candidates << photo.thumbnail_uuid_path
     candidates << photo.thumbnail_simple_path
 
-    send_file candidates.map { |path| File.join library.path, path }.
+    thumbnail_path = candidates.map { |path| File.join library.path, path }.
                   find { |path| File.exists? path }
+
+    if thumbnail_path.nil?
+      logger.error 'Could not find a thumbnail for the photo with ID #%s.' % [ photo.id ]
+      halt 404
+    end
+
+    send_file thumbnail_path
   end
 
 end
