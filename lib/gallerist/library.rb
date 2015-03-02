@@ -26,8 +26,12 @@ class Gallerist::Library
     Gallerist::Album.all
   end
 
-  def database_path
+  def library_db
     File.join @path, 'Database', 'Library.apdb'
+  end
+
+  def image_proxies_db
+    File.join @path, 'Database', 'ImageProxies.apdb'
   end
 
 end

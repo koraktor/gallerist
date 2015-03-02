@@ -3,6 +3,8 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
+require 'gallerist/model_resource'
+
 class Gallerist::Photo < ActiveRecord::Base
 
   self.inheritance_column = nil
@@ -10,18 +12,22 @@ class Gallerist::Photo < ActiveRecord::Base
   self.table_name = 'RKVersion'
 
   has_one :master, class: Gallerist::PhotoMaster, primary_key: 'masterId', foreign_key: 'modelId'
+  has_one :model_resource, -> { where model_type: 2 }, class: Gallerist::ModelResource, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_and_belongs_to_many :albums, through: :album_photos
 
   alias_attribute :date, :imageDate
-  alias_attribute :file_path, :fileName
-
-  def file_name
-    File.basename file_path
-  end
+  alias_attribute :file_name, :fileName
 
   def image_path
-    File.join "Masters", master.path
+    if model_resource
+      uuid = model_resource.uuid
+      first, second = uuid[0].ord.to_s, uuid[1].ord.to_s
+
+      File.join 'resources', 'modelresources', first, second, uuid, model_resource.file_name
+    else
+      File.join 'Masters', master.path
+    end
   end
 
   def inspect

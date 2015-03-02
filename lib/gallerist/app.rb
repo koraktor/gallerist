@@ -32,8 +32,13 @@ class Gallerist::App < Sinatra::Base
       settings.set :library, Gallerist::Library.new(self, settings.library_path)
       settings.set :database, {
         adapter: 'sqlite3',
-        database: settings.library.database_path
+        database: library.library_db
       }
+
+      Gallerist::ModelResource.establish_connection({
+        adapter: 'sqlite3',
+        database: library.image_proxies_db
+      })
 
       logger.debug "  Found #{library.albums.size} albums."
     end
