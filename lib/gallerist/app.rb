@@ -24,6 +24,18 @@ class Gallerist::App < Sinatra::Base
 
   helpers Gallerist::Helpers
 
+  def send_file(file, options = {})
+    logger.debug "Serving file '%s' from library..." % [ file ]
+
+    file_path = File.join(library.path, file)
+    response = catch(:halt) { super file_path, options }
+    if response == 404
+      logger.error "File '%s' could not be served, because it does not exist." % file
+    end
+
+    halt response
+  end
+
   def library
     unless settings.respond_to? :library
       settings.set :library, Gallerist::Library.new(self, settings.library_path)
@@ -75,7 +87,7 @@ class Gallerist::App < Sinatra::Base
       halt 404
     end
 
-    send_file File.join(library.path, photo.image_path),
+    send_file photo.image_path,
       disposition: :inline,
       filename: photo.file_name
   end
@@ -88,7 +100,7 @@ class Gallerist::App < Sinatra::Base
       halt 404
     end
 
-    send_file File.join(library.path, photo.small_thumbnail_path),
+    send_file photo.small_thumbnail_path,
       disposition: :inline,
       filename: 'thumb_%s' % [ photo.file_name ]
   end
