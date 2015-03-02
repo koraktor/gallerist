@@ -9,6 +9,7 @@ class Gallerist::Photo < ActiveRecord::Base
   self.primary_key = 'modelId'
   self.table_name = 'RKVersion'
 
+  has_one :image_proxy_state, class: Gallerist::ImageProxyState, foreign_key: 'versionId'
   has_one :master, class: Gallerist::PhotoMaster, primary_key: 'masterId', foreign_key: 'modelId'
   has_one :model_resource, -> { where model_type: 2 }, class: Gallerist::ModelResource, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
@@ -36,20 +37,8 @@ class Gallerist::Photo < ActiveRecord::Base
     File.dirname master.path
   end
 
-  def thumbnail_file_name
-    "#{File.basename file_name, '.*'}.jpg"
-  end
-
-  def thumbnail_simple_path
-    "Thumbnails/#{path}/#{thumbnail_file_name}"
-  end
-
-  def thumbnail_uuid_path
-    "Thumbnails/#{path}/#{uuid}/#{thumbnail_file_name}"
-  end
-
-  def thumbnail_uuid_thumb_path
-    "Thumbnails/#{path}/#{uuid}/thumb_#{thumbnail_file_name}"
+  def small_thumbnail_path
+    File.join 'Thumbnails', image_proxy_state.small_thumbnail_path
   end
 
 end

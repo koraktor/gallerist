@@ -32,6 +32,11 @@ class Gallerist::App < Sinatra::Base
         database: library.library_db
       }
 
+      Gallerist::ImageProxyState.establish_connection({
+        adapter: 'sqlite3',
+        database: library.image_proxies_db
+      })
+
       Gallerist::ModelResource.establish_connection({
         adapter: 'sqlite3',
         database: library.image_proxies_db
@@ -83,20 +88,7 @@ class Gallerist::App < Sinatra::Base
       halt 404
     end
 
-    candidates = []
-    candidates << photo.thumbnail_uuid_thumb_path
-    candidates << photo.thumbnail_uuid_path
-    candidates << photo.thumbnail_simple_path
-
-    thumbnail_path = candidates.map { |path| File.join library.path, path }.
-                  find { |path| File.exists? path }
-
-    if thumbnail_path.nil?
-      logger.error 'Could not find a thumbnail for the photo with ID #%s.' % [ photo.id ]
-      halt 404
-    end
-
-    send_file thumbnail_path,
+    send_file File.join(library.path, photo.small_thumbnail_path),
       disposition: :inline,
       filename: 'thumb_%s' % [ photo.file_name ]
   end
