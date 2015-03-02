@@ -15,6 +15,12 @@ class Gallerist::Album < ActiveRecord::Base
   alias_attribute :hidden, :isHidden
   alias_attribute :trashed, :isInTrash
 
+  scope :nonempty, -> {
+    joins(:album_photos).
+    select('RKAlbum.*', 'count(RKAlbumVersion.albumId) as photos_count').
+    group('RKAlbumVersion.albumId').
+    having('photos_count > 0')
+  }
   scope :visible, -> { where(trashed: false, hidden: false) }
 
 end

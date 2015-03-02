@@ -52,7 +52,7 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/' do
-    @albums = library.albums.visible.order :date
+    @albums = library.albums.visible.nonempty.order :date
     @title = library.name
 
     erb :index
