@@ -3,11 +3,10 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-$LOAD_PATH << 'lib'
-
-require 'gallerist'
-require 'gallerist/app'
+$LOAD_PATH << File.join(__dir__, 'lib')
 
 warmup { |app| Rack::MockRequest.new(app).get '/' }
+
+require 'gallerist'
 
 run Gallerist::App

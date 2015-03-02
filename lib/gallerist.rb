@@ -4,4 +4,16 @@
 # Copyright (c) 2015, Sebastian Staudt
 
 module Gallerist
+
+  autoload :Album, 'gallerist/album'
+  autoload :AlbumPhoto, 'gallerist/album_photo'
+  autoload :App, 'gallerist/app'
+  autoload :Helpers, 'gallerist/helpers'
+  autoload :ImageProxyState, 'gallerist/image_proxy_state'
+  autoload :Library, 'gallerist/library'
+  autoload :ModelResource, 'gallerist/model_resource'
+  autoload :Photo, 'gallerist/photo'
+  autoload :PhotoMaster, 'gallerist/photo_master'
+  autoload :ShowExceptions, 'gallerist/middleware/show_exceptions'
+
 end

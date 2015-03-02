@@ -3,8 +3,6 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-require 'gallerist/model_resource'
-
 class Gallerist::Photo < ActiveRecord::Base
 
   self.inheritance_column = nil

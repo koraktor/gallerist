@@ -3,11 +3,6 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-require 'gallerist/album'
-require 'gallerist/album_photo'
-require 'gallerist/photo_master'
-require 'gallerist/photo'
-
 class Gallerist::Library
 
   attr_reader :app
