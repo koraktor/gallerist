@@ -19,7 +19,7 @@ class Gallerist::Photo < ActiveRecord::Base
   alias_attribute :file_name, :fileName
 
   def image_path
-    if model_resource
+    if model_resource && !video?
       uuid = model_resource.uuid
       first, second = uuid[0].ord.to_s, uuid[1].ord.to_s
 
@@ -39,6 +39,10 @@ class Gallerist::Photo < ActiveRecord::Base
 
   def small_thumbnail_path
     File.join 'Thumbnails', image_proxy_state.small_thumbnail_path
+  end
+
+  def video?
+    master.type == 'VIDT'
   end
 
 end
