@@ -5,6 +5,7 @@
 
 require 'logger'
 require 'sinatra/activerecord'
+require 'sqlite3/database_force_readonly'
 
 require 'gallerist/library'
 require 'gallerist/helpers'
