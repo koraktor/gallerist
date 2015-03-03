@@ -16,7 +16,8 @@ module Rack::Handler::Unicorn
         options[:Port] ||= 9292
 
         unicorn_options = {
-          listeners: [ '%s:%d' % [ options[:Host], options[:Port] ] ]
+          listeners: [ '%s:%d' % [ options[:Host], options[:Port] ] ],
+          worker_processes: options[:worker_processes] || 1
         }
 
         ::Unicorn::Launcher.daemonize!(unicorn_options) if options[:daemonize]
