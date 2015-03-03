@@ -13,7 +13,7 @@ module Rack::Handler::Unicorn
         environment = ENV['RACK_ENV'] || 'development'
         default_host = (environment == 'development') ? 'localhost' : '0.0.0.0'
         options[:Host] ||= default_host
-        options[:Port] ||= 8080
+        options[:Port] ||= 9292
 
         unicorn_options = {
           listeners: [ '%s:%d' % [ options[:Host], options[:Port] ] ]
