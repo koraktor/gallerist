@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::PhotoMaster < ActiveRecord::Base
+class Gallerist::Master < ActiveRecord::Base
 
   self.inheritance_column = nil
   self.primary_key = 'modelId'
