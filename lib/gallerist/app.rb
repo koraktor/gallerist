@@ -73,8 +73,10 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/' do
-    @albums = library.albums.visible.nonempty.order :date
     @title = library.name
+
+    @albums = library.albums.visible.nonempty.order :date
+    @tags = library.tags.nonempty.order 'photos_count desc'
 
     erb :index
   end
@@ -92,6 +94,13 @@ class Gallerist::App < Sinatra::Base
     send_file photo.image_path,
       disposition: :inline,
       filename: photo.file_name
+  end
+
+  get '/tags/:name' do
+    @tag = library.tags.find_by_simple_name params[:name]
+    @title = @tag.name
+
+    erb :tag
   end
 
   get '/thumbs/:id' do

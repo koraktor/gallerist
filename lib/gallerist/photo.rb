@@ -13,7 +13,9 @@ class Gallerist::Photo < ActiveRecord::Base
   has_one :master, primary_key: 'masterId', foreign_key: 'modelId'
   has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
-  has_and_belongs_to_many :albums, through: :album_photos
+  has_many :albums, through: :album_photos
+  has_many :tag_photos, primary_key: 'modelId', foreign_key: 'versionId'
+  has_many :tags, through: :tag_photos
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName

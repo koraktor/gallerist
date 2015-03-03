@@ -10,6 +10,8 @@ module Gallerist
   autoload :App, 'gallerist/app'
   autoload :Helpers, 'gallerist/helpers'
   autoload :ImageProxyState, 'gallerist/image_proxy_state'
+  autoload :Tag, 'gallerist/tag'
+  autoload :TagPhoto, 'gallerist/tag_photo'
   autoload :Library, 'gallerist/library'
   autoload :Master, 'gallerist/master'
   autoload :ModelResource, 'gallerist/model_resource'

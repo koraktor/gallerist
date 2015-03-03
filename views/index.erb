@@ -7,3 +7,7 @@
     <li><%= link_to album %></li>
   <% end %>
 </ul>
+
+<h2>Tags</h2>
+
+<%= @tags.map { |tag| link_to tag }.join(', ') %>

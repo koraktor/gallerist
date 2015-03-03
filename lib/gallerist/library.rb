@@ -21,6 +21,10 @@ class Gallerist::Library
     Gallerist::Album.all
   end
 
+  def tags
+    Gallerist::Tag.all
+  end
+
   def library_db
     File.join @path, 'Database', 'Library.apdb'
   end

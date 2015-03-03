@@ -10,12 +10,16 @@ module Gallerist::Helpers
   end
 
   def link_to(obj)
-    if obj.is_a? Gallerist::Album
+    case obj
+    when Gallerist::Album
       link = obj.name
       url = '/albums/%s' % [ obj.id ]
-    elsif obj.is_a? Gallerist::Photo
-      link = '<img src="/thumbs/%s">' % [ obj.id ]
+    when Gallerist::Photo
+      link = '<img src="/thumbs/%s" title="%s">' % [ obj.id, obj.tags.join(', ') ]
       url = '/photos/%s' % [ obj.id ]
+    when Gallerist::Tag
+      link = obj.name
+      url = '/tags/%s' % [ URI.encode(obj.simple_name) ]
     end
 
     '<a href="%s">%s</a>' % [ url, link ]
