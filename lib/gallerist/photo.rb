@@ -9,9 +9,9 @@ class Gallerist::Photo < ActiveRecord::Base
   self.primary_key = 'modelId'
   self.table_name = 'RKVersion'
 
-  has_one :image_proxy_state, class: Gallerist::ImageProxyState, foreign_key: 'versionId'
+  has_one :image_proxy_state, foreign_key: 'versionId'
   has_one :master, class: Gallerist::PhotoMaster, primary_key: 'masterId', foreign_key: 'modelId'
-  has_one :model_resource, -> { where model_type: 2 }, class: Gallerist::ModelResource, foreign_key: 'attachedModelId'
+  has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_and_belongs_to_many :albums, through: :album_photos
 
