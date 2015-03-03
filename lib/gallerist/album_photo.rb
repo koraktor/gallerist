@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class AlbumPhoto < ActiveRecord::Base
+class Gallerist::AlbumPhoto < ActiveRecord::Base
 
   self.primary_key = 'modelId'
   self.table_name = 'RKAlbumVersion'
