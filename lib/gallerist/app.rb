@@ -59,6 +59,13 @@ class Gallerist::App < Sinatra::Base
     settings.library
   end
 
+  def photo(id)
+    Gallerist::Photo.find id
+  rescue ActiveRecord::RecordNotFound
+    logger.error 'Could not find the photo with ID #%s.' % [ id ]
+    not_found
+  end
+
   def self.setup_default_middleware(builder)
     builder.use Sinatra::ExtendedRack
     builder.use Gallerist::ShowExceptions
@@ -80,12 +87,7 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/photos/:id' do
-    begin
-      photo = Gallerist::Photo.find params[:id]
-    rescue ActiveRecord::RecordNotFound
-      logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
-      not_found
-    end
+    photo = photo params[:id]
 
     send_file photo.image_path,
       disposition: :inline,
@@ -93,12 +95,7 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/thumbs/:id' do
-    begin
-      photo = Gallerist::Photo.find params[:id]
-    rescue ActiveRecord::RecordNotFound
-      logger.error 'Could not find the photo with ID #%s.' % [ params[:id] ]
-      not_found
-    end
+    photo = photo params[:id]
 
     send_file photo.small_thumbnail_path,
       disposition: :inline,
