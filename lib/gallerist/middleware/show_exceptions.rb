@@ -11,6 +11,8 @@ class Gallerist::ShowExceptions < Sinatra::ShowExceptions
   def call(env)
     @app.call(env)
   rescue Exception => e
+    raise e if env['rack.errors'].is_a? StringIO
+
     errors, env["rack.errors"] = env["rack.errors"], @@eats_errors
 
     if prefers_plain_text?(env)
