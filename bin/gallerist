@@ -11,5 +11,6 @@ require 'rack'
 config_path = File.expand_path File.join(__dir__, '..', 'config.ru')
 
 ENV['GALLERIST_LIBRARY'] = ARGV[0]
+ENV['RACK_ENV'] ||= 'production'
 
 Rack::Server.start config: config_path, server: :unicorn, worker_processes: 4
