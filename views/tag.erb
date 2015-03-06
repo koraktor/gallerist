@@ -3,7 +3,7 @@
 <div class="row">
   <% @tag.photos.order(:date).each do |photo| %>
     <div class="col-md-3">
-      <%= link_to photo %>
+      <%= erb :thumbnail, locals: { photo: photo } %>
     </div>
   <% end %>
 </div>

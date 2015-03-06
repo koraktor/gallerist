@@ -1,0 +1,17 @@
+<div class="thumbnail">
+  <a href="<%= url_for(photo) %>">
+    <img src="/thumbs/<%= photo.id %>">
+  </a>
+  <div class="caption">
+    <% unless photo.tags.to_a.empty? %>
+      <p>Tags: <%= photo.tags.map { |t| link_to t }.join('') %></p>
+    <% end %>
+    <a data-toggle="collapse" href="#photo-detail-<%= photo.id %>">
+      <i class="icon icon-info"></i>
+    </a>
+    <div class="collapse" id="photo-detail-<%= photo.id %>">
+      <div class="well">
+      </div>
+    </div>
+  </div>
+</div>
