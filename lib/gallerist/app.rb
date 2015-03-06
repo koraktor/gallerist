@@ -15,6 +15,7 @@ class Gallerist::App < Sinatra::Base
 
   configure do
     enable :logging
+    enable :show_exceptions
 
     set :root, File.join(root, '..', '..')
 
@@ -84,7 +85,9 @@ class Gallerist::App < Sinatra::Base
 
   def self.setup_default_middleware(builder)
     builder.use Sinatra::ExtendedRack
-    builder.use Gallerist::ShowExceptions
+    builder.use Gallerist::ShowExceptions if show_exceptions? && development?
+    builder.use Gallerist::RaiseWarmupExceptions
+
     setup_logging builder
   end
 

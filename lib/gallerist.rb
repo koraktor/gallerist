@@ -16,6 +16,7 @@ module Gallerist
   autoload :Master, 'gallerist/master'
   autoload :ModelResource, 'gallerist/model_resource'
   autoload :Photo, 'gallerist/photo'
+  autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
   autoload :ShowExceptions, 'gallerist/middleware/show_exceptions'
 
 end
