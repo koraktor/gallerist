@@ -9,4 +9,8 @@ warmup { |app| Rack::MockRequest.new(app).get '/' }
 
 require 'gallerist'
 
+map '/assets' do
+  run Gallerist::App.sprockets
+end
+
 run Gallerist::App

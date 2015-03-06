@@ -6,20 +6,34 @@
 require 'logger'
 require 'sinatra/activerecord'
 require 'sqlite3/database_force_readonly'
+require 'sinatra/sprockets-helpers'
 
 class Gallerist::App < Sinatra::Base
 
   register Sinatra::ActiveRecordExtension
+  register Sinatra::Sprockets::Helpers
 
   configure do
     enable :logging
 
+    set :root, File.join(root, '..', '..')
+
     set :library_path, ENV['GALLERIST_LIBRARY']
-    set :views, File.join(settings.root, '..', '..', 'views')
+    set :views, File.join(root, 'views')
+
+    set :sprockets, Sprockets::Environment.new(root)
+
+    sprockets.append_path File.join(root, 'assets', 'stylesheets')
+    sprockets.css_compressor = :scss
+
+    configure_sprockets_helpers do |helpers|
+      helpers.debug = development?
+    end
   end
 
   configure :development do
     set :logging, ::Logger::DEBUG
+    sprockets.logger = ::Logger.new($stdout, ::Logger::DEBUG)
   end
 
   helpers Gallerist::Helpers
