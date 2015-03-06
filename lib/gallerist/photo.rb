@@ -15,10 +15,12 @@ class Gallerist::Photo < ActiveRecord::Base
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :albums, through: :album_photos
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'versionId'
-  has_many :tags, through: :tag_photos
+  has_many :tags, -> { distinct }, through: :tag_photos
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
+
+  default_scope { select(:masterId, :modelId, :fileName, :imageDate, :uuid) }
 
   def image_path
     if model_resource && !video?

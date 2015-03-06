@@ -9,13 +9,14 @@ class Gallerist::Tag < ActiveRecord::Base
   self.table_name = 'RKKeyword'
 
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'keywordId'
-  has_many :photos, through: :tag_photos
+  has_many :photos, -> { distinct }, through: :tag_photos
 
   alias_attribute :simple_name, :searchName
 
+  default_scope { select(:modelId, :name, :searchName) }
   scope :nonempty, -> {
     joins(:tag_photos).
-    select('RKKeyword.*', 'count(RKKeywordForVersion.keywordId) as photos_count').
+    select('count(RKKeywordForVersion.keywordId) as photos_count').
     group('RKKeywordForVersion.keywordId').
     having('photos_count > 0')
   }
