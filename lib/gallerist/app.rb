@@ -6,7 +6,6 @@
 require 'bootstrap-sass'
 require 'logger'
 require 'sinatra/activerecord'
-require 'sqlite3/database_force_readonly'
 require 'sinatra/sprockets-helpers'
 
 class Gallerist::App < Sinatra::Base
