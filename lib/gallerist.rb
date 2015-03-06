@@ -13,6 +13,7 @@ module Gallerist
   autoload :Tag, 'gallerist/tag'
   autoload :TagPhoto, 'gallerist/tag_photo'
   autoload :Library, 'gallerist/library'
+  autoload :LibraryInUseError, 'gallerist/errors'
   autoload :Master, 'gallerist/master'
   autoload :ModelResource, 'gallerist/model_resource'
   autoload :Photo, 'gallerist/photo'
