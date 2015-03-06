@@ -10,11 +10,14 @@ module Gallerist::Helpers
   end
 
   def link_to(obj)
+    classes = []
+
     case obj
     when Gallerist::Album
       link = obj.name
       url = '/albums/%s' % [ obj.id ]
     when Gallerist::Photo
+      classes << 'thumbnail'
       link = '<img src="/thumbs/%s" title="%s">' % [ obj.id, obj.tags.join(', ') ]
       url = '/photos/%s' % [ obj.id ]
     when Gallerist::Tag
@@ -22,7 +25,9 @@ module Gallerist::Helpers
       url = '/tags/%s' % [ URI.encode(obj.simple_name) ]
     end
 
-    '<a href="%s">%s</a>' % [ url, link ]
+    classes = classes.empty? ? '' : ' class="%s"' % [ classes.join(' ') ]
+
+    '<a href="%s"%s>%s</a>' % [ url, classes, link ]
   end
 
   def title

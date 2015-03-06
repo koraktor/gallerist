@@ -1,7 +1,9 @@
 <h1><%= @tag.name %></h1>
 
-<ul>
+<div class="row">
   <% @tag.photos.order(:date).each do |photo| %>
-    <li><%= link_to photo %></li>
+    <div class="col-md-3">
+      <%= link_to photo %>
+    </div>
   <% end %>
-</ul>
+</div>
