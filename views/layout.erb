@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><%= title %></title>
+  <title><%= title %></title>
+
+  <link href="<%= stylesheet_path 'main' %>" rel="stylesheet">
 </head>
 <body>
+  <div class="container-fluid">
     <%= yield %>
+  </div>
 </body>
 </html>

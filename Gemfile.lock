@@ -15,7 +15,14 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    autoprefixer-rails (5.1.7)
+      execjs
+      json
+    bootstrap-sass (3.3.3)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.2.19)
     builder (3.2.2)
+    execjs (2.3.0)
     hike (1.2.3)
     i18n (0.7.0)
     json (1.8.2)
@@ -26,6 +33,7 @@ GEM
     rack-protection (1.5.3)
       rack
     raindrops (0.13.0)
+    sass (3.4.13)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -55,6 +63,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (~> 4.2.0)
+  bootstrap-sass (~> 3.3.3)
   rack (~> 1.6.0)
   sinatra (~> 1.4.5)
   sinatra-activerecord (~> 2.0.5)

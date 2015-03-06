@@ -6,6 +6,7 @@
 source 'https://rubygems.org'
 
 gem 'activerecord', '~> 4.2.0'
+gem 'bootstrap-sass', '~> 3.3.3'
 gem 'rack', '~> 1.6.0'
 gem 'sinatra', '~> 1.4.5'
 gem 'sinatra-activerecord', '~> 2.0.5'

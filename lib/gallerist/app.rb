@@ -3,6 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
+require 'bootstrap-sass'
 require 'logger'
 require 'sinatra/activerecord'
 require 'sqlite3/database_force_readonly'
@@ -29,6 +30,8 @@ class Gallerist::App < Sinatra::Base
     configure_sprockets_helpers do |helpers|
       helpers.debug = development?
     end
+
+    Bootstrap.load!
   end
 
   configure :development do
