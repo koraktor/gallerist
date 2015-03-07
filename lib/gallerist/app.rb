@@ -76,6 +76,19 @@ class Gallerist::App < Sinatra::Base
     settings.library
   end
 
+  def navbar_for(obj)
+    @navbar = [[ '/', library.name ]]
+
+    case obj
+    when Gallerist::Album
+      @navbar << [ '/albums', 'Albums' ]
+      @navbar << [ '/albums/%s' % [ obj.id ], obj.name ]
+    when Gallerist::Tag
+      @navbar << [ '/tags', 'Tags' ]
+      @navbar << [ '/tags/%s' % [ obj.simple_name ], obj.name ]
+    end
+  end
+
   def photo(id)
     Gallerist::Photo.find id
   rescue ActiveRecord::RecordNotFound
@@ -97,12 +110,16 @@ class Gallerist::App < Sinatra::Base
     @albums = library.albums.visible.nonempty.order :date
     @tags = library.tags.nonempty.order 'photos_count desc'
 
+    navbar_for :root
+
     erb :index
   end
 
   get '/albums/:id' do
     @album = library.albums.find params[:id]
     @title = @album.name
+
+    navbar_for @album
 
     erb :album
   end
@@ -118,6 +135,8 @@ class Gallerist::App < Sinatra::Base
   get '/tags/:name' do
     @tag = library.tags.find_by_simple_name params[:name]
     @title = @tag.name
+
+    navbar_for @tag
 
     erb :tag
   end

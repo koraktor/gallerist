@@ -36,6 +36,14 @@ module Gallerist::Helpers
     end
   end
 
+  def navbar
+    @navbar
+  end
+
+  def route_exists(url)
+    settings.routes['GET'].map(&:first).any? { |route| route =~ url }
+  end
+
   def title
     '%s – Gallerist' % [ @title ]
   end

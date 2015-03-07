@@ -7,6 +7,10 @@
 
 @import 'bootstrap';
 
+.navbar-inverse .navbar-brand:hover {
+  color: $navbar-inverse-brand-color;
+}
+
 .tag {
   display: inline-block;
   margin-right: 1pt;

@@ -6,6 +6,25 @@
   <link href="<%= stylesheet_path 'main' %>" rel="stylesheet">
 </head>
 <body>
+  <nav class="navbar navbar-default navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <span class="navbar-brand"><strong>Gallerist</strong></span>
+      </div>
+      <ul class="nav navbar-nav">
+        <% (navbar || []).each_with_index do |item, idx| %>
+          <li<%= ' class="active"' if idx == navbar.size - 1 %>>
+            <% if route_exists item.first %>
+              <a href="<%= item.first %>" ><%= item.last %></a>
+            <% else %>
+              <span class="navbar-text"><%= item.last %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container-fluid">
     <%= yield %>
   </div>
