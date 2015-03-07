@@ -25,6 +25,7 @@ class Gallerist::App < Sinatra::Base
     set :sprockets, Sprockets::Environment.new(root)
 
     sprockets.append_path File.join(root, 'assets', 'stylesheets')
+    sprockets.cache = Sprockets::Cache::FileStore.new Dir.tmpdir
     sprockets.css_compressor = :scss
 
     configure_sprockets_helpers do |helpers|
