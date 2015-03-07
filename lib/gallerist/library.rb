@@ -54,7 +54,7 @@ class Gallerist::Library
   end
 
   def inspect
-    "%s{path: '%s'}" % [ self.class, path ]
+    "#<%s path='%s'>" % [ self.class, path ]
   end
 
 end

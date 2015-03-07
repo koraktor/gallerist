@@ -22,7 +22,7 @@ class Gallerist::Tag < ActiveRecord::Base
   }
 
   def inspect
-    "%s{id: %d, name: '%s'}" % [ self.class, id, name ]
+    "#<%s id=%d name='%s'>" % [ self.class, id, name ]
   end
 
   def to_s

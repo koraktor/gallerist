@@ -17,7 +17,7 @@ class Gallerist::ModelResource < ActiveRecord::Base
   default_scope { select(:attachedModelType, :filename, :modelId, :resourceUuid) }
 
   def inspect
-    '%s{id: %d, uuid: %s, file_name: %s}' % [ self.class, id, uuid, file_name ]
+    '#<%s id=%d uuid=%s file_name=%s>' % [ self.class, id, uuid, file_name ]
   end
 
 end

@@ -15,7 +15,7 @@ class Gallerist::Master < ActiveRecord::Base
   default_scope { select(:fileName, :imagePath, :modelId, :type, :uuid) }
 
   def inspect
-    "%s{id: %d, uuid: %s, name: '%s'}" % [ self.class, id, uuid, file_name ]
+    "#<%s id=%d uuid=%s name='%s'>" % [ self.class, id, uuid, file_name ]
   end
 
 end

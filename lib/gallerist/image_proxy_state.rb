@@ -16,7 +16,7 @@ class Gallerist::ImageProxyState < ActiveRecord::Base
   default_scope { select(:miniThumbnailPath, :modelId, :versionId) }
 
   def inspect
-    '%s{id: %d, photo: %s}' % [ self.class, id, photo_id ]
+    '#<%s id=%d photo=%s>' % [ self.class, id, photo_id ]
   end
 
 end
