@@ -39,6 +39,12 @@ class Gallerist::App < Sinatra::Base
     sprockets.logger = ::Logger.new($stdout, ::Logger::DEBUG)
   end
 
+  error 500 do |error|
+    @title = 'Error'
+
+    erb :'500'
+  end
+
   helpers Gallerist::Helpers
 
   def send_library_file(file, options = {})
