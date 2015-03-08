@@ -16,9 +16,9 @@ class Gallerist::RaiseWarmupExceptions
       if $!.is_a? SQLite3::BusyException
         raise Gallerist::LibraryInUseError, Gallerist::App.library_path
       end
-
-      raise $!
     end
+
+    raise $!
   end
 
 end
