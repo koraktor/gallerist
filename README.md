@@ -30,6 +30,9 @@ $ bundle install
 $ bin/gallerist ~/Pictures/Photos\ Library.photoslibrary
 ```
 
+After that the application is served on port 9292. You can open it by simply
+browsing to `http://localhost:9292`.
+
 ## Caveats
 
  * iPhoto libraries work to a certain degree. But especially the full versions
