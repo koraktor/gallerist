@@ -9,11 +9,11 @@ module Gallerist::Helpers
     settings.library
   end
 
-  def link_to(obj)
+  def link_to(obj, classes = nil)
     url = url_for obj
     current = (url == request.path)
 
-    classes = []
+    classes = [ classes ].compact
 
     case obj
     when Gallerist::Album

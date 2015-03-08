@@ -19,10 +19,12 @@ class Gallerist::Photo < ActiveRecord::Base
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
+  alias_attribute :is_favorite, :isFavorite
 
   delegate :thumbnail_available?, to: :image_proxy_state
 
   default_scope { select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid) }
+  scope :favorites, -> { where(is_favorite: true) }
 
   def image_path
     if model_resource && !video?

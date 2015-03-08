@@ -57,4 +57,8 @@ class Gallerist::Library
     "#<%s path='%s'>" % [ self.class, path ]
   end
 
+  def photos
+    Gallerist::Photo.all
+  end
+
 end

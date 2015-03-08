@@ -41,7 +41,7 @@ $ bin/gallerist ~/Pictures/Photos\ Library.photoslibrary
 
 ## Future plans
 
- * Support for internal categories like favorites and videos
+ * Support for internal categories like photo stream and videos
  * Support for moments, faces and places
  * Performance improvements
  * Easier installation, e.g. through [Homebrew][brew]

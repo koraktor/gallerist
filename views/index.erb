@@ -1,10 +1,15 @@
+<div class="list-group">
+  <a class="list-group-item" href="/photos">All photos</a>
+  <a class="list-group-item" href="/favorites">Favorites</a>
+</div>
+
 <h2>Albums</h2>
 
-<ul>
+<div class="list-group">
   <% @albums.each do |album| %>
-    <li><%= link_to album %></li>
+    <%= link_to album, 'list-group-item' %>
   <% end %>
-</ul>
+</div>
 
 <h2>Tags</h2>
 

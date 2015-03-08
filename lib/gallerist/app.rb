@@ -81,6 +81,10 @@ class Gallerist::App < Sinatra::Base
     @navbar = [[ '/', library.name ]]
 
     case obj
+    when :all_photos
+      @navbar << [ '/photos', 'All photos' ]
+    when :favorites
+      @navbar << [ '/favorites', 'Favorites' ]
     when Gallerist::Album
       @navbar << [ '/albums', 'Albums' ]
       @navbar << [ '/albums/%s' % [ obj.id ], obj.name ]
@@ -123,6 +127,24 @@ class Gallerist::App < Sinatra::Base
     navbar_for @album
 
     erb :album
+  end
+
+  get '/favorites' do
+    @photos = library.photos.favorites
+    @title = 'Favorites'
+
+    navbar_for :favorites
+
+    erb :photos
+  end
+
+  get '/photos' do
+    @photos = library.photos
+    @title = 'All photos'
+
+    navbar_for :all_photos
+
+    erb :photos
   end
 
   get '/photos/:id' do
