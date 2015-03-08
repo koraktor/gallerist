@@ -12,7 +12,7 @@ class Gallerist::Master < ActiveRecord::Base
   alias_attribute :file_name, :fileName
   alias_attribute :path, :imagePath
 
-  default_scope { select(:fileName, :imagePath, :modelId, :type, :uuid) }
+  default_scope { select(:fileName, :imagePath, :modelId, :uuid) }
 
   def inspect
     "#<%s id=%d uuid=%s name='%s'>" % [ self.class, id, uuid, file_name ]

@@ -20,7 +20,7 @@ class Gallerist::Photo < ActiveRecord::Base
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
 
-  default_scope { select(:masterId, :modelId, :fileName, :imageDate, :uuid) }
+  default_scope { select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid) }
 
   def image_path
     if model_resource && !video?
@@ -46,7 +46,7 @@ class Gallerist::Photo < ActiveRecord::Base
   end
 
   def video?
-    master.type == 'VIDT'
+    type == 8
   end
 
 end
