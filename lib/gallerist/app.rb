@@ -145,7 +145,13 @@ class Gallerist::App < Sinatra::Base
   get '/thumbs/:id' do
     photo = photo params[:id]
 
-    send_library_file photo.small_thumbnail_path,
+    if photo.thumbnail_available?
+      thumbnail_path = photo.small_thumbnail_path
+    else
+      thumbnail_path = photo.preview_path
+    end
+
+    send_library_file thumbnail_path,
       disposition: :inline,
       filename: 'thumb_%s' % [ photo.file_name ]
   end

@@ -20,6 +20,8 @@ class Gallerist::Photo < ActiveRecord::Base
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
 
+  delegate :thumbnail_available?, to: :image_proxy_state
+
   default_scope { select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid) }
 
   def image_path
@@ -39,6 +41,12 @@ class Gallerist::Photo < ActiveRecord::Base
 
   def path
     File.dirname master.path
+  end
+
+  def preview_path
+    dir_name = File.dirname master.path
+    image_name = File.basename(master.path, '.*') + '.jpg'
+    File.join 'Previews', dir_name, image_name
   end
 
   def small_thumbnail_path
