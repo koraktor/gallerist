@@ -103,7 +103,7 @@ class Gallerist::App < Sinatra::Base
 
   def self.setup_default_middleware(builder)
     builder.use Sinatra::ExtendedRack
-    builder.use Gallerist::ShowExceptions if show_exceptions? && development?
+    builder.use Gallerist::ShowExceptions if development?
     builder.use Gallerist::RaiseWarmupExceptions
 
     setup_logging builder
