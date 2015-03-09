@@ -42,6 +42,8 @@ class Gallerist::App < Sinatra::Base
   error 500 do |error|
     @title = 'Error'
 
+    raise error if env['rack.errors'].is_a? StringIO
+
     erb :'500'
   end
 
