@@ -72,11 +72,13 @@ class Gallerist::App < Sinatra::Base
         adapter: 'sqlite3',
         database: library.library_db
       })
+      ActiveRecord::Base.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
 
       Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',
         database: library.image_proxies_db
       })
+      Gallerist::ImageProxiesModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
 
       logger.debug "  Found #{library.albums.size} albums."
     end
