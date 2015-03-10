@@ -66,7 +66,9 @@ class Gallerist::App < Sinatra::Base
 
   def library
     unless settings.respond_to? :library
-      settings.set :library, Gallerist::Library.new(self, settings.library_path)
+      settings.set :library, Gallerist::Library.new(settings.library_path)
+
+      logger.info "Loading library from \"#{library.path}\""
 
       ActiveRecord::Base.establish_connection({
         adapter: 'sqlite3',

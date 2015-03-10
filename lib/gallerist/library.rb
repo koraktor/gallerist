@@ -11,8 +11,7 @@ class Gallerist::Library
   attr_reader :name
   attr_reader :path
 
-  def initialize(app, library_path)
-    @app = app
+  def initialize(library_path)
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
     @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
@@ -22,8 +21,6 @@ class Gallerist::Library
 
     copy_tmp_db 'ImageProxies.apdb'
     copy_tmp_db 'Library.apdb'
-
-    app.logger.info "Loading library from \"#{@path}\""
   end
 
   def albums
