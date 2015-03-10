@@ -40,6 +40,10 @@ module Gallerist::Helpers
     @navbar
   end
 
+  def partial(partial, *options)
+    erb :"partials/#{partial}", *options
+  end
+
   def route_exists(url)
     settings.routes['GET'].map(&:first).any? { |route| route =~ url }
   end

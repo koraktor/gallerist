@@ -3,7 +3,7 @@
 <div class="row">
   <% @album.photos.order(:date).each do |photo| %>
     <div class="col-md-3">
-      <%= erb :thumbnail, locals: { photo: photo } %>
+      <%= partial :thumbnail, locals: { photo: photo } %>
     </div>
   <% end %>
 </div>
