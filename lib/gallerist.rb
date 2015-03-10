@@ -13,15 +13,29 @@ module Gallerist
   autoload :ShowExceptions, 'gallerist/middleware/show_exceptions'
 
   # Models
-  autoload :AdminData, 'gallerist/models/admin_data'
-  autoload :Album, 'gallerist/models/album'
-  autoload :AlbumPhoto, 'gallerist/models/album_photo'
-  autoload :ImageProxiesModel, 'gallerist/models/image_proxies_model'
-  autoload :ImageProxyState, 'gallerist/models/image_proxy_state'
-  autoload :Master, 'gallerist/models/master'
-  autoload :ModelResource, 'gallerist/models/model_resource'
-  autoload :Photo, 'gallerist/models/photo'
-  autoload :Tag, 'gallerist/models/tag'
-  autoload :TagPhoto, 'gallerist/models/tag_photo'
+
+  MODELS = {}
+
+  def self.model(name, file)
+    autoload name, file
+
+    MODELS[name] = file
+  end
+
+  def self.load_models
+    MODELS.values.each { |file| require file }
+  end
+
+  model :AdminData, 'gallerist/models/admin_data'
+  model :Album, 'gallerist/models/album'
+  model :AlbumPhoto, 'gallerist/models/album_photo'
+  model :BaseModel, 'gallerist/models/base_model'
+  model :ImageProxiesModel, 'gallerist/models/image_proxies_model'
+  model :ImageProxyState, 'gallerist/models/image_proxy_state'
+  model :Master, 'gallerist/models/master'
+  model :ModelResource, 'gallerist/models/model_resource'
+  model :Photo, 'gallerist/models/photo'
+  model :Tag, 'gallerist/models/tag'
+  model :TagPhoto, 'gallerist/models/tag_photo'
 
 end

@@ -76,6 +76,13 @@ class Gallerist::App < Sinatra::Base
 
       logger.info "  Found library with type '%s'." % [ library.app_id ]
 
+      Gallerist.load_models
+      Gallerist::BaseModel.descendants.each do |model|
+        logger.debug "Setting up %s for library type '%s'" % [ model, library.type ]
+
+        model.setup_for library.type
+      end
+
       Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',
         database: library.image_proxies_db

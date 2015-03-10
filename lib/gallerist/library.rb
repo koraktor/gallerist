@@ -48,6 +48,10 @@ class Gallerist::Library
     db.close unless db.nil?
   end
 
+  def iphoto?
+    app_id == 'com.apple.iPhoto'
+  end
+
   def tags
     Gallerist::Tag.all
   end
@@ -66,6 +70,10 @@ class Gallerist::Library
 
   def photos
     Gallerist::Photo.all
+  end
+
+  def type
+    iphoto? ? :iphoto : :photos
   end
 
 end
