@@ -74,13 +74,13 @@ class Gallerist::App < Sinatra::Base
       })
       ActiveRecord::Base.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
 
+      logger.info "  Found library with type '%s'." % [ library.app_id ]
+
       Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',
         database: library.image_proxies_db
       })
       Gallerist::ImageProxiesModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
-
-      logger.debug "  Found #{library.albums.size} albums."
     end
     settings.library
   end

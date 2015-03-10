@@ -5,6 +5,7 @@
 
 module Gallerist
 
+  autoload :AdminData, 'gallerist/admin_data'
   autoload :Album, 'gallerist/album'
   autoload :AlbumPhoto, 'gallerist/album_photo'
   autoload :App, 'gallerist/app'

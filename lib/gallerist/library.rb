@@ -30,6 +30,12 @@ class Gallerist::Library
     Gallerist::Album.all
   end
 
+  def app_id
+    @app_id ||= Gallerist::AdminData.
+      where(propertyArea: 'database', propertyName: 'applicationIdentifier').
+      pluck(:propertyValue).first
+  end
+
   def copy_tmp_db(db_name)
     source_path = File.join @db_path, db_name
     dest_path = File.join @temp_path, db_name
