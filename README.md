@@ -24,6 +24,12 @@ $ cd gallerist
 $ bundle install
 ```
 
+Updating an existing installation can be done with:
+
+```shell
+$ git pull
+```
+
 ## Usage
 
 ```shell
