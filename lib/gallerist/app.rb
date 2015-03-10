@@ -3,14 +3,13 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
+require 'active_record'
 require 'bootstrap-sass'
 require 'logger'
-require 'sinatra/activerecord'
 require 'sinatra/sprockets-helpers'
 
 class Gallerist::App < Sinatra::Base
 
-  register Sinatra::ActiveRecordExtension
   register Sinatra::Sprockets::Helpers
 
   configure do
@@ -36,7 +35,11 @@ class Gallerist::App < Sinatra::Base
 
   configure :development do
     set :logging, ::Logger::DEBUG
-    sprockets.logger = ::Logger.new($stdout, ::Logger::DEBUG)
+
+    debug_logger = ::Logger.new($stdout, ::Logger::DEBUG)
+
+    sprockets.logger = debug_logger
+    ActiveRecord::Base.logger = debug_logger
   end
 
   error 500 do |error|
@@ -64,17 +67,13 @@ class Gallerist::App < Sinatra::Base
   def library
     unless settings.respond_to? :library
       settings.set :library, Gallerist::Library.new(self, settings.library_path)
-      settings.set :database, {
+
+      ActiveRecord::Base.establish_connection({
         adapter: 'sqlite3',
         database: library.library_db
-      }
-
-      Gallerist::ImageProxyState.establish_connection({
-        adapter: 'sqlite3',
-        database: library.image_proxies_db
       })
 
-      Gallerist::ModelResource.establish_connection({
+      Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',
         database: library.image_proxies_db
       })

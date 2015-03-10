@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::ImageProxyState < ActiveRecord::Base
+class Gallerist::ImageProxyState < Gallerist::ImageProxiesModel
 
   self.primary_key = 'modelId'
   self.table_name = 'RKImageProxyState'

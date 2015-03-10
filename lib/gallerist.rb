@@ -9,6 +9,7 @@ module Gallerist
   autoload :AlbumPhoto, 'gallerist/album_photo'
   autoload :App, 'gallerist/app'
   autoload :Helpers, 'gallerist/helpers'
+  autoload :ImageProxiesModel, 'gallerist/image_proxies_model'
   autoload :ImageProxyState, 'gallerist/image_proxy_state'
   autoload :Tag, 'gallerist/tag'
   autoload :TagPhoto, 'gallerist/tag_photo'

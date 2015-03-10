@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::ModelResource < ActiveRecord::Base
+class Gallerist::ModelResource < Gallerist::ImageProxiesModel
 
   self.primary_key = 'modelId'
   self.table_name = 'RKModelResource'
