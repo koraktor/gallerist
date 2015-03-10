@@ -15,12 +15,13 @@ class Gallerist::Library
     @app = app
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
+    @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
 
     @temp_path = Dir.mktmpdir 'gallerist'
     at_exit { FileUtils.rm_rf @temp_path }
 
-    copy_tmp_db 'Library.apdb'
     copy_tmp_db 'ImageProxies.apdb'
+    copy_tmp_db 'Library.apdb'
 
     app.logger.info "Loading library from \"#{@path}\""
   end
@@ -30,7 +31,7 @@ class Gallerist::Library
   end
 
   def copy_tmp_db(db_name)
-    source_path = File.join @path, 'Database', db_name
+    source_path = File.join @db_path, db_name
     dest_path = File.join @temp_path, db_name
 
     db = SQLite3::Database.new source_path
