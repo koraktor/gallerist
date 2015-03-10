@@ -11,7 +11,7 @@ class Gallerist::ShowExceptions < Sinatra::ShowExceptions
   def call(env)
     @app.call(env)
   rescue Exception => e
-    raise if env['rack.errors'].is_a? StringIO
+    raise if env['rack.warmup']
 
     errors, env["rack.errors"] = env["rack.errors"], @@eats_errors
 

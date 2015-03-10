@@ -8,7 +8,11 @@ unless defined? Gallerist
   require 'gallerist'
 end
 
-warmup { |app| Rack::MockRequest.new(app).get '/' }
+warmup do |app|
+  Rack::MockRequest.new(app).get '/',
+    'rack.errors' => $stderr,
+    'rack.warmup' => true
+end
 
 map '/assets' do
   run Gallerist::App.sprockets
