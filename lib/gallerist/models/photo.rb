@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::Photo < ActiveRecord::Base
+class Gallerist::Photo < Gallerist::BaseModel
 
   self.inheritance_column = nil
   self.primary_key = 'modelId'
@@ -24,8 +24,15 @@ class Gallerist::Photo < ActiveRecord::Base
 
   delegate :thumbnail_available?, to: :image_proxy_state
 
-  default_scope { select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid) }
   scope :favorites, -> { where(is_favorite: true) }
+
+  photos do
+    default_scope { select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid) }
+  end
+
+  iphoto do
+    default_scope { select(:masterId, :modelId, :fileName, :imageDate, :uuid) }
+  end
 
   def image_path
     if model_resource && !video?
