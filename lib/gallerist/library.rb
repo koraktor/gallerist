@@ -17,7 +17,8 @@ class Gallerist::Library
     @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
 
     @temp_path = Dir.mktmpdir 'gallerist'
-    at_exit { FileUtils.rm_rf @temp_path }
+    temp_path = @temp_path.dup
+    at_exit { FileUtils.rm_rf temp_path }
 
     copy_tmp_db 'ImageProxies.apdb'
     copy_tmp_db 'Library.apdb'
