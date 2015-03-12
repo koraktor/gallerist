@@ -86,7 +86,11 @@ class Gallerist::App < Sinatra::Base
         model.setup_for library.type
       end
 
-      library.copy_tmp_dbs if settings.copy_dbs
+      if settings.copy_dbs
+        logger.debug 'Creating temporary copies of the library databases...'
+        library.copy_tmp_dbs
+        logger.debug '  Completed.'
+      end
 
       Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',
