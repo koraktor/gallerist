@@ -16,12 +16,16 @@ class Gallerist::Library
     @path = File.expand_path library_path
     @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
 
-    @temp_path = Dir.mktmpdir 'gallerist'
-    temp_path = @temp_path.dup
-    at_exit { FileUtils.rm_rf temp_path }
+    if ENV['GALLERIST_NOCOPY']
+      @temp_path = @db_path
+    else
+      @temp_path = Dir.mktmpdir 'gallerist'
+      temp_path = @temp_path.dup
+      at_exit { FileUtils.rm_rf temp_path }
 
-    copy_tmp_db 'ImageProxies.apdb'
-    copy_tmp_db 'Library.apdb'
+      copy_tmp_db 'ImageProxies.apdb'
+      copy_tmp_db 'Library.apdb'
+    end
   end
 
   def albums

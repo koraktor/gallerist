@@ -17,7 +17,6 @@ opts = OptionParser.new do |opts|
 
   opts.separator ''
   opts.separator 'Options:'
-
   opts.on('-p', '--port PORT', 'Specify on which port to listen') do |port|
     server_options[:port] = port
   end
@@ -28,6 +27,12 @@ opts = OptionParser.new do |opts|
   opts.separator ''
   opts.separator 'Arguments:'
   opts.separator opts.summary_indent + '<library> The path to the photo library to open.'
+
+  opts.separator ''
+  opts.separator 'Advanced options:'
+  opts.on('-n', '--no-copy', 'Disable temporary copies of the library databases') do
+    ENV['GALLERIST_NOCOPY'] = 'true'
+  end
 end
 opts.parse!
 
