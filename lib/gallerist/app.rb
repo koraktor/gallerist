@@ -18,6 +18,7 @@ class Gallerist::App < Sinatra::Base
     set :root, File.join(root, '..', '..')
 
     set :library_path, ENV['GALLERIST_LIBRARY']
+    set :copy_dbs, !ENV['GALLERIST_NOCOPY']
     set :views, File.join(root, 'views')
 
     set :sprockets, Sprockets::Environment.new(root)
@@ -84,6 +85,8 @@ class Gallerist::App < Sinatra::Base
 
         model.setup_for library.type
       end
+
+      library.copy_tmp_dbs if settings.copy_dbs
 
       Gallerist::ImageProxiesModel.establish_connection({
         adapter: 'sqlite3',

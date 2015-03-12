@@ -15,17 +15,6 @@ class Gallerist::Library
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
     @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
-
-    if ENV['GALLERIST_NOCOPY']
-      @temp_path = @db_path
-    else
-      @temp_path = Dir.mktmpdir 'gallerist'
-      temp_path = @temp_path.dup
-      at_exit { FileUtils.rm_rf temp_path }
-
-      copy_tmp_db 'ImageProxies.apdb'
-      copy_tmp_db 'Library.apdb'
-    end
   end
 
   def albums
@@ -38,9 +27,20 @@ class Gallerist::Library
       pluck(:propertyValue).first
   end
 
-  def copy_tmp_db(db_name)
+  def copy_tmp_dbs
+    new_db_path = Dir.mktmpdir 'gallerist'
+    temp_path = new_db_path.dup
+    at_exit { FileUtils.rm_rf temp_path }
+
+    copy_tmp_db 'ImageProxies.apdb', new_db_path
+    copy_tmp_db 'Library.apdb', new_db_path
+
+    @db_path = new_db_path
+  end
+
+  def copy_tmp_db(db_name, temp_path)
     source_path = File.join @db_path, db_name
-    dest_path = File.join @temp_path, db_name
+    dest_path = File.join temp_path, db_name
 
     db = SQLite3::Database.new source_path
     db.transaction :immediate do |_|
