@@ -11,12 +11,16 @@ require 'rack'
 
 ENV['RACK_ENV'] ||= 'production'
 
+server_options = { port: 9292 }
 opts = OptionParser.new do |opts|
   opts.banner = 'Usage: gallerist [options] <library>'
 
   opts.separator ''
   opts.separator 'Options:'
 
+  opts.on('-p', '--port PORT', 'Specify on which port to listen') do |port|
+    server_options[:port] = port
+  end
   opts.on('-d', '--debug', 'Enable debug mode') do
     ENV['RACK_ENV'] = 'development'
   end
@@ -41,7 +45,10 @@ if ENV['GALLERIST_LIBRARY'].nil?
 end
 
 begin
-  Rack::Server.start config: config_path, server: :unicorn, worker_processes: 4
+  Rack::Server.start config: config_path,
+                     server: :unicorn,
+                     Port: server_options[:port],
+                     worker_processes: 4
 rescue Gallerist::LibraryInUseError
   $stderr.puts 'The library is currently in use.' <<
                ' Is it currently opened in Photos?'
