@@ -6,7 +6,26 @@
 # Copyright (c) 2015, Sebastian Staudt
 
 require 'bundler/setup'
+require 'optparse'
 require 'rack'
+
+ENV['RACK_ENV'] ||= 'production'
+
+opts = OptionParser.new do |opts|
+  opts.banner = 'Usage: gallerist [options] <library>'
+
+  opts.separator ''
+  opts.separator 'Options:'
+
+  opts.on('-d', '--debug', 'Enable debug mode') do
+    ENV['RACK_ENV'] = 'development'
+  end
+
+  opts.separator ''
+  opts.separator 'Arguments:'
+  opts.separator opts.summary_indent + '<library> The path to the photo library to open.'
+end
+opts.parse!
 
 $LOAD_PATH << File.join(__dir__, '..', 'lib')
 
@@ -15,7 +34,11 @@ require 'gallerist'
 config_path = File.expand_path File.join(__dir__, '..', 'config.ru')
 
 ENV['GALLERIST_LIBRARY'] = ARGV[0]
-ENV['RACK_ENV'] ||= 'production'
+
+if ENV['GALLERIST_LIBRARY'].nil?
+  puts opts.help
+  exit 1
+end
 
 begin
   Rack::Server.start config: config_path, server: :unicorn, worker_processes: 4
