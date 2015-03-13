@@ -22,7 +22,7 @@ class Gallerist::Photo < Gallerist::BaseModel
   alias_attribute :file_name, :fileName
   alias_attribute :is_favorite, :isFavorite
 
-  delegate :thumbnail_available?, to: :image_proxy_state
+  delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true
 
   scope :favorites, -> { where(is_favorite: true) }
 
