@@ -27,20 +27,31 @@ class Gallerist::Library
       pluck(:propertyValue).first
   end
 
-  def copy_tmp_dbs
-    new_db_path = Dir.mktmpdir 'gallerist'
-    temp_path = new_db_path.dup
-    at_exit { FileUtils.rm_rf temp_path }
-
-    copy_tmp_db 'ImageProxies.apdb', new_db_path
-    copy_tmp_db 'Library.apdb', new_db_path
-
-    @db_path = new_db_path
+  def db_path
+    @temp_path || @db_path
   end
 
-  def copy_tmp_db(db_name, temp_path)
+  def copy_base_db
+    @temp_path = Dir.mktmpdir 'gallerist'
+    temp_path = @temp_path.dup
+    at_exit { FileUtils.rm_rf temp_path }
+
+    copy_tmp_db 'Library.apdb'
+  end
+
+  def copy_extra_dbs
+    copy_tmp_db 'ImageProxies.apdb'
+
+    if iphoto?
+      copy_tmp_db 'Faces.db'
+    else
+      copy_tmp_db 'Person.db'
+    end
+  end
+
+  def copy_tmp_db(db_name)
     source_path = File.join @db_path, db_name
-    dest_path = File.join temp_path, db_name
+    dest_path = File.join @temp_path, db_name
 
     db = SQLite3::Database.new source_path
     db.transaction :immediate do |_|
@@ -59,11 +70,11 @@ class Gallerist::Library
   end
 
   def library_db
-    File.join @temp_path, 'Library.apdb'
+    File.join db_path, 'Library.apdb'
   end
 
   def image_proxies_db
-    File.join @temp_path, 'ImageProxies.apdb'
+    File.join db_path, 'ImageProxies.apdb'
   end
 
   def inspect

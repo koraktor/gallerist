@@ -71,11 +71,23 @@ class Gallerist::App < Sinatra::Base
 
       logger.info "Loading library from \"#{library.path}\""
 
+      if settings.copy_dbs
+        logger.debug 'Creating temporary copy of the main library database...'
+        library.copy_base_db
+        logger.debug '  Completed.'
+      end
+
       ActiveRecord::Base.establish_connection({
         adapter: 'sqlite3',
         database: library.library_db
       })
       ActiveRecord::Base.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
+
+      if settings.copy_dbs
+        logger.debug 'Creating temporary copies of additional library databases...'
+        library.copy_extra_dbs
+        logger.debug '  Completed.'
+      end
 
       logger.info "  Found library with type '%s'." % [ library.app_id ]
 
@@ -84,12 +96,6 @@ class Gallerist::App < Sinatra::Base
         logger.debug "Setting up %s for library type '%s'" % [ model, library.type ]
 
         model.setup_for library.type
-      end
-
-      if settings.copy_dbs
-        logger.debug 'Creating temporary copies of the library databases...'
-        library.copy_tmp_dbs
-        logger.debug '  Completed.'
       end
 
       Gallerist::ImageProxiesModel.establish_connection({
