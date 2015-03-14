@@ -1,12 +1,13 @@
 Gallerist
 =========
 
-Gallerist is a web application to browse libraries of Apple’s Photos app. It is
-built on top of [Sinatra][sinatra].
+Gallerist is a web application to browse libraries of Apple Photos and iPhoto.
+It is built on top of [Sinatra][sinatra].
 
 ## Requirements
 
- * One or more Photos libraries (`.photoslibrary` directories)
+ * One or more Photos or iPhoto libraries (`.photoslibrary` or `.photolibrary`
+   directories)
  * Ruby 2.x with Bundler
  
 OS X 10.9 and above ship with Ruby 2.0. You will only have to install Bundler
@@ -41,8 +42,7 @@ browsing to `http://localhost:9292`.
 
 ## Caveats
 
- * iPhoto libraries work to a certain degree. But especially the full versions
-   of the photos do not work, yet. Additionally, iPhoto’s events are not
+ * iPhoto libraries work to a certain degree as iPhoto’s events are not
    listed, only albums.
  * Gallerist works on a copy of the library databases, i.e. changes to the
    original library will not be reflected instantly. You will have to restart
