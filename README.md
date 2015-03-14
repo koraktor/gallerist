@@ -37,8 +37,11 @@ $ git pull
 $ bin/gallerist ~/Pictures/Photos\ Library.photoslibrary
 ```
 
-After that the application is served on port 9292. You can open it by simply
-browsing to `http://localhost:9292`.
+After that the application is served on port 9292 by default. You can open it
+by simply browsing to `http://localhost:9292`.
+
+Further command-line arguments are available, see `gallerist --help` for more
+information.
 
 ## Caveats
 
