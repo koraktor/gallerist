@@ -18,6 +18,10 @@ module Gallerist::Helpers
     case obj
     when Gallerist::Album
       link = obj.name
+    when Gallerist::Person
+      classes << 'label' << 'tag'
+      classes << (current ? 'label-info' : 'label-primary')
+      link = obj.name
     when Gallerist::Photo
       classes << 'thumbnail'
       link = '<img src="/thumbs/%s" title="%s">' % [ obj.id, obj.tags.join(', ') ]
@@ -56,6 +60,8 @@ module Gallerist::Helpers
     case obj
     when Gallerist::Album
       '/albums/%s' % [ obj.id ]
+    when Gallerist::Person
+      '/persons/%s' % [ obj.id ]
     when Gallerist::Photo
       '/photos/%s' % [ obj.id ]
     when Gallerist::Tag

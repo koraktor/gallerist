@@ -51,7 +51,7 @@ browsing to `http://localhost:9292`.
 ## Future plans
 
  * Support for internal categories like photo stream and videos
- * Support for moments, faces and places
+ * Support for moments and places
  * Performance improvements
  * Easier installation, e.g. through [Homebrew][brew]
 

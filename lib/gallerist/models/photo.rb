@@ -14,9 +14,20 @@ class Gallerist::Photo < Gallerist::BaseModel
   has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :albums, through: :album_photos
-  has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :tags, -> { distinct }, through: :tag_photos
+
+  iphoto do
+    alias_attribute :master_uuid, :masterUuid
+
+    def person_photos
+      Gallerist::PersonPhoto.where master_uuid: master.uuid
+    end
+  end
+
+  photos do
+    has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
+  end
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
@@ -62,8 +73,16 @@ class Gallerist::Photo < Gallerist::BaseModel
 
   # ActiveRecord does not support has_many-through associations across
   # different databases, so we have to query the persons manually
-  def persons
-    Gallerist::Person.where modelId: person_photos.map(&:person_id)
+  photos do
+    def persons
+      Gallerist::Person.where modelId: person_photos.map(&:person_id)
+    end
+  end
+
+  iphoto do
+    def persons
+      Gallerist::Person.where faceKey: person_photos.map(&:person_id)
+    end
   end
 
   def preview_path

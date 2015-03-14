@@ -1,0 +1,9 @@
+<h1><%= @person.name %></h1>
+
+<div class="row">
+  <% @person.photos.order(:date).each do |photo| %>
+    <div class="col-md-3">
+      <%= partial :thumbnail, locals: { photo: photo } %>
+    </div>
+  <% end %>
+</div>

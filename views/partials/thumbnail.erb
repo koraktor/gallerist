@@ -6,5 +6,8 @@
     <% unless photo.tags.to_a.empty? %>
       <p>Tags: <%= photo.tags.map { |t| link_to t }.join('') %></p>
     <% end %>
+    <% unless photo.persons.to_a.empty? %>
+      <p>Persons: <%= photo.persons.map { |t| link_to t }.join('') %></p>
+    <% end %>
   </div>
 </div>

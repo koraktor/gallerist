@@ -81,6 +81,14 @@ class Gallerist::Library
     "#<%s path='%s'>" % [ self.class, path ]
   end
 
+  def person_db
+    File.join db_path, iphoto? ? 'Faces.db' : 'Person.db'
+  end
+
+  def persons
+    Gallerist::Person.all
+  end
+
   def photos
     Gallerist::Photo.all
   end

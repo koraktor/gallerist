@@ -103,6 +103,12 @@ class Gallerist::App < Sinatra::Base
         database: library.image_proxies_db
       })
       Gallerist::ImageProxiesModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
+
+      Gallerist::PersonModel.establish_connection({
+        adapter: 'sqlite3',
+        database: library.person_db
+      })
+      Gallerist::PersonModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
     end
     settings.library
   end
@@ -118,6 +124,9 @@ class Gallerist::App < Sinatra::Base
     when Gallerist::Album
       @navbar << [ '/albums', 'Albums' ]
       @navbar << [ '/albums/%s' % [ obj.id ], obj.name ]
+    when Gallerist::Person
+      @navbar << [ '/persons', 'Persons' ]
+      @navbar << [ '/persons/%s' % [ obj.id ], obj.name ]
     when Gallerist::Tag
       @navbar << [ '/tags', 'Tags' ]
       @navbar << [ '/tags/%s' % [ obj.simple_name ], obj.name ]
@@ -143,6 +152,7 @@ class Gallerist::App < Sinatra::Base
     @title = library.name
 
     @albums = library.albums.visible.nonempty.order :date
+    @persons = library.persons
     @tags = library.tags.nonempty.order 'photos_count desc'
 
     navbar_for :root
@@ -167,6 +177,15 @@ class Gallerist::App < Sinatra::Base
 
     erb :photos
   end
+
+  get '/persons/:id' do
+      @person = library.persons.find params[:id]
+      @title = @person.name
+
+      navbar_for @person
+
+      erb :person
+    end
 
   get '/photos' do
     @photos = library.photos
