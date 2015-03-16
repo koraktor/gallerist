@@ -24,7 +24,7 @@ module Gallerist::Helpers
       link = obj.name
     when Gallerist::Photo
       classes << 'thumbnail'
-      link = '<img src="/thumbs/%s" title="%s">' % [ obj.id, obj.tags.join(', ') ]
+      link = '<img src="/thumbs/%s">' % [ obj.id ]
     when Gallerist::Tag
       classes << 'label' << 'tag'
       classes << (current ? 'label-info' : 'label-primary')
