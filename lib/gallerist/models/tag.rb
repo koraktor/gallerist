@@ -3,9 +3,8 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::Tag < ActiveRecord::Base
+class Gallerist::Tag < Gallerist::BaseModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKKeyword'
 
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'keywordId'

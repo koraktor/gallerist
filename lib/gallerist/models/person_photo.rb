@@ -6,7 +6,6 @@
 class Gallerist::PersonPhoto < Gallerist::PersonModel
 
   iphoto do
-    self.primary_key = 'modelId'
     self.table_name = 'RKDetectedFace'
 
     has_one :person, primary_key: 'faceKey', foreign_key: 'faceKey'
@@ -24,7 +23,6 @@ class Gallerist::PersonPhoto < Gallerist::PersonModel
   end
 
   photos do
-    self.primary_key = 'modelId'
     self.table_name = 'RKPersonVersion'
 
     has_one :person, primary_key: 'personId', foreign_key: 'modelId'

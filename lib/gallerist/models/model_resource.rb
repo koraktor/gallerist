@@ -5,7 +5,6 @@
 
 class Gallerist::ModelResource < Gallerist::ImageProxiesModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKModelResource'
 
   belongs_to :photo

@@ -5,8 +5,6 @@
 
 class Gallerist::Master < Gallerist::BaseModel
 
-  self.inheritance_column = nil
-  self.primary_key = 'modelId'
   self.table_name = 'RKMaster'
 
   alias_attribute :file_name, :fileName

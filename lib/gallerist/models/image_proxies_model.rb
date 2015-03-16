@@ -4,7 +4,7 @@
 # Copyright (c) 2015, Sebastian Staudt
 
 
-class Gallerist::ImageProxiesModel < ActiveRecord::Base
+class Gallerist::ImageProxiesModel < Gallerist::BaseModel
 
   self.abstract_class = true
 

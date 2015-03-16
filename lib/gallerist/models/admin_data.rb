@@ -3,9 +3,8 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::AdminData < ActiveRecord::Base
+class Gallerist::AdminData < Gallerist::BaseModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKAdminData'
 
 end

@@ -5,10 +5,7 @@
 
 class Gallerist::Person < Gallerist::PersonModel
 
-  self.primary_key = 'modelId'
-
   iphoto do
-    self.primary_key = 'faceKey'
     self.table_name = 'RKFaceName'
 
     has_many :person_photos, primary_key: 'faceKey', foreign_key: 'faceKey'

@@ -3,9 +3,8 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::TagPhoto < ActiveRecord::Base
+class Gallerist::TagPhoto < Gallerist::BaseModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKKeywordForVersion'
 
   has_one :tag, primary_key: 'keywordId', foreign_key: 'modelId'

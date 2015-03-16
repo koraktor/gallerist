@@ -3,9 +3,8 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-class Gallerist::Album < ActiveRecord::Base
+class Gallerist::Album < Gallerist::BaseModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKAlbum'
 
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'albumId'

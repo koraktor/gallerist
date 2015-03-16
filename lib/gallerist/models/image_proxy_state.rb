@@ -5,7 +5,6 @@
 
 class Gallerist::ImageProxyState < Gallerist::ImageProxiesModel
 
-  self.primary_key = 'modelId'
   self.table_name = 'RKImageProxyState'
 
   belongs_to :photo

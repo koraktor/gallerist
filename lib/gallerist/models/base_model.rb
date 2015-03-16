@@ -6,6 +6,8 @@
 class Gallerist::BaseModel < ActiveRecord::Base
 
   self.abstract_class = true
+  self.inheritance_column = nil
+  self.primary_key = 'modelId'
 
   def self.iphoto(&block)
     store_setup :iphoto, &block

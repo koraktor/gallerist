@@ -5,8 +5,6 @@
 
 class Gallerist::Photo < Gallerist::BaseModel
 
-  self.inheritance_column = nil
-  self.primary_key = 'modelId'
   self.table_name = 'RKVersion'
 
   has_one :image_proxy_state, foreign_key: 'versionId'
