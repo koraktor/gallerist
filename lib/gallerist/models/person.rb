@@ -10,7 +10,7 @@ class Gallerist::Person < Gallerist::PersonModel
 
     has_many :person_photos, primary_key: 'faceKey', foreign_key: 'faceKey'
 
-    default_scope { select(:name, :faceKey) }
+    default_scope { select(:name, :faceKey, :keyVersionUuid).order(:manual_order) }
   end
 
   photos do
@@ -20,8 +20,10 @@ class Gallerist::Person < Gallerist::PersonModel
 
     alias_attribute :simple_name, :searchName
 
-    default_scope { select(:modelId, :name, :representativeFaceId) }
+    default_scope { select(:modelId, :name, :representativeFaceId).order(:manual_order) }
   end
+
+  alias_attribute :manual_order, :manualOrder
 
   def inspect
     "#<%s id=%d name='%s'>" % [ self.class, id, name ]
