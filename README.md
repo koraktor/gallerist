@@ -9,27 +9,23 @@ It is built on top of [Sinatra][sinatra].
  * One or more Photos or iPhoto libraries (`.photoslibrary` or `.photolibrary`
    directories)
  * Ruby 2.x with Bundler
- 
+
 OS X 10.9 and above ship with Ruby 2.0. You will only have to install Bundler
 (`gem install bundler`) to get started.
 
 ## Installation
 
-Currently, there’s no sophisticated installation implemented (or required). A
-simple clone of the repository and installation of all dependencies is
-sufficient:
+Gallerist can be simply installed as a Ruby gem.
 
 ```shell
-$ git clone https://github.com/koraktor/gallerist
-$ cd gallerist
-$ bundle install
+$ gem install gallerist
 ```
 
-Updating an existing installation can be done with:
+*Note*: You might need to use `sudo` if you’re installing into your system
+Ruby, e.g. when not using rbenv or RVM.
 
-```shell
-$ git pull
-```
+If you want to run the current development code please use Git to clone the
+repository.
 
 ## Usage
 
@@ -56,7 +52,6 @@ information.
  * Support for internal categories like photo stream and videos
  * Support for moments and places
  * Performance improvements
- * Easier installation, e.g. through [Homebrew][brew]
 
  [brew]: http://brew.sh
  [sinatra]: http://www.sinatrarb.com
