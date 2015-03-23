@@ -11,10 +11,10 @@ It is built on top of [Sinatra][sinatra].
 
  * One or more Photos or iPhoto libraries (`.photoslibrary` or `.photolibrary`
    directories)
- * Ruby 2.x with Bundler
+ * Ruby 2.x
 
-OS X 10.9 and above ship with Ruby 2.0. You will only have to install Bundler
-(`gem install bundler`) to get started.
+OS X 10.9 and above ship with Ruby 2.0. Ruby 1.9 probably works, but won’t be
+supported.
 
 ## Installation
 
