@@ -5,7 +5,7 @@
 
 module Gallerist
 
-  VERSION = '0.0.0'
+  VERSION = '0.1.0'
 
   autoload :App, 'gallerist/app'
   autoload :Helpers, 'gallerist/helpers'
