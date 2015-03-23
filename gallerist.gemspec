@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sqlite3', '~> 1.3'
   s.add_dependency 'unicorn', '~> 4.8'
 
+  s.executables   = [ 'gallerist' ]
   s.files         = `git ls-files`.split
   s.require_paths = 'lib'
 end
