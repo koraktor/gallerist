@@ -1,6 +1,8 @@
 Gallerist
 =========
 
+[![Gem Version](https://badge.fury.io/rb/gallerist.svg)](http://badge.fury.io/rb/gallerist)
+
 Gallerist is a web application to browse libraries of Apple Photos and iPhoto.
 It is built on top of [Sinatra][sinatra].
 
