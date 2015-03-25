@@ -11,6 +11,7 @@ require 'sinatra/sprockets-helpers'
 class Gallerist::App < Sinatra::Base
 
   autoload :BaseExtensions, 'gallerist/app/base_extensions'
+  autoload :Helpers, 'gallerist/app/helpers'
 
   extend BaseExtensions
 
@@ -55,7 +56,7 @@ class Gallerist::App < Sinatra::Base
     erb :'500'
   end
 
-  helpers Gallerist::Helpers
+  helpers Helpers
 
   def send_library_file(file, options = {})
     logger.debug "Serving file '%s' from library..." % [ file ]

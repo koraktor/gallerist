@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-module Gallerist::Helpers
+module Gallerist::App::Helpers
 
   def library
     settings.library

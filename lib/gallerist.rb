@@ -8,7 +8,6 @@ module Gallerist
   VERSION = '0.1.0'
 
   autoload :App, 'gallerist/app'
-  autoload :Helpers, 'gallerist/helpers'
   autoload :Library, 'gallerist/library'
   autoload :LibraryInUseError, 'gallerist/errors'
   autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
