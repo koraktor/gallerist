@@ -10,6 +10,10 @@ require 'sinatra/sprockets-helpers'
 
 class Gallerist::App < Sinatra::Base
 
+  autoload :BaseExtensions, 'gallerist/app/base_extensions'
+
+  extend BaseExtensions
+
   register Sinatra::Sprockets::Helpers
 
   configure do
@@ -138,14 +142,6 @@ class Gallerist::App < Sinatra::Base
   rescue ActiveRecord::RecordNotFound
     logger.error 'Could not find the photo with ID #%s.' % [ id ]
     not_found
-  end
-
-  def self.setup_default_middleware(builder)
-    builder.use Sinatra::ExtendedRack
-    builder.use Gallerist::ShowExceptions if show_exceptions?
-    builder.use Gallerist::RaiseWarmupExceptions
-
-    setup_logging builder
   end
 
   get '/' do
