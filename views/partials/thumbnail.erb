@@ -4,10 +4,10 @@
   </a>
   <div class="caption">
     <% unless photo.tags.to_a.empty? %>
-      <p>Tags: <%= photo.tags.map { |t| link_to t }.join('') %></p>
+      <p>Tags: <%= photo.tags.map { |t| link_to t }.join '' %></p>
     <% end %>
     <% unless photo.persons.to_a.empty? %>
-      <p>Persons: <%= photo.persons.map { |t| link_to t }.join('') %></p>
+      <p>Persons: <%= photo.persons.map { |p| link_to p }.join '' %></p>
     <% end %>
   </div>
 </div>
