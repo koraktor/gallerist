@@ -9,9 +9,12 @@ unless defined? Gallerist
 end
 
 warmup do |app|
+  error = []
   Rack::MockRequest.new(app).get '/',
     'rack.errors' => $stderr,
-    'rack.warmup' => true
+    'rack.warmup' => true,
+    'rack.warmup.error' => error
+  raise error.first unless error.empty?
 end
 
 map '/assets' do

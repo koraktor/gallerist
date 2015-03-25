@@ -11,11 +11,13 @@ class Gallerist::RaiseWarmupExceptions
 
   def call(env)
     @app.call env
-  rescue Exception
+  rescue Exception => error
     if env['rack.warmup']
-      if defined?(SQLite3::BusyException) && $!.is_a?(SQLite3::BusyException)
-        raise Gallerist::LibraryInUseError, Gallerist::App.library_path
+      if defined?(SQLite3::BusyException) && error.is_a?(SQLite3::BusyException)
+        error = Gallerist::LibraryInUseError.new Gallerist::App.library_path
       end
+
+      env['rack.warmup.error'] << error
     end
 
     raise $!

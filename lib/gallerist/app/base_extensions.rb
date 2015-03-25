@@ -7,7 +7,7 @@ module Gallerist::App::BaseExtensions
 
   def setup_default_middleware(builder)
     builder.use Sinatra::ExtendedRack
-    builder.use Gallerist::ShowExceptions if show_exceptions?
+    builder.use Sinatra::ShowExceptions if show_exceptions?
     builder.use Gallerist::RaiseWarmupExceptions
 
     setup_logging builder
