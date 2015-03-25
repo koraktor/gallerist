@@ -3,6 +3,7 @@ Gallerist
 
 [![Gem Version](https://badge.fury.io/rb/gallerist.svg)](http://badge.fury.io/rb/gallerist)
 [![Dependency Status](https://gemnasium.com/koraktor/gallerist.svg)](https://gemnasium.com/koraktor/gallerist)
+[![Code Climate](https://codeclimate.com/github/koraktor/gallerist/badges/gpa.svg)](https://codeclimate.com/github/koraktor/gallerist)
 
 Gallerist is a web application to browse libraries of Apple Photos and iPhoto.
 It is built on top of [Sinatra][sinatra].
