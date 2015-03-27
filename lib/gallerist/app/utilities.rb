@@ -28,11 +28,7 @@ module Gallerist::App::Utilities
       logger.debug '  Completed.'
     end
 
-    ActiveRecord::Base.establish_connection({
-      adapter: 'sqlite3',
-      database: library.library_db
-    })
-    ActiveRecord::Base.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
+    Gallerist::BaseModel.use_library library
 
     if settings.copy_dbs
       logger.debug 'Creating temporary copies of additional library databases...'
@@ -49,17 +45,8 @@ module Gallerist::App::Utilities
       model.setup_for library.type
     end
 
-    Gallerist::ImageProxiesModel.establish_connection({
-      adapter: 'sqlite3',
-      database: library.image_proxies_db
-    })
-    Gallerist::ImageProxiesModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
-
-    Gallerist::PersonModel.establish_connection({
-      adapter: 'sqlite3',
-      database: library.person_db
-    })
-    Gallerist::PersonModel.connection.exec_query 'PRAGMA journal_mode="MEMORY";'
+    Gallerist::ImageProxiesModel.use_library library
+    Gallerist::PersonModel.use_library library
 
     settings.library
   end

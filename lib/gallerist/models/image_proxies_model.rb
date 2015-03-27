@@ -7,5 +7,6 @@
 class Gallerist::ImageProxiesModel < Gallerist::BaseModel
 
   self.abstract_class = true
+  self.database = :image_proxies_db
 
 end

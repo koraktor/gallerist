@@ -6,5 +6,6 @@
 class Gallerist::PersonModel < Gallerist::BaseModel
 
   self.abstract_class = true
+  self.database = :person_db
 
 end
