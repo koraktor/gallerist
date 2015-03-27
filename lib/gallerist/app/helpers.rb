@@ -6,7 +6,7 @@
 module Gallerist::App::Helpers
 
   def library
-    settings.library
+    settings.library || setup_library
   end
 
   def link_to(obj, classes = nil)
