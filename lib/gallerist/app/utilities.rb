@@ -64,23 +64,29 @@ module Gallerist::App::Utilities
     settings.library
   end
 
+  def navbar_item(name, url, *args)
+    url = url % args unless args.empty?
+    @navbar << [ url, name ]
+  end
+
   def navbar_for(obj)
-    @navbar = [[ '/', library.name ]]
+    @navbar = []
+    navbar_item library.name, '/'
 
     case obj
     when :all_photos
-      @navbar << [ '/photos', 'All photos' ]
+      navbar_item 'All photos', '/photos'
     when :favorites
-      @navbar << [ '/favorites', 'Favorites' ]
+      navbar_item 'Favorites', '/favorites'
     when Gallerist::Album
-      @navbar << [ '/albums', 'Albums' ]
-      @navbar << [ '/albums/%s' % [ obj.id ], obj.name ]
+      navbar_item 'Albums', '/albums'
+      navbar_item obj.name, '/albums/%d', obj.id
     when Gallerist::Person
-      @navbar << [ '/persons', 'Persons' ]
-      @navbar << [ '/persons/%s' % [ obj.id ], obj.name ]
+      navbar_item 'Persons', '/persons'
+      navbar_item obj.name, '/persons/%d', obj.id
     when Gallerist::Tag
-      @navbar << [ '/tags', 'Tags' ]
-      @navbar << [ '/tags/%s' % [ obj.simple_name ], obj.name ]
+      navbar_item 'Tags', '/tags'
+      navbar_item obj.name, '/tags/%s', obj.simple_name
     end
   end
 
