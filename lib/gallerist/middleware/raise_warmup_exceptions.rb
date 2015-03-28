@@ -18,6 +18,7 @@ class Gallerist::RaiseWarmupExceptions
       end
 
       env['rack.warmup.error'] << error
+      return 500, {}, ''
     end
 
     raise $!

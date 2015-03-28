@@ -21,12 +21,14 @@ class Gallerist::App < Sinatra::Base
 
   configure do
     enable :logging
+    enable :show_exceptions
 
     set :root, File.join(root, '..', '..')
 
+    set :copy_dbs, !ENV['GALLERIST_NOCOPY']
+    set :dump_errors, Proc.new { development? }
     set :library, nil
     set :library_path, ENV['GALLERIST_LIBRARY']
-    set :copy_dbs, !ENV['GALLERIST_NOCOPY']
     set :views, File.join(root, 'views')
 
     set :sprockets, Sprockets::Environment.new(root)
