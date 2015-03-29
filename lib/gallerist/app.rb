@@ -21,7 +21,6 @@ class Gallerist::App < Sinatra::Base
 
   configure do
     enable :logging
-    enable :show_exceptions
 
     set :root, File.join(root, '..', '..')
 

@@ -10,10 +10,12 @@ end
 
 warmup do |app|
   error = []
+  Gallerist::App.enable :show_exceptions
   Rack::MockRequest.new(app).get '/',
     'rack.errors' => $stderr,
     'rack.warmup' => true,
     'rack.warmup.error' => error
+  Gallerist::App.disable :show_exceptions
   raise error.first unless error.empty?
 end
 
