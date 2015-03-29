@@ -18,7 +18,8 @@ module Gallerist::App::Utilities
   end
 
   def setup_library
-    settings.set :library, Gallerist::Library.new(settings.library_path)
+    library = Gallerist::Library.new settings.library_path
+    settings.set :library, library
 
     logger.info "Loading library from \"#{library.path}\""
 
@@ -36,9 +37,9 @@ module Gallerist::App::Utilities
       logger.debug '  Completed.'
     end
 
-    logger.info "  Found library with type '%s'." % [ library.app_id ]
+    logger.info "  Found library with type '#{library.app_id}'."
 
-    logger.debug "Setting up models for library type '%s'" % [ library.type ]
+    logger.debug "Setting up models for library type '#{library.type}'"
     Gallerist.load_models library.type
     Gallerist::BaseModel.descendants.each do |model|
       model.setup_for library.type
@@ -47,7 +48,7 @@ module Gallerist::App::Utilities
     Gallerist::ImageProxiesModel.use_library library
     Gallerist::PersonModel.use_library library
 
-    settings.library
+    library
   end
 
   def navbar_item(name, url, *args)
