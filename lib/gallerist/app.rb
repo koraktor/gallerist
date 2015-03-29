@@ -74,12 +74,7 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/albums/:id' do
-    @album = library.albums.find params[:id]
-    @title = @album.name
-
-    navbar_for @album
-
-    erb :album
+    render_object :album
   end
 
   get '/favorites' do
@@ -92,13 +87,8 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/persons/:id' do
-      @person = library.persons.find params[:id]
-      @title = @person.name
-
-      navbar_for @person
-
-      erb :person
-    end
+    render_object :person
+  end
 
   get '/photos' do
     @photos = library.photos

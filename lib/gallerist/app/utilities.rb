@@ -83,4 +83,16 @@ module Gallerist::App::Utilities
     not_found
   end
 
+  def render_object(type)
+    objects = library.send "#{type}s".to_sym
+    object = objects.find params[:id]
+    @title = object.name
+
+    navbar_for object
+
+    instance_variable_set "@#{type}".to_sym, object
+
+    erb type
+  end
+
 end
