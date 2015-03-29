@@ -38,10 +38,9 @@ module Gallerist::App::Utilities
 
     logger.info "  Found library with type '%s'." % [ library.app_id ]
 
+    logger.debug "Setting up models for library type '%s'" % [ library.type ]
     Gallerist.load_models
     Gallerist::BaseModel.descendants.each do |model|
-      logger.debug "Setting up %s for library type '%s'" % [ model, library.type ]
-
       model.setup_for library.type
     end
 
