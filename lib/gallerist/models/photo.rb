@@ -15,18 +15,6 @@ class Gallerist::Photo < Gallerist::BaseModel
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :tags, -> { distinct }, through: :tag_photos
 
-  iphoto do
-    alias_attribute :master_uuid, :masterUuid
-
-    def person_photos
-      Gallerist::PersonPhoto.where master_uuid: master.uuid
-    end
-  end
-
-  photos do
-    has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
-  end
-
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
   alias_attribute :is_favorite, :isFavorite
@@ -35,20 +23,6 @@ class Gallerist::Photo < Gallerist::BaseModel
   delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true
 
   scope :favorites, -> { where(is_favorite: true) }
-
-  photos do
-    default_scope do
-      select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid).
-      where(show_in_library: true)
-    end
-  end
-
-  iphoto do
-    default_scope do
-      select(:masterId, :modelId, :fileName, :imageDate, :uuid).
-      where(show_in_library: true)
-    end
-  end
 
   def image_path
     if model_resource && !video?
@@ -67,20 +41,6 @@ class Gallerist::Photo < Gallerist::BaseModel
 
   def path
     File.dirname master.path
-  end
-
-  # ActiveRecord does not support has_many-through associations across
-  # different databases, so we have to query the persons manually
-  photos do
-    def persons
-      Gallerist::Person.where modelId: person_photos.map(&:person_id)
-    end
-  end
-
-  iphoto do
-    def persons
-      Gallerist::Person.where faceKey: person_photos.map(&:person_id)
-    end
   end
 
   def preview_path

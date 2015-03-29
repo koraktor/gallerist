@@ -10,14 +10,6 @@ class Gallerist::Master < Gallerist::BaseModel
   alias_attribute :file_name, :fileName
   alias_attribute :path, :imagePath
 
-  photos do
-    default_scope { select(:fileName, :imagePath, :modelId, :uuid) }
-  end
-
-  iphoto do
-    default_scope { select(:fileName, :imagePath, :modelId, :type, :uuid) }
-  end
-
   def inspect
     "#<%s id=%d uuid=%s name='%s'>" % [ self.class, id, uuid, file_name ]
   end

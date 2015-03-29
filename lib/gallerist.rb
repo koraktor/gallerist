@@ -16,29 +16,41 @@ module Gallerist
 
   MODELS = {}
 
-  def self.model(name, file)
-    autoload name, file
+  def self.model(name, file, type = :all)
+    autoload name, 'gallerist/models/%s' % [ file ]
 
     MODELS[name] = file
   end
 
-  def self.load_models
-    MODELS.values.each { |file| require file }
+  def self.load_models(library_type)
+    MODELS.each_value do |file|
+      require 'gallerist/models/%s' % [ file ]
+
+      begin
+        model_extesion = 'gallerist/models/%s_extensions/%s' % [ library_type, file ]
+        require model_extesion
+      rescue LoadError
+      end
+    end
   end
 
-  model :AdminData, 'gallerist/models/admin_data'
-  model :Album, 'gallerist/models/album'
-  model :AlbumPhoto, 'gallerist/models/album_photo'
-  model :BaseModel, 'gallerist/models/base_model'
-  model :ImageProxiesModel, 'gallerist/models/image_proxies_model'
-  model :ImageProxyState, 'gallerist/models/image_proxy_state'
-  model :Master, 'gallerist/models/master'
-  model :ModelResource, 'gallerist/models/model_resource'
-  model :Person, 'gallerist/models/person'
-  model :PersonModel, 'gallerist/models/person_model'
-  model :PersonPhoto, 'gallerist/models/person_photo'
-  model :Photo, 'gallerist/models/photo'
-  model :Tag, 'gallerist/models/tag'
-  model :TagPhoto, 'gallerist/models/tag_photo'
+  model :AdminData, 'admin_data'
+  model :Album, 'album'
+  model :AlbumPhoto, 'album_photo'
+  model :BaseModel, 'base_model'
+  model :Face, 'face'
+  model :ImageProxiesModel, 'image_proxies_model'
+  model :ImageProxyState, 'image_proxy_state'
+  model :Master, 'master'
+  model :ModelResource, 'model_resource'
+  model :Person, 'person'
+  model :PersonModel, 'person_model'
+  model :PersonPhoto, 'person_photo'
+  model :Photo, 'photo'
+  model :Tag, 'tag'
+  model :TagPhoto, 'tag_photo'
+
+  module IphotoExtensions; end
+  module PhotosExtensions; end
 
 end

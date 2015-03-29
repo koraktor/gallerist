@@ -14,28 +14,16 @@ class Gallerist::BaseModel < ActiveRecord::Base
   self.inheritance_column = nil
   self.primary_key = 'modelId'
 
-  def self.iphoto(&block)
-    store_setup :iphoto, &block
-  end
-
   def self.journal_mode(mode)
     connection.exec_query 'PRAGMA journal_mode="%s";' % [ mode ]
   end
 
-  def self.photos(&block)
-    store_setup :photos, &block
-  end
-
   def self.setup_for(app)
-    ((@setups || {})[app] || []).each do |setup|
-      setup.call
+    extensions = Gallerist.const_get '%sExtensions' % [ app.capitalize ]
+    class_name = name.demodulize
+    if extensions.const_defined? class_name
+      include extensions.const_get class_name
     end
-  end
-
-  def self.store_setup(app, &block)
-    @setups ||= {}
-    @setups[app] ||= []
-    @setups[app] << block
   end
 
   def self.use_library(library)
