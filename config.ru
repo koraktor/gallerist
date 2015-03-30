@@ -15,7 +15,7 @@ warmup do |app|
     'rack.errors' => $stderr,
     'rack.warmup' => true,
     'rack.warmup.error' => error
-  Gallerist::App.disable :show_exceptions
+  Gallerist::App.disable :show_exceptions unless Gallerist::App.development?
   raise error.first unless error.empty?
 end
 
