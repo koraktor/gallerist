@@ -30,14 +30,14 @@
   position: relative;
 }
 
-.thumbnail img {
-  width: 100%;
-}
-
-.thumbnail .fa {
+.thumbnail > div:first-child .fa {
   color: #fff;
   position: absolute;
   left: 1em;
   text-shadow: 1px 1px 2px #000;
   top: 1em;
+}
+
+.thumbnail img {
+  width: 100%;
 }

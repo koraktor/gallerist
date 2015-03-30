@@ -1,11 +1,13 @@
 <div class="list-group">
-  <a class="list-group-item" href="/photos">All photos</a>
+  <a class="list-group-item" href="/photos">
+    <i class="fa fa-fw fa-th"></i> All photos
+  </a>
   <a class="list-group-item" href="/favorites">
-    <i class="fa fa-heart"></i> Favorites
+    <i class="fa fa-fw fa-heart"></i> Favorites
   </a>
 </div>
 
-<h2>Albums</h2>
+<h2><i class="fa fa-fw fa-folder-o"></i> Albums</h2>
 
 <div class="list-group">
   <% @albums.each do |album| %>
@@ -13,13 +15,13 @@
   <% end %>
 </div>
 
-<h2>Tags</h2>
+<h2><i class="fa fa-fw fa-tags"></i> Tags</h2>
 
 <h3>
   <%= @tags.map { |tag| link_to tag }.join %>
 </h3>
 
-<h2>Persons</h2>
+<h2><i class="fa fa-fw fa-users"></i> Persons</h2>
 
 <h3>
   <%= @persons.map { |person| link_to person }.join %>
