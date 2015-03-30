@@ -9,7 +9,7 @@ module Gallerist::IphotoExtensions::Photo
     model.alias_attribute :master_uuid, :masterUuid
 
     model.send :default_scope do
-      model.select(:masterId, :modelId, :fileName, :imageDate, :uuid).
+      model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :uuid).
       where(show_in_library: true)
     end
   end

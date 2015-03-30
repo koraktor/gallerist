@@ -5,6 +5,7 @@
 
 require 'active_record'
 require 'bootstrap-sass'
+require 'font-awesome-sass'
 require 'logger'
 require 'sinatra/sprockets-helpers'
 
@@ -14,10 +15,8 @@ class Gallerist::App < Sinatra::Base
   autoload :Helpers, 'gallerist/app/helpers'
   autoload :Utilities, 'gallerist/app/utilities'
 
-  register BaseExtensions
+  register BaseExtensions, Sinatra::Sprockets::Helpers
   helpers Helpers, Utilities
-
-  register Sinatra::Sprockets::Helpers
 
   configure do
     enable :logging
@@ -30,9 +29,14 @@ class Gallerist::App < Sinatra::Base
     set :library_path, ENV['GALLERIST_LIBRARY']
     set :views, File.join(root, 'views')
 
+    Sprockets.register_mime_type 'application/vnd.ms-fontobject', '.eot'
+    Sprockets.register_mime_type 'application/x-font-ttf', '.ttf'
+    Sprockets.register_mime_type 'application/font-woff', '.woff'
+
     set :sprockets, Sprockets::Environment.new(root)
 
     sprockets.append_path File.join(root, 'assets', 'stylesheets')
+    sprockets.append_path FontAwesome::Sass.fonts_path
     sprockets.cache = Sprockets::Cache::FileStore.new Dir.tmpdir
     sprockets.css_compressor = :scss
 
@@ -40,7 +44,6 @@ class Gallerist::App < Sinatra::Base
       helpers.debug = development?
     end
 
-    Bootstrap.load!
   end
 
   configure :development do

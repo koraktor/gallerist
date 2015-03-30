@@ -9,7 +9,7 @@ module Gallerist::PhotosExtensions::Photo
     model.has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
 
     model.send :default_scope do
-      model.select(:masterId, :modelId, :fileName, :imageDate, :type, :uuid).
+      model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
       where(show_in_library: true)
     end
   end

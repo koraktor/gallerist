@@ -1,7 +1,14 @@
 <div class="thumbnail">
-  <a href="<%= url_for(photo) %>">
-    <img src="/thumbs/<%= photo.id %>">
-  </a>
+  <div>
+    <a href="<%= url_for(photo) %>">
+      <div>
+        <img src="/thumbs/<%= photo.id %>">
+        <% if photo.is_favorite? %>
+          <i class="fa fa-heart fa-lg"></i>
+        <% end %>
+      </div>
+    </a>
+  </div>
   <div class="caption">
     <% unless photo.tags.to_a.empty? %>
       <p>Tags: <%= photo.tags.map { |t| link_to t }.join '' %></p>

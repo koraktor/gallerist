@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activerecord', '~> 4.2'
   s.add_dependency 'bootstrap-sass', '~> 3.3'
+  s.add_dependency 'font-awesome-sass', '~> 4.3'
   s.add_dependency 'rack', '~> 1.6'
   s.add_dependency 'sinatra', '~> 1.4', '>= 1.4.6'
   s.add_dependency 'sprockets-helpers', '~> 1.1'
