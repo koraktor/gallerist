@@ -20,22 +20,22 @@
 
 .thumbnail > div:first-child {
   text-align: center;
+
+  .fa {
+    color: #fff;
+    position: absolute;
+    left: 1em;
+    text-shadow: 1px 1px 2px #000;
+    top: 1em;
+  }
 }
 
 .thumbnail > div > a {
   display: inline-block;
-}
 
-.thumbnail > div > a > div {
-  position: relative;
-}
-
-.thumbnail > div:first-child .fa {
-  color: #fff;
-  position: absolute;
-  left: 1em;
-  text-shadow: 1px 1px 2px #000;
-  top: 1em;
+  & > div {
+    position: relative;
+  }
 }
 
 .thumbnail img {
