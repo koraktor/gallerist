@@ -14,7 +14,7 @@ class Gallerist::AlbumPhoto < Gallerist::BaseModel
   alias_attribute :photo_id, :versionId
 
   def inspect
-    '#<%s album_id=%d photo_id=%d>' % [ self.class, album_id, photo_id ]
+    "#<#{self.class} album_id=#{album_id} photo_id=#{photo_id}>"
   end
 
 end

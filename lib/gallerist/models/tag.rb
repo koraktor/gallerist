@@ -21,7 +21,7 @@ class Gallerist::Tag < Gallerist::BaseModel
   }
 
   def inspect
-    "#<%s id=%d name='%s'>" % [ self.class, id, name ]
+    "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
   def to_s

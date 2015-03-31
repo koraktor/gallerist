@@ -16,7 +16,7 @@ class Gallerist::ImageProxyState < Gallerist::ImageProxiesModel
   default_scope { select(:miniThumbnailPath, :modelId, :thumbnailsCurrent, :versionId) }
 
   def inspect
-    '#<%s id=%d photo=%s>' % [ self.class, id, photo_id ]
+    "#<#{self.class} id=#{id} photo=#{photo_id}>"
   end
 
 end

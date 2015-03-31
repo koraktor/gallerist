@@ -6,7 +6,7 @@
 class Gallerist::LibraryInUseError < StandardError
 
   def initialize(library_path)
-    super "The library '%s' is currently in use." % [ library_path ]
+    super "The library '#{library_path}' is currently in use."
   end
 
 end

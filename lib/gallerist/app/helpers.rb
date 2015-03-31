@@ -49,19 +49,19 @@ module Gallerist::App::Helpers
   end
 
   def title
-    '%s – Gallerist' % [ @title ]
+    "#{@title} – Gallerist"
   end
 
   def url_for(obj)
     case obj
     when Gallerist::Album
-      '/albums/%s' % [ obj.id ]
+      "/albums/#{obj.id}"
     when Gallerist::Person
-      '/persons/%s' % [ obj.id ]
+      "/persons/#{obj.id}"
     when Gallerist::Photo
-      '/photos/%s' % [ obj.id ]
+      "/photos/#{obj.id}"
     when Gallerist::Tag
-      '/tags/%s' % [ URI.encode(obj.simple_name) ]
+      "/tags/#{URI.encode obj.simple_name}"
     end
   end
 

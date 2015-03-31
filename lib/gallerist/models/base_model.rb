@@ -15,11 +15,11 @@ class Gallerist::BaseModel < ActiveRecord::Base
   self.primary_key = 'modelId'
 
   def self.journal_mode(mode)
-    connection.exec_query 'PRAGMA journal_mode="%s";' % [ mode ]
+    connection.exec_query "PRAGMA journal_mode='#{mode}';"
   end
 
   def self.setup_for(app)
-    extensions = Gallerist.const_get '%sExtensions' % [ app.capitalize ]
+    extensions = Gallerist.const_get "#{app.capitalize}Extensions"
     class_name = name.demodulize
     if extensions.const_defined? class_name
       include extensions.const_get class_name

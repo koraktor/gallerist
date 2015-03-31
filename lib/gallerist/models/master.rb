@@ -11,7 +11,7 @@ class Gallerist::Master < Gallerist::BaseModel
   alias_attribute :path, :imagePath
 
   def inspect
-    "#<%s id=%d uuid=%s name='%s'>" % [ self.class, id, uuid, file_name ]
+    "#<#{self.class} id=#{id} uuid=#{uuid} name='#{file_name}'>"
   end
 
 end

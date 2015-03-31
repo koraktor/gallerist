@@ -6,12 +6,12 @@
 module Gallerist::App::Utilities
 
   def send_library_file(file, options = {})
-    logger.debug "Serving file '%s' from library..." % [ file ]
+    logger.debug "Serving file '#{file}' from library..."
 
     file_path = File.join(library.path, file)
     response = catch(:halt) { send_file file_path, options }
     if response == 404
-      logger.error "File '%s' could not be served, because it does not exist." % file
+      logger.error "File '#{file}' could not be served, because it does not exist."
     end
 
     halt response
@@ -80,7 +80,7 @@ module Gallerist::App::Utilities
   def photo(id)
     Gallerist::Photo.find id
   rescue ActiveRecord::RecordNotFound
-    logger.error 'Could not find the photo with ID #%s.' % [ id ]
+    logger.error "Could not find the photo with ID ##{id}."
     not_found
   end
 

@@ -129,7 +129,7 @@ class Gallerist::App < Sinatra::Base
 
     send_library_file thumbnail_path,
       disposition: :inline,
-      filename: 'thumb_%s' % [ photo.file_name ]
+      filename: "thumb_#{photo.file_name}"
   end
 
 end

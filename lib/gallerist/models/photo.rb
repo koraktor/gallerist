@@ -36,7 +36,7 @@ class Gallerist::Photo < Gallerist::BaseModel
   end
 
   def inspect
-    "#<%s id=%d uuid=%s file_name='%s'>" % [ self.class, id, uuid, file_name ]
+    "#<#{self.class} id=#{id} uuid=#{uuid} file_name='#{file_name}'>"
   end
 
   def path

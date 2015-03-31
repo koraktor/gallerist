@@ -24,7 +24,7 @@ class Gallerist::Album < Gallerist::BaseModel
   scope :visible, -> { where(trashed: false, hidden: false) }
 
   def inspect
-    "#<%s id=%d uuid=%s name='%s'>" % [ self.class, id, uuid, name ]
+    "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
 end

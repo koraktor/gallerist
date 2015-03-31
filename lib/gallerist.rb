@@ -17,17 +17,17 @@ module Gallerist
   MODELS = {}
 
   def self.model(name, file, type = :all)
-    autoload name, 'gallerist/models/%s' % [ file ]
+    autoload name, "gallerist/models/#{file}"
 
     MODELS[name] = file
   end
 
   def self.load_models(library_type)
     MODELS.each_value do |file|
-      require 'gallerist/models/%s' % [ file ]
+      require "gallerist/models/#{file}"
 
       begin
-        model_extesion = 'gallerist/models/%s_extensions/%s' % [ library_type, file ]
+        model_extesion = "gallerist/models/#{library_type}_extensions/#{file}"
         require model_extesion
       rescue LoadError
       end

@@ -6,7 +6,7 @@
 class Gallerist::PersonPhoto < Gallerist::PersonModel
 
   def inspect
-    '#<%s person_id=%d photo_id=%s>' % [ self.class, person_id, photo_id ]
+    "#<#{self.class} person_id=#{person_id} photo_id=#{photo_id}>"
   end
 
 end

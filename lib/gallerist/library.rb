@@ -78,7 +78,7 @@ class Gallerist::Library
   end
 
   def inspect
-    "#<%s path='%s'>" % [ self.class, path ]
+    "#<#{self.class} path='#{path}'>"
   end
 
   def person_db
