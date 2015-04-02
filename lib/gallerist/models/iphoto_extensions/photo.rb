@@ -8,8 +8,10 @@ module Gallerist::IphotoExtensions::Photo
   def self.included(model)
     model.alias_attribute :master_uuid, :masterUuid
 
+    alias_attribute :is_favorite, :isFlagged
+
     model.send :default_scope do
-      model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :uuid).
+      model.select(:isFlagged, :masterId, :modelId, :fileName, :imageDate, :uuid).
       where(show_in_library: true)
     end
   end

@@ -17,7 +17,6 @@ class Gallerist::Photo < Gallerist::BaseModel
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
-  alias_attribute :is_favorite, :isFavorite
   alias_attribute :show_in_library, :showInLibrary
 
   delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true

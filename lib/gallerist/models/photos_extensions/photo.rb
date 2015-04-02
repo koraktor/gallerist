@@ -8,6 +8,8 @@ module Gallerist::PhotosExtensions::Photo
   def self.included(model)
     model.has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
 
+    model.alias_attribute :is_favorite, :isFavorite
+
     model.send :default_scope do
       model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
       where(show_in_library: true)
