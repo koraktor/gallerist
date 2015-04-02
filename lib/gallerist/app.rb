@@ -52,6 +52,15 @@ class Gallerist::App < Sinatra::Base
     erb :photos
   end
 
+  get '/movies' do
+    @photos = library.photos.movies
+    @title = 'Movies'
+
+    navbar_for :movies
+
+    erb :photos
+  end
+
   get '/persons/:id' do
     render_object :person
   end

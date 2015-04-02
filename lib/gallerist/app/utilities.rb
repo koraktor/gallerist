@@ -65,6 +65,8 @@ module Gallerist::App::Utilities
       navbar_item 'All photos', '/photos'
     when :favorites
       navbar_item 'Favorites', '/favorites'
+    when :movies
+      navbar_item 'Movies', '/movies'
     when Gallerist::Album
       navbar_item 'Albums', '/albums'
       navbar_item obj.name, '/albums/%d', obj.id

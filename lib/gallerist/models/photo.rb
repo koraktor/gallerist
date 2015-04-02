@@ -21,6 +21,7 @@ class Gallerist::Photo < Gallerist::BaseModel
   delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true
 
   scope :favorites, -> { where(is_favorite: true) }
+  scope :movies, -> { where(type: 8) }
 
   def inspect
     "#<#{self.class} id=#{id} uuid=#{uuid} file_name='#{file_name}'>"
