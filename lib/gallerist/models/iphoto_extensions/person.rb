@@ -5,13 +5,13 @@
 
 module Gallerist::IphotoExtensions::Person
 
-  def self.included(model)
-    model.table_name = 'RKFaceName'
+  def __extend
+    self.table_name = 'RKFaceName'
 
-    model.has_many :person_photos, primary_key: 'faceKey', foreign_key: 'faceKey'
+    has_many :person_photos, primary_key: 'faceKey', foreign_key: 'faceKey'
 
-    model.send :default_scope do
-      model.select(:name, :faceKey, :keyVersionUuid).order(:manual_order)
+    default_scope do
+      select(:modelId, :name, :faceKey, :keyVersionUuid).order(:manual_order)
     end
   end
 

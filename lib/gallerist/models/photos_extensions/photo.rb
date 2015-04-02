@@ -5,17 +5,17 @@
 
 module Gallerist::PhotosExtensions::Photo
 
-  def self.included(model)
-    model.has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
-    model.has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
+  def __extend
+    has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
+    has_many :person_photos, primary_key: 'modelId', foreign_key: 'versionId'
 
-    model.alias_attribute :is_favorite, :isFavorite
+    alias_attribute :is_favorite, :isFavorite
 
-    model.send :default_scope do
-      model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
+    default_scope do
+      select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
       where(show_in_library: true)
     end
-    model.scope :movies, -> { model.where(type: 8) }
+    scope :movies, -> { where(type: 8) }
   end
 
   def image_path

@@ -5,8 +5,8 @@
 
 module Gallerist::IphotoExtensions::Album
 
-  def self.included(model)
-    model.scope :projects, -> { model.where(type: 9) }
+  def __extend
+    scope :projects, -> { where(type: 9) }
   end
 
 end

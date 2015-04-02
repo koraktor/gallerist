@@ -5,17 +5,17 @@
 
 module Gallerist::IphotoExtensions::Photo
 
-  def self.included(model)
-    model.alias_attribute :master_uuid, :masterUuid
+  def __extend
+    alias_attribute :master_uuid, :masterUuid
 
     alias_attribute :is_favorite, :isFlagged
 
-    model.send :default_scope do
-      model.select(:isFlagged, :masterId, :modelId, :fileName, :imageDate, :uuid).
+    default_scope do
+      select(:isFlagged, :masterId, :modelId, :fileName, :imageDate, :uuid).
       where(show_in_library: true)
     end
-    model.scope :movies, -> {
-      model.joins(:master).select('"RKMaster"."type"').
+    scope :movies, -> {
+      joins(:master).select('"RKMaster"."type"').
       where('RKMaster.type' => 'VIDT')
     }
   end

@@ -5,9 +5,9 @@
 
 module Gallerist::IphotoExtensions::Master
 
-  def self.included(model)
-    model.send :default_scope do
-      model.select :fileName, :imagePath, :modelId, :type, :uuid
+  def __extend
+    default_scope do
+      select :fileName, :imagePath, :modelId, :type, :uuid
     end
   end
 

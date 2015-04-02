@@ -5,13 +5,13 @@
 
 module Gallerist::IphotoExtensions::PersonPhoto
 
-  def self.included(model)
-    model.table_name = 'RKDetectedFace'
+  def __extend
+    self.table_name = 'RKDetectedFace'
 
-    model.has_one :person, primary_key: 'faceKey', foreign_key: 'faceKey'
+    has_one :person, primary_key: 'faceKey', foreign_key: 'faceKey'
 
-    model.alias_attribute :master_uuid, :masterUuid
-    model.alias_attribute :person_id, :faceKey
+    alias_attribute :master_uuid, :masterUuid
+    alias_attribute :person_id, :faceKey
   end
 
   def photo

@@ -22,7 +22,10 @@ class Gallerist::BaseModel < ActiveRecord::Base
     extensions = Gallerist.const_get "#{app.capitalize}Extensions"
     class_name = name.demodulize
     if extensions.const_defined? class_name
-      include extensions.const_get class_name
+      extension = extensions.const_get class_name
+      include extension
+      extension.instance_method(:__extend).bind(self).call
+      undef_method :__extend
     end
   end
 
