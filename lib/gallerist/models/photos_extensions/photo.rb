@@ -15,6 +15,7 @@ module Gallerist::PhotosExtensions::Photo
       model.select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
       where(show_in_library: true)
     end
+    model.scope :movies, -> { model.where(type: 8) }
   end
 
   def image_path
@@ -32,6 +33,10 @@ module Gallerist::PhotosExtensions::Photo
   # different databases, so we have to query the photos manually
   def persons
     Gallerist::Person.where modelId: person_photos.map(&:person_id)
+  end
+
+  def video?
+    type == 8
   end
 
 end

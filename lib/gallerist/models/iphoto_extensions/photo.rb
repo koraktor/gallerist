@@ -14,6 +14,10 @@ module Gallerist::IphotoExtensions::Photo
       model.select(:isFlagged, :masterId, :modelId, :fileName, :imageDate, :uuid).
       where(show_in_library: true)
     end
+    model.scope :movies, -> {
+      model.joins(:master).select('"RKMaster"."type"').
+      where('RKMaster.type' => 'VIDT')
+    }
   end
 
   def image_path
@@ -28,6 +32,10 @@ module Gallerist::IphotoExtensions::Photo
 
   def persons
     Gallerist::Person.where faceKey: person_photos.map(&:person_id)
+  end
+
+  def video?
+    master.type == 'VIDT'
   end
 
 end

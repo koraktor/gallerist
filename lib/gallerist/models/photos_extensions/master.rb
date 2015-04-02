@@ -7,7 +7,7 @@ module Gallerist::PhotosExtensions::Master
 
   def self.included(model)
     model.send :default_scope do
-      model.select :fileName, :imagePath, :modelId, :uuid
+      model.select :fileName, :imagePath, :modelId, :type, :uuid
     end
   end
 
