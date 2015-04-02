@@ -13,14 +13,18 @@ class Gallerist::Album < Gallerist::BaseModel
   alias_attribute :date, :createDate
   alias_attribute :hidden, :isHidden
   alias_attribute :trashed, :isInTrash
+  alias_attribute :type, :albumType
 
-  default_scope { select(:createDate, :isHidden, :isInTrash, :modelId, :name) }
+  default_scope do
+    select :albumType, :createDate, :isHidden, :isInTrash, :modelId, :name
+  end
   scope :nonempty, -> {
     joins(:album_photos).
     select('count(RKAlbumVersion.albumId) as photos_count').
     group('RKAlbumVersion.albumId').
     having('photos_count > 0')
   }
+  scope :regular, -> { where(type: 1) }
   scope :visible, -> { where(trashed: false, hidden: false) }
 
   def inspect

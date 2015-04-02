@@ -13,8 +13,16 @@
 <h2><i class="fa fa-fw fa-folder-o"></i> Albums</h2>
 
 <div class="list-group">
-  <% @albums.each do |album| %>
+  <% @albums.regular.each do |album| %>
     <%= link_to album, 'list-group-item' %>
+  <% end %>
+</div>
+
+<h2><i class="fa fa-fw fa-calendar-o"></i> Projects</h2>
+
+<div class="list-group">
+  <% @albums.projects.each do |project| %>
+    <%= link_to project, 'list-group-item' %>
   <% end %>
 </div>
 
