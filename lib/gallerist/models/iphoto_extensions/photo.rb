@@ -16,6 +16,10 @@ module Gallerist::IphotoExtensions::Photo
     end
   end
 
+  def image_path
+    File.join 'Masters', master.path
+  end
+
   # ActiveRecord does not support has_many-through associations across
   # different databases, so we have to query the photos manually
   def person_photos

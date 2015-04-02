@@ -9,7 +9,6 @@ class Gallerist::Photo < Gallerist::BaseModel
 
   has_one :image_proxy_state, foreign_key: 'versionId'
   has_one :master, primary_key: 'masterId', foreign_key: 'modelId'
-  has_one :model_resource, -> { where model_type: 2 }, foreign_key: 'attachedModelId'
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'versionId'
   has_many :albums, through: :album_photos
   has_many :tag_photos, primary_key: 'modelId', foreign_key: 'versionId'
@@ -22,17 +21,6 @@ class Gallerist::Photo < Gallerist::BaseModel
   delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true
 
   scope :favorites, -> { where(is_favorite: true) }
-
-  def image_path
-    if model_resource && !video?
-      uuid = model_resource.uuid
-      first, second = uuid[0].ord.to_s, uuid[1].ord.to_s
-
-      File.join 'resources', 'modelresources', first, second, uuid, model_resource.file_name
-    else
-      File.join 'Masters', master.path
-    end
-  end
 
   def inspect
     "#<#{self.class} id=#{id} uuid=#{uuid} file_name='#{file_name}'>"
