@@ -9,8 +9,25 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+.link {
+  font-size: $font-size-h3;
+}
+
 .navbar-inverse .navbar-brand:hover {
   color: $navbar-inverse-brand-color;
+}
+
+.key-photo {
+  display: inline-block;
+  height: 3.4em;
+  padding: 0.2em;
+  text-align: center;
+  width: 5em;
+
+  img {
+    height: 3em;
+    box-shadow: $gray-base 0 0 8px;
+  }
 }
 
 .tag {

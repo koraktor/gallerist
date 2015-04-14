@@ -1,11 +1,11 @@
 <div class="list-group">
-  <a class="list-group-item" href="/photos">
+  <a class="link list-group-item" href="/photos">
     <i class="fa fa-fw fa-th"></i> All photos
   </a>
-  <a class="list-group-item" href="/favorites">
+  <a class="link list-group-item" href="/favorites">
     <i class="fa fa-fw fa-heart"></i> Favorites
   </a>
-  <a class="list-group-item" href="/movies">
+  <a class="link list-group-item" href="/movies">
     <i class="fa fa-fw fa-film"></i> Movies
   </a>
 </div>
@@ -14,17 +14,21 @@
 
 <div class="list-group">
   <% @albums.regular.each do |album| %>
-    <%= link_to album, 'list-group-item' %>
+    <%= link_to album, 'link col-md-4 list-group-item' %>
   <% end %>
 </div>
+
+<div class="clearfix"></div>
 
 <h2><i class="fa fa-fw fa-calendar-o"></i> Projects</h2>
 
 <div class="list-group">
   <% @albums.projects.each do |project| %>
-    <%= link_to project, 'list-group-item' %>
+    <%= link_to project, 'link col-md-4 list-group-item' %>
   <% end %>
 </div>
+
+<div class="clearfix"></div>
 
 <h2><i class="fa fa-fw fa-tags"></i> Tags</h2>
 
