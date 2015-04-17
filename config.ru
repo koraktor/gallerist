@@ -17,6 +17,9 @@ warmup do |app|
     'rack.warmup.error' => error
   Gallerist::App.disable :show_exceptions unless Gallerist::App.development?
   raise error.first unless error.empty?
+
+  Rack::MockRequest.new(app).get '/assets/main.css'
+  Rack::MockRequest.new(app).get '/assets/main.js'
 end
 
 map '/assets' do
