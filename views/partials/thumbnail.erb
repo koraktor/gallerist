@@ -2,7 +2,7 @@
   <div>
     <a href="<%= url_for(photo) %>">
       <div>
-        <img src="/thumbs/<%= photo.id %>">
+        <img data-layzr="/thumbs/<%= photo.id %>">
         <% if photo.is_favorite? %>
           <i class="fa fa-heart fa-lg top-left"></i>
         <% end %>

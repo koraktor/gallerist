@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sinatra', '~> 1.4', '>= 1.4.6'
   s.add_dependency 'sprockets-helpers', '~> 1.1'
   s.add_dependency 'sqlite3', '~> 1.3'
+  s.add_dependency 'uglifier', '~> 2.7'
   s.add_dependency 'unicorn', '~> 4.8'
 
   s.executables   = [ 'gallerist' ]

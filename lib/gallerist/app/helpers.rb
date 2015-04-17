@@ -17,7 +17,7 @@ module Gallerist::App::Helpers
 
     case obj
     when Gallerist::Album
-      link = '<div class="key-photo"><img src="/thumbs/%d"></div> %s' %
+      link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
               [ obj.key_photo.id, obj.name ]
     when Gallerist::Person, Gallerist::Tag
       classes << 'label' << 'tag'
@@ -25,7 +25,7 @@ module Gallerist::App::Helpers
       link = obj.name
     when Gallerist::Photo
       classes << 'thumbnail'
-      link = '<img src="/thumbs/%s">' % [ obj.id ]
+      link = '<img data-layzr="/thumbs/%s">' % [ obj.id ]
     end
 
     classes = classes.empty? ? '' : ' class="%s"' % [ classes.join(' ') ]
