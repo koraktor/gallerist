@@ -15,6 +15,7 @@ class Gallerist::Library
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
     @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
+    @temp_path = Gallerist::App.tempdir
   end
 
   def albums
@@ -32,10 +33,6 @@ class Gallerist::Library
   end
 
   def copy_base_db
-    @temp_path = Dir.mktmpdir 'gallerist'
-    temp_path = @temp_path.dup
-    at_exit { FileUtils.rm_rf temp_path }
-
     copy_tmp_db 'Library.apdb'
   end
 

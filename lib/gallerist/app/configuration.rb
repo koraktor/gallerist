@@ -13,7 +13,11 @@ module Gallerist::App::Configuration
     configure do
       enable :logging
 
+      tempdir = Dir.mktmpdir('gallerist')
+      at_exit { FileUtils.rm_rf tempdir }
+
       set :root, File.join(root, '..', '..')
+      set :tempdir, tempdir.dup
 
       set :copy_dbs, !ENV['GALLERIST_NOCOPY']
       set :dump_errors, Proc.new { development? }
@@ -30,14 +34,13 @@ module Gallerist::App::Configuration
       sprockets.append_path File.join(root, 'assets', 'javascript')
       sprockets.append_path File.join(root, 'assets', 'stylesheets')
       sprockets.append_path FontAwesome::Sass.fonts_path
-      sprockets.cache = Sprockets::Cache::FileStore.new Dir.tmpdir
+      sprockets.cache = Sprockets::Cache::FileStore.new tempdir
       sprockets.css_compressor = :scss
       sprockets.js_compressor = :uglifier
 
       configure_sprockets_helpers do |helpers|
         helpers.debug = development?
       end
-
     end
 
     configure :development do
