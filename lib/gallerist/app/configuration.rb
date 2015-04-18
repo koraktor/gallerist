@@ -5,8 +5,10 @@
 
 module Gallerist::App::Configuration
 
-  def self.configure(*args, &block)
-    Gallerist::App.instance_exec *args, &block
+  def self.configure(*envs, &block)
+    if envs.empty? || envs.include?(Gallerist::App.environment.to_sym)
+      Gallerist::App.instance_exec &block
+    end
   end
 
   def self.registered(app)
