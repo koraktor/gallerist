@@ -37,8 +37,6 @@ module Gallerist::App::Configuration
       sprockets.append_path File.join(root, 'assets', 'stylesheets')
       sprockets.append_path FontAwesome::Sass.fonts_path
       sprockets.cache = Sprockets::Cache::FileStore.new tempdir
-      sprockets.css_compressor = :scss
-      sprockets.js_compressor = :uglifier
 
       configure_sprockets_helpers do |helpers|
         helpers.debug = development?
@@ -52,6 +50,11 @@ module Gallerist::App::Configuration
 
       sprockets.logger = debug_logger
       ActiveRecord::Base.logger = debug_logger
+    end
+
+    configure :production do
+      sprockets.css_compressor = :scss
+      sprockets.js_compressor = :uglifier
     end
   end
 
