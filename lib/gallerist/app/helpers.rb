@@ -33,7 +33,7 @@ module Gallerist::App::Helpers
     if current
       '<span%s>%s</span>' % [ classes, link ]
     else
-      '<a href="%s"%s>%s</a>' % [ url_for(obj), classes, link ]
+      '<a href="%s"%s>%s</a>' % [ url, classes, link ]
     end
   end
 
