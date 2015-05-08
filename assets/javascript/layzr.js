@@ -11,66 +11,49 @@
 
   // CONSTRUCTOR
 
-  function Layzr( options ) {
+  function Layzr(options) {
     // debounce
     this._lastScroll = 0;
     this._ticking = false;
 
     // options
+    this._optionsSelector = options.selector || '[data-layzr]';
     this._optionsAttr = options.attr || 'data-layzr';
     this._optionsAttrRetina = options.retinaAttr || 'data-layzr-retina';
+    this._optionsAttrBg = options.bgAttr || 'data-layzr-bg';
     this._optionsThreshold = options.threshold || 0;
     this._optionsCallback = options.callback || null;
 
     // properties
     this._retina = window.devicePixelRatio > 1;
-    this._imgAttr = this._retina ? this._optionsAttrRetina : this._optionsAttr;
+    this._srcAttr = this._retina ? this._optionsAttrRetina : this._optionsAttr;
 
-    // images nodelist
-    this._images = document.getElementsByTagName('img');
+    // nodelist
+    this._nodes = document.querySelectorAll(this._optionsSelector);
 
     // call to create
-    document.addEventListener('DOMContentLoaded', this._create.bind(this), false);
+    this._create();
   }
 
-  // DEBOUNCE METHODS
+  // DEBOUNCE HELPERS
   // adapted from: http://www.html5rocks.com/en/tutorials/speed/animations/
 
   Layzr.prototype._requestScroll = function() {
     this._lastScroll = window.scrollY || window.pageYOffset;
     this._requestTick();
-  }
+  };
 
   Layzr.prototype._requestTick = function() {
     if(!this._ticking) {
       requestAnimationFrame(this.update.bind(this));
       this._ticking = true;
     }
-  }
+  };
 
-  // Layzr METHODS
-
-  Layzr.prototype._create = function() {
-    // fire scroll event once
-    this._requestScroll();
-
-    // bind scroll and resize event
-    window.addEventListener('scroll', this._requestScroll.bind(this), false);
-    window.addEventListener('resize', this._requestScroll.bind(this), false);
-  }
-
-  Layzr.prototype._destroy = function() {
-    // possibly remove attributes, and set all sources?
-
-    // unbind scroll and resize event
-    window.removeEventListener('scroll', this._requestScroll.bind(this), false);
-    window.removeEventListener('resize', this._requestScroll.bind(this), false);
-  }
-
-  // offset helper
+  // OFFSET HELPER
   // borrowed from: http://stackoverflow.com/questions/5598743/finding-elements-position-relative-to-the-document
 
-  Layzr.prototype._getOffset = function( element ) {
+  Layzr.prototype._getOffset = function(element) {
     var offsetTop  = 0;
 
     do {
@@ -80,66 +63,94 @@
     } while (element = element.offsetParent);
 
     return offsetTop;
-  }
+  };
 
-  Layzr.prototype._inViewport = function( imageNode ) {
+  // LAYZR METHODS
+
+  Layzr.prototype._create = function() {
+    // fire scroll event once
+    this._requestScroll();
+
+    // bind scroll and resize event
+    window.addEventListener('scroll', this._requestScroll.bind(this), false);
+    window.addEventListener('resize', this._requestScroll.bind(this), false);
+  };
+
+  Layzr.prototype._destroy = function() {
+    // possibly remove attributes, and set all sources?
+
+    // unbind scroll and resize event
+    window.removeEventListener('scroll', this._requestScroll.bind(this), false);
+    window.removeEventListener('resize', this._requestScroll.bind(this), false);
+  };
+
+  Layzr.prototype._inViewport = function(node) {
     // get viewport top and bottom offset
     var viewportTop = this._lastScroll;
     var viewportBottom = viewportTop + window.innerHeight;
 
-    // get image top and bottom offset
-    var elementTop = this._getOffset(imageNode);
-    var elementBottom = elementTop + imageNode.offsetHeight;
+    // get node top and bottom offset
+    var elementTop = this._getOffset(node);
+    var elementBottom = elementTop + node.offsetHeight;
 
     // calculate threshold, convert percentage to pixel value
     var threshold = (this._optionsThreshold / 100) * window.innerHeight;
 
     // return if element in viewport
     return elementBottom >= viewportTop - threshold && elementBottom <= viewportBottom + threshold;
-  }
+  };
+
+  Layzr.prototype._reveal = function(node) {
+    // get node source
+    var source = node.getAttribute(this._srcAttr) || node.getAttribute(this._optionsAttr);
+
+    // set node src or bg image
+    if(node.hasAttribute(this._optionsAttrBg)) {
+      node.style.backgroundImage = 'url(' + source + ')';
+    }
+    else {
+      node.setAttribute('src', source);
+    }
+
+    // call the callback
+    if(typeof this._optionsCallback === 'function') {
+      // "this" will be the node in the callback
+      this._optionsCallback.call(node);
+    }
+
+    // remove node data attributes
+    node.removeAttribute(this._optionsAttr);
+    node.removeAttribute(this._optionsAttrRetina);
+    node.removeAttribute(this._optionsAttrBg);
+  };
+
+  Layzr.prototype.updateSelector = function() {
+    // update cached list of elements matching selector
+    this._nodes = document.querySelectorAll(this._optionsSelector);
+  };
 
   Layzr.prototype.update = function() {
-    // cache image nodelist length
-    var imagesLength = this._images.length;
+    // cache nodelist length
+    var nodesLength = this._nodes.length;
 
-    // loop through images
-    for(var i = 0; i < imagesLength; i++) {
-      // cache image
-      var image = this._images[i];
+    // loop through nodes
+    for(var i = 0; i < nodesLength; i++) {
+      // cache node
+      var node = this._nodes[i];
 
-      // check if image has attribute
-      if(image.hasAttribute(this._imgAttr) || image.hasAttribute(this._optionsAttr)) {
-        // check if image in viewport
-        if(this._inViewport(image)) {
-          // reveal image
-          this.reveal(image);
+      // check if node has mandatory attribute
+      if(node.hasAttribute(this._optionsAttr)) {
+        // check if node in viewport
+        if(this._inViewport(node)) {
+          // reveal node
+          this._reveal(node);
         }
       }
     }
 
     // allow for more animation frames
     this._ticking = false;
-  }
-
-  Layzr.prototype.reveal = function( imageNode ) {
-    // get image source
-    var source = imageNode.getAttribute(this._imgAttr) || imageNode.getAttribute(this._optionsAttr);
-
-    // remove image data attributes
-    imageNode.removeAttribute(this._optionsAttr);
-    imageNode.removeAttribute(this._optionsAttrRetina);
-
-    // set image source, if it has one
-    if(source) {
-      imageNode.setAttribute('src', source);
-
-      // call the callback
-      if(typeof this._optionsCallback === 'function') {
-        // this will be the image node in the callback
-        this._optionsCallback.call(imageNode);
-      }
-    }
-  }
+  };
 
   return Layzr;
 }));

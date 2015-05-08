@@ -7,8 +7,9 @@
 
 //=require 'layzr'
 
-var layzr = new Layzr({
-  attr: 'data-layzr',
-  threshold: 5,
-  callback: null
+$(function() {
+  var layzr = new Layzr({
+    threshold: 5
+  });
+});
 });
