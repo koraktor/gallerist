@@ -38,7 +38,6 @@ module Gallerist
   model :Album, 'album'
   model :AlbumPhoto, 'album_photo'
   model :BaseModel, 'base_model'
-  model :Face, 'face'
   model :ImageProxiesModel, 'image_proxies_model'
   model :ImageProxyState, 'image_proxy_state'
   model :Master, 'master'
