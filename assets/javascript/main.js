@@ -12,4 +12,3 @@ $(function() {
     threshold: 5
   });
 });
-});
