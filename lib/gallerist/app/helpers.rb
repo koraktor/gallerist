@@ -17,8 +17,12 @@ module Gallerist::App::Helpers
 
     case obj
     when Gallerist::Album
-      link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
-              [ obj.key_photo.id, obj.name ]
+      if obj.key_photo
+        link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
+                [ obj.key_photo.id, obj.name ]
+      else
+        link = '<div class="key-photo"></div> %s' % [ obj.name ]
+      end
     when Gallerist::Person, Gallerist::Tag
       classes << 'label' << 'tag'
       classes << (current ? 'label-info' : 'label-primary')
