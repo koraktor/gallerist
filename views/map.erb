@@ -1,0 +1,15 @@
+<h1><%= @title %></h1>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script>
+  $(function() {
+    GALLERIST.showOnMap(<%= @photos_with_location %>);
+  });
+</script>
+
+<div id="map-container">
+  <figure id="map-thumb">
+    <img/>
+    <figcaption></figcaption>
+  </figure>
+  <div id="map"></div>
+</div>

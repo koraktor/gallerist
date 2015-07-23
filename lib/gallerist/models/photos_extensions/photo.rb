@@ -12,7 +12,9 @@ module Gallerist::PhotosExtensions::Photo
     alias_attribute :is_favorite, :isFavorite
 
     default_scope do
-      select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid).
+      select(:isFavorite, :masterId, :modelId, :fileName, :imageDate, :type, :uuid,
+        :latitude, :longitude, :processedWidth, :processedHeight
+      ).
       where(show_in_library: true)
     end
     scope :movies, -> { where(type: 8) }
@@ -37,6 +39,10 @@ module Gallerist::PhotosExtensions::Photo
 
   def video?
     type == 8
+  end
+
+  def ratio
+    (processedHeight.to_f / processedWidth).round(3)
   end
 
 end

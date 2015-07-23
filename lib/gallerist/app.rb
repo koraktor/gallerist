@@ -8,6 +8,7 @@ require 'bootstrap-sass'
 require 'font-awesome-sass'
 require 'logger'
 require 'sinatra/sprockets-helpers'
+require 'json'
 
 class Gallerist::App < Sinatra::Base
 
@@ -103,6 +104,27 @@ class Gallerist::App < Sinatra::Base
     send_library_file thumbnail_path,
       disposition: :inline,
       filename: "thumb_#{photo.file_name}"
+  end
+
+  get '/map' do
+
+    photos_with_location = []
+    library.all_with_location.each do |photo|
+
+      photos_with_location << {
+        "id" => photo.id,
+        "lat" => photo.latitude.round(8), # round to prevent values like 12.345678900000001
+        "lng" => photo.longitude.round(8),
+        "ratio" => photo.ratio,
+        "date" => 978307200 + photo.date, # Apple epoch is 2001-01-01
+      }
+    end
+
+    @photos_with_location = JSON.generate photos_with_location
+    @title = 'Photos by Location'
+
+    navbar_for :map
+    erb :map
   end
 
 end

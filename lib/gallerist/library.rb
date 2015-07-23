@@ -94,4 +94,9 @@ class Gallerist::Library
     iphoto? ? :iphoto : :photos
   end
 
+  # get all photos that have geolocation attributes
+  def all_with_location
+    Gallerist::Photo.where("latitude IS NOT NULL")
+  end
+
 end
