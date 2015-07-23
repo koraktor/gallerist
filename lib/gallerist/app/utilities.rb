@@ -76,6 +76,8 @@ module Gallerist::App::Utilities
     when Gallerist::Tag
       navbar_item 'Tags', '/tags'
       navbar_item obj.name, '/tags/%s', obj.simple_name
+    when :map
+      navbar_item 'Photos by Location', '/map'
     end
   end
 
