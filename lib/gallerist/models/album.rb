@@ -8,7 +8,7 @@ class Gallerist::Album < Gallerist::BaseModel
   self.table_name = 'RKAlbum'
 
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'albumId'
-  has_one :key_photo, class: Gallerist::Photo, primary_key: 'posterVersionUuid', foreign_key: 'uuid'
+  has_one :key_photo, class_name: Gallerist::Photo, primary_key: 'posterVersionUuid', foreign_key: 'uuid'
   has_many :photos, through: :album_photos
 
   alias_attribute :date, :createDate
