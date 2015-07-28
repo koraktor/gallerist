@@ -7,7 +7,7 @@
 
 //=require 'layzr'
 
-$(function() {
+document.addEventListener('DOMContentLoaded', function(){
   var layzr = new Layzr({
     threshold: 5
   });
