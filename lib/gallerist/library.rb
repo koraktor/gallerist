@@ -14,7 +14,7 @@ class Gallerist::Library
   def initialize(library_path)
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
-    @db_path = File.dirname File.realpath(File.join @path, 'Database', 'Library.apdb')
+    @db_path = File.dirname File.realpath(file @path, 'Database', 'Library.apdb')
   end
 
   def albums
@@ -47,9 +47,8 @@ class Gallerist::Library
 
   def copy_tmp_db(db_name)
     @temp_path ||= Gallerist::App.tempdir
-
-    source_path = File.join @db_path, db_name
-    dest_path = File.join @temp_path, db_name
+    source_path = file @db_path, db_name
+    dest_path = file @temp_path, db_name
 
     db = SQLite3::Database.new source_path
     db.transaction :immediate do |_|
@@ -57,6 +56,10 @@ class Gallerist::Library
     end
   ensure
     db.close unless db.nil?
+  end
+
+  def file(*path_components)
+    Dir.glob(File.join(*path_components), File::FNM_CASEFOLD).first
   end
 
   def iphoto?
@@ -68,11 +71,11 @@ class Gallerist::Library
   end
 
   def library_db
-    File.join db_path, 'Library.apdb'
+    file db_path, 'Library.apdb'
   end
 
   def image_proxies_db
-    File.join db_path, 'ImageProxies.apdb'
+    file db_path, 'ImageProxies.apdb'
   end
 
   def inspect
