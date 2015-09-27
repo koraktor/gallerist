@@ -9,7 +9,7 @@
 //=require 'bootstrap-sprockets'
 //=require 'layzr'
 
-document.addEventListener('DOMContentLoaded', function(){
+$(function(){
   var layzr = new Layzr({
     threshold: 5
   });
