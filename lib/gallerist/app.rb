@@ -4,7 +4,6 @@
 # Copyright (c) 2015, Sebastian Staudt
 
 require 'active_record'
-require 'bootstrap-sass'
 require 'font-awesome-sass'
 require 'logger'
 require 'sinatra/sprockets-helpers'

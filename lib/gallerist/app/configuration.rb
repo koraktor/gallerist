@@ -3,6 +3,9 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
+require 'bootstrap-sass'
+require 'jquery-cdn'
+
 module Gallerist::App::Configuration
 
   def self.configure(*envs, &block)
@@ -37,6 +40,10 @@ module Gallerist::App::Configuration
       sprockets.append_path File.join(root, 'assets', 'stylesheets')
       sprockets.append_path FontAwesome::Sass.fonts_path
       sprockets.cache = Sprockets::Cache::FileStore.new tempdir
+
+      JqueryCdn.install sprockets
+
+      Bootstrap.load!
 
       configure_sprockets_helpers do |helpers|
         helpers.debug = development?

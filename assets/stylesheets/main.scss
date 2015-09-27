@@ -9,12 +9,55 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
+#photo-modal {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  .backdrop {
+    background: #000000;
+    height: 100%;
+    opacity: 0.6;
+    width: 100%;
+  }
+
+  img, video {
+    bottom: 0;
+    border: 5px solid #ffffff;
+    left: 0;
+    margin: auto;
+    max-height: 90%;
+    max-width: 90%;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
 .link {
   font-size: $font-size-h3;
 }
 
 .navbar-inverse .navbar-brand:hover {
   color: $navbar-inverse-brand-color;
+}
+
+.face {
+  border-radius: 50%;
+  box-shadow: $gray-base 0 0 8px;
+  display: block;
+  float: left;
+  height: 32px;
+  width: 32px;
+}
+
+h3 .face {
+  height: 64px;
+  width: 64px;
 }
 
 .key-photo {
@@ -30,9 +73,10 @@
   }
 }
 
-.tag {
+.person, .tag {
   display: inline-block;
   margin-right: 1pt;
+  text-shadow: $gray-darker 2px 2px;
 }
 
 .thumbnail > div:first-child {
@@ -46,7 +90,7 @@
   .fa {
     color: #fff;
     position: absolute;
-    text-shadow: 1px 1px 2px #000;
+    text-shadow: 1px 1px 2px $gray-base;
   }
 
   .top-left {
