@@ -17,19 +17,27 @@ module Gallerist::App::Helpers
 
     case obj
     when Gallerist::Album
-      if obj.key_photo
-        link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
-                [ obj.key_photo.id, obj.name ]
-      else
-        link = '<div class="key-photo"></div> %s' % [ obj.name ]
-      end
-    when Gallerist::Person, Gallerist::Tag
-      classes << 'label' << 'tag'
+      link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
+              [ obj.key_photo.id, obj.name ]
+    when Gallerist::Person
+      classes << 'label' << 'person'
       classes << (current ? 'label-info' : 'label-primary')
-      link = obj.name
+      if obj.key_face.source_width > obj.key_face.source_height
+        size = '%f%% auto'
+      else
+        size = 'auto %f%%'
+      end
+      size = size % [ obj.key_face.link_size ]
+      link = '<span class="face" data-layzr="/photos/%d" data-layzr-bg
+              style="background-position: %f%% %f%%; background-size: %s"></span> %s' %
+              [ obj.key_photo.id, obj.key_face.position_x, obj.key_face.position_y, size, obj.name ]
     when Gallerist::Photo
       classes << 'thumbnail'
       link = '<img data-layzr="/thumbs/%s">' % [ obj.id ]
+    when Gallerist::Tag
+      classes << 'label' << 'tag'
+      classes << (current ? 'label-info' : 'label-primary')
+      link = obj.name
     end
 
     classes = classes.empty? ? '' : ' class="%s"' % [ classes.join(' ') ]
