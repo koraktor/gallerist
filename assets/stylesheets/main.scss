@@ -62,15 +62,33 @@ h3 .face {
 
 .key-photo {
   display: inline-block;
-  height: 3.4em;
+  height: 13em;
   padding: 0.2em;
-  text-align: center;
-  width: 5em;
+
+  .align-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
 
   img {
-    height: 3em;
+    max-height: 12em;
     box-shadow: $gray-base 0 0 8px;
   }
+
+  span {
+    bottom: 1em;
+    position: absolute;
+    right: 1em;
+    text-shadow:  1px  1px 1px white,
+                  1px -1px 1px white,
+                 -1px  1px 1px white,
+                 -1px -1px 1px white;
+  }
+}
+
+.key-photos .list-group-item {
+  text-align: center;
 }
 
 .person, .tag {

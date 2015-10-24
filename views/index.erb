@@ -12,9 +12,9 @@
 
 <h2><i class="fa fa-fw fa-folder-o"></i> Albums</h2>
 
-<div class="list-group">
+<div class="list-group key-photos">
   <% @albums.regular.each do |album| %>
-    <%= link_to album, 'link col-md-4 list-group-item' %>
+    <%= link_to album, 'link col-md-3 list-group-item' %>
   <% end %>
 </div>
 
@@ -22,9 +22,9 @@
 
 <h2><i class="fa fa-fw fa-calendar-o"></i> Projects</h2>
 
-<div class="list-group">
+<div class="list-group key-photos">
   <% @albums.projects.each do |project| %>
-    <%= link_to project, 'link col-md-4 list-group-item' %>
+    <%= link_to project, 'link col-md-3 list-group-item' %>
   <% end %>
 </div>
 

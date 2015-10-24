@@ -17,7 +17,7 @@ module Gallerist::App::Helpers
 
     case obj
     when Gallerist::Album
-      link = '<div class="key-photo"><img data-layzr="/thumbs/%d"></div> %s' %
+      link = '<div class="key-photo"><div class="align-helper"></div><img data-layzr="/thumbs/%d"><span>%s</span></div>' %
               [ obj.key_photo.id, obj.name ]
     when Gallerist::Person
       classes << 'label' << 'person'
