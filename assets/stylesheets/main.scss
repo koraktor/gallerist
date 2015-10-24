@@ -19,7 +19,7 @@
   z-index: 1000;
 
   .backdrop {
-    background: #000000;
+    background: $modal-backdrop-bg;
     height: 100%;
     opacity: 0.6;
     width: 100%;
@@ -27,7 +27,7 @@
 
   img, video {
     bottom: 0;
-    border: 5px solid #ffffff;
+    border: 5px solid $popover-bg;
     left: 0;
     margin: auto;
     max-height: 90%;
@@ -80,10 +80,10 @@ h3 .face {
     bottom: 1em;
     position: absolute;
     right: 1em;
-    text-shadow:  1px  1px 1px white,
-                  1px -1px 1px white,
-                 -1px  1px 1px white,
-                 -1px -1px 1px white;
+    text-shadow:  1px  1px 1px $label-color,
+                  1px -1px 1px $label-color,
+                 -1px  1px 1px $label-color,
+                 -1px -1px 1px $label-color;
   }
 }
 
@@ -106,7 +106,7 @@ h3 .face {
   }
 
   .fa {
-    color: #fff;
+    color: $label-color;
     position: absolute;
     text-shadow: 1px 1px 2px $gray-base;
   }
