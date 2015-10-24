@@ -32,6 +32,16 @@ $(function(){
       callbackRemove()
   });
 
+  $('#photo-modal .modal-next').click(function() {
+    var currentUrl = $('#photo-modal').data('current-url');
+    $("a[href='" + currentUrl + "']").parents('.col-md-3').next().find('.thumbnail div:first-child a').click();
+  });
+
+  $('#photo-modal .modal-prev').click(function() {
+    var currentUrl = $('#photo-modal').data('current-url');
+    $("a[href='" + currentUrl + "']").parents('.col-md-3').prev().find('.thumbnail div:first-child a').click();
+  });
+
   $('.thumbnail div:first-child a').click(function(e) {
     var link = $(this);
     var url = link.attr('href');
@@ -51,6 +61,20 @@ $(function(){
       }
       photoModal.find('img, video').remove();
       photoModal.append(fullView);
+    }
+
+    var nextButton = $('#photo-modal .modal-next');
+    if (link.parents('.col-md-3').next().length == 0) {
+      nextButton.removeClass('in')
+    } else {
+      nextButton.addClass('in')
+    }
+
+    var prevButton = $('#photo-modal .modal-prev');
+    if (link.parents('.col-md-3').prev().length == 0) {
+      prevButton.removeClass('in')
+    } else {
+      prevButton.addClass('in')
     }
 
     photoModal.show();

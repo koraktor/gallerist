@@ -25,6 +25,27 @@
     width: 100%;
   }
 
+  .modal-next, .modal-prev {
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+
+    .fa-circle {
+      text-shadow:  2px  2px 0 $carousel-control-color,
+                    2px -2px 0 $carousel-control-color,
+                   -2px  2px 0 $carousel-control-color,
+                   -2px -2px 0 $carousel-control-color;
+    }
+  }
+
+  .modal-next {
+    right: 2em;
+  }
+
+  .modal-prev {
+    left: 2em;
+  }
+
   img, video {
     bottom: 0;
     border: 5px solid $popover-bg;
