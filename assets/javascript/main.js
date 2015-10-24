@@ -14,6 +14,27 @@ $(function(){
     threshold: 5
   });
 
+  $(document).keydown(function(e) {
+    if (!$('#photo-modal').hasClass('in')) {
+      return;
+    }
+
+    switch (e.which) {
+      case 27:
+        $('#photo-modal .backdrop').click();
+        e.preventDefault();
+        break;
+      case 32:
+      case 39:
+        $('#photo-modal .modal-next').click();
+        e.preventDefault();
+        break;
+      case 37:
+        $('#photo-modal .modal-prev').click();
+        e.preventDefault();
+    }
+  });
+
   $('#photo-modal .backdrop').click(function() {
     var photoModal = $('#photo-modal');
     var video = photoModal.find('video');
