@@ -34,11 +34,29 @@
 
     @include user-select(none);
 
-    .fa-circle {
+    .fa-stack-1x, .fa-stack-2x {
+      transition: color 0.5s;
+    }
+
+    .fa-stack-2x {
       text-shadow:  2px  2px 0 $carousel-control-color,
                     2px -2px 0 $carousel-control-color,
                    -2px  2px 0 $carousel-control-color,
                    -2px -2px 0 $carousel-control-color;
+      transition: text-shadow 0.3s;
+    }
+
+    &:hover {
+      .fa-stack-1x {
+        color: $btn-info-bg;
+      }
+
+      .fa-stack-2x {
+        text-shadow:  2px  2px 0 $btn-info-bg,
+                      2px -2px 0 $btn-info-bg,
+                     -2px  2px 0 $btn-info-bg,
+                     -2px -2px 0 $btn-info-bg;
+      }
     }
   }
 
