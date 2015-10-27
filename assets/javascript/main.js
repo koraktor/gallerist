@@ -9,6 +9,22 @@
 //=require 'bootstrap-sprockets'
 //=require 'layzr'
 
+function fadeAndHide(elem) {
+  var callback = function() { elem.hide() };
+
+  $.support.transition ?
+    elem.one('bsTransitionEnd', callback).emulateTransitionEnd(300) :
+    callback();
+
+  elem.removeClass('in');
+}
+
+function fadeIn(elem) {
+  elem.show();
+  var _ = elem[0].offsetWidth;
+  elem.addClass('in');
+}
+
 $(function(){
   var layzr = new Layzr({
     threshold: 5
@@ -41,16 +57,8 @@ $(function(){
     if (video.length > 0) {
       video[0].pause();
     }
-    photoModal.removeClass('in');
 
-    var callbackRemove = function() {
-      photoModal.hide();
-    }
-
-    $.support.transition ?
-      photoModal.one('bsTransitionEnd', callbackRemove)
-        .emulateTransitionEnd(300) :
-      callbackRemove()
+    fadeAndHide(photoModal)
   });
 
   $('#photo-modal .modal-next').click(function() {
@@ -86,21 +94,19 @@ $(function(){
 
     var nextButton = $('#photo-modal .modal-next');
     if (link.parents('.col-md-3').next().length == 0) {
-      nextButton.removeClass('in')
+      fadeAndHide(nextButton)
     } else {
-      nextButton.addClass('in')
+      fadeIn(nextButton)
     }
 
     var prevButton = $('#photo-modal .modal-prev');
     if (link.parents('.col-md-3').prev().length == 0) {
-      prevButton.removeClass('in')
+      fadeAndHide(prevButton)
     } else {
-      prevButton.addClass('in')
+      fadeIn(prevButton)
     }
 
-    photoModal.show();
-    photoModal[0].offsetWidth;
-    photoModal.addClass('in');
+    fadeIn(photoModal);
 
     e.preventDefault();
   });
