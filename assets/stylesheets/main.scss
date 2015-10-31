@@ -104,17 +104,13 @@ h3 .face {
 }
 
 .key-photo {
-  display: inline-block;
+  align-items: center;
+  display: flex;
   height: 13em;
   padding: 0.2em;
 
-  .align-helper {
-    display: inline-block;
-    height: 100%;
-    vertical-align: middle;
-  }
-
   img {
+    margin: 0 auto;
     max-height: 12em;
     box-shadow: $gray-base 0 0 8px;
   }
