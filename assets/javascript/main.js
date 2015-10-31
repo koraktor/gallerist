@@ -63,15 +63,15 @@ $(function(){
 
   $('#photo-modal .modal-next').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
-    $("a[href='" + currentUrl + "']").parents('.col-md-3').next().find('.thumbnail div:first-child a').click();
+    $("a[href='" + currentUrl + "']").parent().next().find('a.thumbnail').click();
   });
 
   $('#photo-modal .modal-prev').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
-    $("a[href='" + currentUrl + "']").parents('.col-md-3').prev().find('.thumbnail div:first-child a').click();
+    $("a[href='" + currentUrl + "']").parent().prev().find('a.thumbnail').click();
   });
 
-  $('.thumbnail div:first-child a').click(function(e) {
+  $('a.thumbnail').click(function(e) {
     var link = $(this);
     var url = link.attr('href');
     var photoModal = $('#photo-modal');
@@ -92,15 +92,15 @@ $(function(){
       photoModal.append(fullView);
     }
 
-    var nextButton = $('#photo-modal .modal-next');
-    if (link.parents('.col-md-3').next().length == 0) {
+    var nextButton = photoModal.find('.modal-next');
+    if (link.parent().next().length == 0) {
       fadeAndHide(nextButton)
     } else {
       fadeIn(nextButton)
     }
 
-    var prevButton = $('#photo-modal .modal-prev');
-    if (link.parents('.col-md-3').prev().length == 0) {
+    var prevButton = photoModal.find('.modal-prev');
+    if (link.parent().prev().length == 0) {
       fadeAndHide(prevButton)
     } else {
       fadeIn(prevButton)

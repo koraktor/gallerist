@@ -1,23 +1,11 @@
-<div class="thumbnail">
+<a href="<%= url_for(photo) %>" class="thumbnail" data-type="<%= photo.video? ? 'video' : 'image' %>">
   <div>
-    <a href="<%= url_for(photo) %>" data-type="<%= photo.video? ? 'video' : 'image' %>">
-      <div>
-        <img data-layzr="/thumbs/<%= photo.id %>">
-        <% if photo.is_favorite? %>
-          <i class="fa fa-heart fa-lg top-left"></i>
-        <% end %>
-        <% if photo.video? %>
-          <i class="fa fa-film fa-lg bottom-right"></i>
-        <% end %>
-      </div>
-    </a>
-  </div>
-  <div class="caption">
-    <% unless photo.tags.to_a.empty? %>
-      <p><i class="fa fa-fw fa-tags"></i> <%= photo.tags.map { |t| link_to t }.join '' %></p>
+    <img data-layzr="/thumbs/<%= photo.id %>">
+    <% if photo.is_favorite? %>
+      <i class="fa fa-heart fa-lg top-left"></i>
     <% end %>
-    <% unless photo.persons.to_a.empty? %>
-      <p><i class="fa fa-fw fa-users"></i> <%= photo.persons.map { |p| link_to p }.join '' %></p>
+    <% if photo.video? %>
+      <i class="fa fa-film fa-lg bottom-right"></i>
     <% end %>
   </div>
-</div>
+</a>
