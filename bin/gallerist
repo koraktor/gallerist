@@ -32,6 +32,9 @@ opts = OptionParser.new do |opts|
   opts.on('-n', '--no-copy', 'Disable temporary copies of the library databases') do
     ENV['GALLERIST_NOCOPY'] = 'true'
   end
+  opts.on('-v', '--verbose', 'Enable verbose output') do
+    ENV['VERBOSE'] = 'true'
+  end
 end
 opts.parse!
 

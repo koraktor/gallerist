@@ -16,7 +16,7 @@ module Gallerist::App::Configuration
 
   def self.registered(app)
     configure do
-      enable :logging
+      set :logging, ENV['VERBOSE'] ? ::Logger::WARN : ::Logger::INFO
 
       tempdir = Dir.mktmpdir('gallerist')
       at_exit { FileUtils.rm_rf tempdir }
