@@ -50,12 +50,7 @@ class Gallerist::Library
     source_path = file @db_path, db_name
     dest_path = file @temp_path, db_name
 
-    db = SQLite3::Database.new source_path
-    db.transaction :immediate do |_|
-      FileUtils.cp source_path, dest_path, preserve: true
-    end
-  ensure
-    db.close unless db.nil?
+    FileUtils.cp source_path, dest_path, preserve: true
   end
 
   def file(*path_components)

@@ -49,6 +49,11 @@ module Gallerist::App::Utilities
     Gallerist::PersonModel.use_library library
 
     library
+  rescue ActiveRecord::StatementInvalid
+    if $!.original_exception.is_a? SQLite3::BusyException
+      raise Gallerist::LibraryInUseError, settings.library_path
+    end
+    raise
   end
 
   def navbar_item(name, url, *args)
