@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'sprockets-helpers', '~> 1.1'
   s.add_dependency 'sqlite3', '~> 1.3'
   s.add_dependency 'uglifier', '~> 2.7'
-  s.add_dependency 'unicorn', '~> 4.8'
+  s.add_dependency 'unicorn', '~> 5.0'
 
   s.executables   = [ 'gallerist' ]
   s.files         = `git ls-files`.split
