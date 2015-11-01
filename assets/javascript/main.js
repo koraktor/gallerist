@@ -30,28 +30,30 @@ $(function(){
     threshold: 5
   });
 
+  var photoModal = $('#photo-modal');
+
   $(document).keydown(function(e) {
-    if (!$('#photo-modal').hasClass('in')) {
+    if (!photoModal.hasClass('in')) {
       return;
     }
 
     switch (e.which) {
       case 27:
-        $('#photo-modal .backdrop').click();
+        photoModal.find('.backdrop').click();
         e.preventDefault();
         break;
       case 32:
       case 39:
-        $('#photo-modal .modal-next').click();
+        photoModal.find('.modal-next').click();
         e.preventDefault();
         break;
       case 37:
-        $('#photo-modal .modal-prev').click();
+        photoModal.find('.modal-prev').click();
         e.preventDefault();
     }
   });
 
-  $('#photo-modal .backdrop').click(function() {
+  photoModal.find('.backdrop').click(hideModal);
     var photoModal = $('#photo-modal');
     var video = photoModal.find('video');
     if (video.length > 0) {
@@ -61,12 +63,12 @@ $(function(){
     fadeAndHide(photoModal)
   });
 
-  $('#photo-modal .modal-next').click(function() {
+  photoModal.find('.modal-next').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
     $("a[href='" + currentUrl + "']").parent().next().find('a.thumbnail').click();
   });
 
-  $('#photo-modal .modal-prev').click(function() {
+  photoModal.find('.modal-prev').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
     $("a[href='" + currentUrl + "']").parent().prev().find('a.thumbnail').click();
   });
@@ -74,7 +76,6 @@ $(function(){
   $('a.thumbnail').click(function(e) {
     var link = $(this);
     var url = link.attr('href');
-    var photoModal = $('#photo-modal');
 
     if (photoModal.data('current-url') != url) {
       photoModal.data('current-url', url);
