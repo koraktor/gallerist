@@ -17,6 +17,10 @@ class Gallerist::Person < Gallerist::PersonModel
     Gallerist::Photo.where modelId: person_photos.map(&:photo_id)
   end
 
+  def as_json(*)
+    { id: id, name: name }
+  end
+
   def to_s
     name
   end

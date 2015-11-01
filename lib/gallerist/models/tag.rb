@@ -24,6 +24,10 @@ class Gallerist::Tag < Gallerist::BaseModel
     "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
+  def as_json(*)
+    { name: name, searchName: searchName }
+  end
+
   def to_s
     name
   end

@@ -26,6 +26,10 @@ class Gallerist::Photo < Gallerist::BaseModel
     "#<#{self.class} id=#{id} uuid=#{uuid} file_name='#{file_name}'>"
   end
 
+  def metadata
+    { persons: persons, tags: tags }
+  end
+
   def path
     File.dirname master.path
   end

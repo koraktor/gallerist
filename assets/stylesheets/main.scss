@@ -10,7 +10,7 @@
 @import 'font-awesome';
 
 #photo-modal {
-  display: none;
+  display: flex;
   height: 100%;
   left: 0;
   position: fixed;
@@ -22,7 +22,9 @@
     background: $modal-backdrop-bg;
     height: 100%;
     opacity: 0.6;
+    position: absolute;
     width: 100%;
+    z-index: -1;
   }
 
   .modal-next, .modal-prev {
@@ -30,7 +32,6 @@
     font-weight: bold;
     position: absolute;
     top: 50%;
-    user-select: none;
 
     @include user-select(none);
 
@@ -68,16 +69,48 @@
     left: 2em;
   }
 
-  img, video {
+  .metadata {
+    background: $popover-bg;
     bottom: 0;
-    border: 5px solid $popover-bg;
-    left: 0;
-    margin: auto;
-    max-height: 90%;
-    max-width: 90%;
+    left: 100%;
+    position: absolute;
+    width: 100%;
+    transition: left 0.5s ease-in-out;
+
+    p {
+      padding: 0.5em 0.5em 0 0.5em;
+    }
+  }
+
+  .metadata-button {
+    background: $popover-bg;
+    bottom: 0;
+    border-top-left-radius: 50%;
     position: absolute;
     right: 0;
-    top: 0;
+
+    @include user-select(none);
+
+    &:hover {
+      color: $link-hover-color;
+    }
+
+    .fa-stack-1x:not(.fa-inverse) {
+      color: $btn-info-bg;
+    }
+  }
+
+  .view-container {
+    margin: auto;
+    max-height: 95vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  img, video {
+    border: 5px solid $popover-bg;
+    max-height: 95vh;
+    max-width: 100%;
   }
 }
 

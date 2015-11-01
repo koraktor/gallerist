@@ -1,4 +1,6 @@
-<a href="<%= url_for(photo) %>" class="thumbnail" data-type="<%= photo.video? ? 'video' : 'image' %>">
+<a href="<%= url_for(photo) %>" class="thumbnail"
+   data-meta='<%= photo.metadata.to_json %>'
+   data-type="<%= photo.video? ? 'video' : 'image' %>">
   <div>
     <img data-layzr="/thumbs/<%= photo.id %>">
     <% if photo.is_favorite? %>
