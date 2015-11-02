@@ -101,6 +101,7 @@
   }
 
   .view-container {
+    border: 5px solid $popover-bg;
     margin: auto;
     max-height: 95vh;
     overflow: hidden;
@@ -108,7 +109,7 @@
   }
 
   img, video {
-    border: 5px solid $popover-bg;
+    display: block;
     max-height: 95vh;
     max-width: 100%;
   }
