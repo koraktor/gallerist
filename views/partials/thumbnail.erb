@@ -1,5 +1,5 @@
 <div class="col-md-3 col-sm-6">
-  <a href="<%= url_for(photo) %>" class="thumbnail"
+  <a href="<%= url_for(photo) %>" class="thumbnail photo"
      data-meta='<%= photo.metadata.to_json %>'
      data-type="<%= photo.video? ? 'video' : 'image' %>">
     <div class="thumbnail-container">

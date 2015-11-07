@@ -1,0 +1,12 @@
+<div class="col-md-3 col-sm-6">
+  <a href="<%= url_for album %>" class="thumbnail">
+    <div class="thumbnail-container">
+      <div class="thumbnail-wrapper">
+        <div class="thumbnail-boundary">
+          <img data-layzr="/thumbs/<%= album.key_photo.id %>">
+          <span><%= album.name %></span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

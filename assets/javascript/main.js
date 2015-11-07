@@ -91,7 +91,7 @@ $(function(){
     $("a[href='" + currentUrl + "']").parent().prev().find('a.thumbnail').click();
   });
 
-  $('a.thumbnail').click(function(e) {
+  $('a.photo').click(function(e) {
     e.preventDefault();
 
     var link = $(this);

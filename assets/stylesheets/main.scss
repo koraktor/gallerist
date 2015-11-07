@@ -115,10 +115,6 @@
   }
 }
 
-.link {
-  font-size: $font-size-h3;
-}
-
 .navbar-inverse .navbar-brand:hover {
   color: $navbar-inverse-brand-color;
 }
@@ -135,33 +131,6 @@
 h3 .face {
   height: 64px;
   width: 64px;
-}
-
-.key-photo {
-  align-items: center;
-  display: flex;
-  height: 13em;
-  padding: 0.2em;
-
-  img {
-    margin: 0 auto;
-    max-height: 12em;
-    box-shadow: $gray-base 0 0 8px;
-  }
-
-  span {
-    bottom: 1em;
-    position: absolute;
-    right: 1em;
-    text-shadow:  1px  1px 1px $label-color,
-                  1px -1px 1px $label-color,
-                 -1px  1px 1px $label-color,
-                 -1px -1px 1px $label-color;
-  }
-}
-
-.key-photos .list-group-item {
-  text-align: center;
 }
 
 .person, .tag {

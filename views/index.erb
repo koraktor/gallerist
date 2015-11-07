@@ -12,9 +12,9 @@
 
 <h2><i class="fa fa-fw fa-folder-o"></i> Albums</h2>
 
-<div class="list-group key-photos">
+<div class="row">
   <% @albums.regular.each do |album| %>
-    <%= link_to album, 'link col-md-3 list-group-item' %>
+    <%= partial :key_photo, locals: { album: album } %>
   <% end %>
 </div>
 
@@ -22,9 +22,9 @@
 
 <h2><i class="fa fa-fw fa-calendar-o"></i> Projects</h2>
 
-<div class="list-group key-photos">
+<div class="row">
   <% @albums.projects.each do |project| %>
-    <%= link_to project, 'link col-md-3 list-group-item' %>
+    <%= partial :key_photo, locals: { album: project } %>
   <% end %>
 </div>
 
