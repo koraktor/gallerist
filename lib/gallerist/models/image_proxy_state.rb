@@ -10,10 +10,11 @@ class Gallerist::ImageProxyState < Gallerist::ImageProxiesModel
   belongs_to :photo
 
   alias_attribute :photo_id, :versionId
+  alias_attribute :preview_path, :fullSizePreviewPath
   alias_attribute :small_thumbnail_path, :miniThumbnailPath
   alias_attribute :thumbnail_available, :thumbnailsCurrent
 
-  default_scope { select(:miniThumbnailPath, :modelId, :thumbnailsCurrent, :versionId) }
+  default_scope { select(:fullSizePreviewPath, :miniThumbnailPath, :modelId, :thumbnailsCurrent, :versionId) }
 
   def inspect
     "#<#{self.class} id=#{id} photo=#{photo_id}>"

@@ -113,6 +113,7 @@ $(function(){
       var source = $('<source>');
       source.attr('src', url);
       fullView = $('<video controls>');
+      fullView.attr('poster', url.replace('photos', 'previews'));
       fullView.append(source);
     }
 

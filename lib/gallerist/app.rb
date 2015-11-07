@@ -90,6 +90,16 @@ class Gallerist::App < Sinatra::Base
     erb :tag
   end
 
+  get '/previews/:id' do
+    photo = photo params[:id]
+
+    not_found if photo.fullsize_preview_path.nil?
+
+    send_library_file photo.fullsize_preview_path,
+      disposition: :inline,
+      filename: "preview_#{photo.file_name}"
+  end
+
   get '/thumbs/:id' do
     photo = photo params[:id]
 

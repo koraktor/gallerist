@@ -26,6 +26,12 @@ class Gallerist::Photo < Gallerist::BaseModel
     "#<#{self.class} id=#{id} uuid=#{uuid} file_name='#{file_name}'>"
   end
 
+  def fullsize_preview_path
+    return nil if image_proxy_state.preview_path.nil?
+
+    File.join 'Previews', image_proxy_state.preview_path
+  end
+
   def metadata
     { persons: persons, tags: tags }
   end
