@@ -27,8 +27,8 @@ module Gallerist
       require "gallerist/models/#{file}"
 
       begin
-        model_extesion = "gallerist/models/#{library_type}_extensions/#{file}"
-        require model_extesion
+        model_extension = "gallerist/models/#{library_type}_extensions/#{file}"
+        require model_extension
       rescue LoadError
       end
     end
