@@ -2,9 +2,7 @@
 
 <div class="row">
   <% @photos.order(:date).each do |photo| %>
-    <div class="col-md-3">
-      <%= partial :thumbnail, locals: { photo: photo } %>
-    </div>
+    <%= partial :thumbnail, locals: { photo: photo } %>
   <% end %>
 </div>
 
