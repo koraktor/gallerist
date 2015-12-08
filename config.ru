@@ -3,10 +3,7 @@
 #
 # Copyright (c) 2015, Sebastian Staudt
 
-unless defined? Gallerist
-  $LOAD_PATH << File.join(__dir__, 'lib')
-  require 'gallerist'
-end
+require 'gallerist'
 
 warmup do |app|
   error = []

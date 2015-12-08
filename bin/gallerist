@@ -8,6 +8,8 @@
 require 'optparse'
 require 'rack'
 
+require 'gallerist'
+
 ENV['RACK_ENV'] ||= 'production'
 
 server_options = { port: 9292 }
@@ -37,10 +39,6 @@ opts = OptionParser.new do |opts|
   end
 end
 opts.parse!
-
-$LOAD_PATH << File.join(__dir__, '..', 'lib')
-
-require 'gallerist'
 
 config_path = File.expand_path File.join(__dir__, '..', 'config.ru')
 
