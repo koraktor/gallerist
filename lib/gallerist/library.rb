@@ -37,12 +37,7 @@ class Gallerist::Library
 
   def copy_extra_dbs
     copy_tmp_db 'ImageProxies.apdb'
-
-    if iphoto?
-      copy_tmp_db 'Faces.db'
-    else
-      copy_tmp_db 'Person.db'
-    end
+    copy_tmp_db (iphoto? ? 'Faces.db' : 'Person.db')
   end
 
   def copy_tmp_db(db_name)
