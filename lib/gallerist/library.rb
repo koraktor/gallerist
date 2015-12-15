@@ -51,7 +51,8 @@ class Gallerist::Library
   end
 
   def file(*path_components)
-    Dir.glob(File.join(*path_components), File::FNM_CASEFOLD).first
+    path = File.expand_path File.join(*path_components)
+    Dir.glob(path, File::FNM_CASEFOLD).first || path
   end
 
   def iphoto?
