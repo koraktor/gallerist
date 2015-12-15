@@ -56,4 +56,8 @@ begin
 rescue Gallerist::LibraryInUseError
   $stderr.puts 'The library is currently in use.' <<
                ' Is it currently opened in Photos?'
+rescue Errno::EADDRINUSE
+  $stderr.puts ('Port %d is already in use.' % [ Gallerist.options[:port] ]) <<
+                ' Maybe another instance of Gallerist is already running.' <<
+                ' (You may use a different port using the --port option.)'
 end
