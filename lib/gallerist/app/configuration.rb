@@ -27,7 +27,7 @@ module Gallerist::App::Configuration
       set :copy_dbs, !ENV['GALLERIST_NOCOPY']
       set :dump_errors, Proc.new { development? }
       set :library, nil
-      set :library_path, ENV['GALLERIST_LIBRARY']
+      set :library_path, Gallerist.options[:library]
       set :views, File.join(root, 'views')
 
       Sprockets.register_mime_type 'application/vnd.ms-fontobject', '.eot'

@@ -12,17 +12,16 @@ require 'gallerist'
 
 ENV['RACK_ENV'] ||= 'production'
 
-server_options = { port: 9292 }
 opts = OptionParser.new do |opts|
   opts.banner = 'Usage: gallerist [options] <library>'
 
   opts.separator ''
   opts.separator 'Options:'
-  opts.on('-p', '--port PORT', 'Specify on which port to listen') do |port|
-    server_options[:port] = port
-  end
   opts.on('-d', '--debug', 'Enable debug mode') do
     ENV['RACK_ENV'] = 'development'
+  end
+  opts.on('-p', '--port PORT', 'Specify on which port to listen (Default is 9292)') do |port|
+    Gallerist.options[:port] = port
   end
 
   opts.separator ''
@@ -42,9 +41,9 @@ opts.parse!
 
 config_path = File.expand_path File.join(__dir__, '..', 'config.ru')
 
-ENV['GALLERIST_LIBRARY'] = ARGV[0]
+Gallerist.options[:library] = File.expand_path ARGV[0]
 
-if ENV['GALLERIST_LIBRARY'].nil?
+if Gallerist.options[:library].nil?
   puts opts.help
   exit 1
 end
@@ -52,7 +51,7 @@ end
 begin
   Rack::Server.start config: config_path,
                      server: :unicorn,
-                     Port: server_options[:port],
+                     Port: Gallerist.options[:port],
                      worker_processes: 4
 rescue Gallerist::LibraryInUseError
   $stderr.puts 'The library is currently in use.' <<

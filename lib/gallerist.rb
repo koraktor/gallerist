@@ -12,6 +12,14 @@ module Gallerist
   autoload :LibraryInUseError, 'gallerist/errors'
   autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
 
+  OPTIONS = {
+          library: ENV['GALLERIST_LIBRARY'],
+          port: 9292
+  }
+
+  def self.options
+    OPTIONS
+  end
   # Models
 
   MODELS = {}
