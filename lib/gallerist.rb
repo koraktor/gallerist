@@ -17,10 +17,16 @@ module Gallerist
           library: ENV['GALLERIST_LIBRARY'],
           port: 9292
   }
+  STDOUT = $stdout.dup
 
   def self.options
     OPTIONS
   end
+
+  def self.stdout
+    STDOUT
+  end
+
   # Models
 
   MODELS = {}
