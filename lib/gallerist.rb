@@ -10,6 +10,7 @@ module Gallerist
   autoload :App, 'gallerist/app'
   autoload :Library, 'gallerist/library'
   autoload :LibraryInUseError, 'gallerist/errors'
+  autoload :LibraryNonExistant, 'gallerist/errors'
   autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
 
   OPTIONS = {

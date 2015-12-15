@@ -10,3 +10,11 @@ class Gallerist::LibraryInUseError < StandardError
   end
 
 end
+
+class Gallerist::LibraryNonExistant < StandardError
+
+  def initialize(library_path)
+    super "The path '#{library_path}' does not exist."
+  end
+
+end
