@@ -17,9 +17,6 @@ opts = OptionParser.new do |opts|
 
   opts.separator ''
   opts.separator 'Options:'
-  opts.on('-d', '--debug', 'Enable debug mode') do
-    ENV['RACK_ENV'] = 'development'
-  end
   opts.on('-p', '--port PORT', 'Specify on which port to listen (Default is 9292)') do |port|
     Gallerist.options[:port] = port
   end
@@ -30,6 +27,9 @@ opts = OptionParser.new do |opts|
 
   opts.separator ''
   opts.separator 'Advanced options:'
+  opts.on('-d', '--debug', 'Enable debug mode') do
+    ENV['RACK_ENV'] = 'development'
+  end
   opts.on('-n', '--no-copy', 'Disable temporary copies of the library databases') do
     ENV['GALLERIST_NOCOPY'] = 'true'
   end
