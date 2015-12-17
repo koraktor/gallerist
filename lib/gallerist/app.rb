@@ -101,6 +101,7 @@ class Gallerist::App < Sinatra::Base
 
   get '/tags/:name' do
     @tag = library.tags.find_by_simple_name params[:name]
+    not_found if @tag.nil?
     @title = @tag.name
 
     navbar_for @tag

@@ -137,6 +137,7 @@ h3 .face {
   display: inline-block;
   margin-right: 1pt;
   text-shadow: $gray-darker 2px 2px;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .thumbnail {
@@ -197,5 +198,6 @@ h3 .face {
                   1px -1px 1px $label-color,
                  -1px  1px 1px $label-color,
                  -1px -1px 1px $label-color;
+    transition: color 0.2s ease-in-out;
   }
 }

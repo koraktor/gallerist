@@ -105,6 +105,8 @@ module Gallerist::App::Utilities
     instance_variable_set "@#{type}".to_sym, object
 
     erb type
+  rescue ActiveRecord::RecordNotFound
+    not_found
   end
 
 end
