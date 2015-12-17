@@ -60,6 +60,15 @@ class Gallerist::App < Sinatra::Base
     erb :photos
   end
 
+  get '/persons' do
+    @persons = library.persons
+    @title = 'Persons'
+
+    navbar_for :persons
+
+    erb :persons
+  end
+
   get '/persons/:id' do
     render_object :person
   end
@@ -79,6 +88,15 @@ class Gallerist::App < Sinatra::Base
     send_library_file photo.image_path,
       disposition: :inline,
       filename: photo.file_name
+  end
+
+  get '/tags' do
+    @tags = library.tags.nonempty.order 'photos_count desc'
+    @title = 'Tags'
+
+    navbar_for :tags
+
+    erb :tags
   end
 
   get '/tags/:name' do

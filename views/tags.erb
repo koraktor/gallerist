@@ -1,0 +1,7 @@
+<h1>Tags</h1>
+
+<ul class="list-group">
+  <% @tags.each do |tag| %>
+    <li class="list-group-item"><%= link_to tag %> (<%= tag.photos.count :all %>)</li>
+  <% end %>
+</ul>

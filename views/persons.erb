@@ -1,0 +1,7 @@
+<h1>Persons</h1>
+
+<ul class="list-group">
+  <% @persons.each do |person| %>
+    <li class="list-group-item"><%= link_to person %> (<%= person.photos.count :all %>)</li>
+  <% end %>
+</ul>
