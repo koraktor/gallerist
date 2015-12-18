@@ -15,8 +15,9 @@ class Gallerist::Library
     @name = File.basename(library_path).rpartition('.').first
     @path = File.expand_path library_path
     main_db_path = file @path, 'Database', 'Library.apdb'
-    raise Gallerist::LibraryNonExistant, library_path if main_db_path.nil?
     @db_path = File.dirname File.realpath(main_db_path)
+  rescue Errno::ENOENT
+    raise Gallerist::LibraryNonExistant, library_path
   end
 
   def albums
