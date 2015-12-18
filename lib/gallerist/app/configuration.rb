@@ -24,7 +24,7 @@ module Gallerist::App::Configuration
       set :root, File.join(root, '..', '..')
       set :tempdir, tempdir.dup
 
-      set :copy_dbs, !ENV['GALLERIST_NOCOPY']
+      set :copy_dbs, !Gallerist.options[:nocopy]
       set :dump_errors, Proc.new { development? }
       set :library, nil
       set :library_path, Gallerist.options[:library]

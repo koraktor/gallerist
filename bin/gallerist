@@ -31,7 +31,7 @@ opts = OptionParser.new do |opts|
     ENV['RACK_ENV'] = 'development'
   end
   opts.on('-n', '--no-copy', 'Disable temporary copies of the library databases') do
-    ENV['GALLERIST_NOCOPY'] = 'true'
+    Gallerist.options[:nocopy] = 'true'
   end
   opts.on('-v', '--verbose', 'Enable verbose output') do
     ENV['VERBOSE'] = 'true'
