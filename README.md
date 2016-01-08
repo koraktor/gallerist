@@ -15,8 +15,8 @@ It is built on top of [Sinatra][sinatra].
    directories)
  * Ruby 2.x
 
-OS X 10.9 and above ship with Ruby 2.0. Ruby 1.9 probably works, but won’t be
-supported.
+OS X 10.9 and above ship with Ruby 2.0. You can use [Homebrew][brew] to install
+a current Ruby version on older versions of OS X.
 
 ## Installation
 
