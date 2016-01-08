@@ -100,8 +100,14 @@ class Gallerist::App < Sinatra::Base
   end
 
   get '/tags/:name' do
-    @tag = library.tags.find_by_simple_name params[:name]
-    not_found if @tag.nil?
+    if params[:name].include? '+'
+      @tag = Gallerist::MultiTag.new library, params[:name].split('+'), true
+    elsif params[:name].include? ','
+      @tag = Gallerist::MultiTag.new library, params[:name].split(','), false
+    else
+      @tag = library.tags.find_by_simple_name params[:name]
+      not_found if @tag.nil?
+    end
     @title = @tag.name
 
     navbar_for @tag
