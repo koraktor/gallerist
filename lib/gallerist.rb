@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 module Gallerist
 
@@ -11,6 +11,7 @@ module Gallerist
   autoload :Library, 'gallerist/library'
   autoload :LibraryInUseError, 'gallerist/errors'
   autoload :LibraryNonExistant, 'gallerist/errors'
+  autoload :MultiTag, 'gallerist/multi_tag'
   autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
 
   OPTIONS = {

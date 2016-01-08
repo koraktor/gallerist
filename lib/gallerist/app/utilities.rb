@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 module Gallerist::App::Utilities
 
@@ -82,7 +82,7 @@ module Gallerist::App::Utilities
     when Gallerist::Person
       navbar_item 'Persons', '/persons'
       navbar_item obj.name, '/persons/%d', obj.id
-    when Gallerist::Tag
+    when Gallerist::Tag, Gallerist::MultiTag
       navbar_item 'Tags', '/tags'
       navbar_item obj.name, '/tags/%s', obj.simple_name
     end
