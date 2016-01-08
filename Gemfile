@@ -9,4 +9,6 @@ gemspec
 
 group :development do
   gem 'rake', '~> 10.4'
+  gem 'rspec', '~> 3.2'
+  gem 'rspec-activemodel-mocks', '~> 1.0.2'
 end
