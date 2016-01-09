@@ -6,6 +6,9 @@
 require 'active_record'
 require 'rspec/active_model/mocks'
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'gallerist'
 include Gallerist
 
