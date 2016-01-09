@@ -2,6 +2,7 @@ Gallerist
 =========
 
 [![Gem Version](https://badge.fury.io/rb/gallerist.svg)](http://badge.fury.io/rb/gallerist)
+[![Build Status](https://travis-ci.org/koraktor/gallerist.svg)](https://travis-ci.org/koraktor/gallerist)
 [![Dependency Status](https://gemnasium.com/koraktor/gallerist.svg)](https://gemnasium.com/koraktor/gallerist)
 [![Code Climate](https://codeclimate.com/github/koraktor/gallerist/badges/gpa.svg)](https://codeclimate.com/github/koraktor/gallerist)
 [![Gitter](https://img.shields.io/badge/Gitter-join%20chat-brightgreen.svg)](https://gitter.im/koraktor/gallerist)
