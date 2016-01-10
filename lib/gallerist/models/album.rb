@@ -33,4 +33,8 @@ class Gallerist::Album < Gallerist::BaseModel
     "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
+  def key_photo
+    self[:key_photo] || photos.first
+  end
+
 end
