@@ -2,7 +2,7 @@
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the new BSD License.
  *
- * Copyright (c) 2015, Sebastian Staudt
+ * Copyright (c) 2015-2016, Sebastian Staudt
  */
 
 @import 'bootstrap';
@@ -25,6 +25,7 @@
     position: absolute;
     width: 100%;
     z-index: -1;
+    transition: opacity 0.3s;
   }
 
   .modal-next, .modal-prev {
@@ -32,6 +33,7 @@
     font-weight: bold;
     position: absolute;
     top: 50%;
+    transition: opacity 0.3s, visibility 0.3s;
 
     @include user-select(none);
 
@@ -106,12 +108,45 @@
     max-height: 95vh;
     overflow: hidden;
     position: relative;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
   }
 
   img, video {
+    cursor: zoom-in;
     display: block;
     max-height: 95vh;
     max-width: 100%;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
+  }
+
+  &.full {
+    .backdrop {
+      opacity: 1.0;
+    }
+
+    .metadata, .metadata-button {
+      display: none !important;
+    }
+
+    .modal-next, .modal-prev {
+      opacity: 0;
+      visibility: hidden;
+      z-index: -2;
+    }
+
+    .view-container {
+      border: none;
+    }
+
+    .view-container, img, video {
+      max-height: 100vh;
+    }
+
+    img, video {
+      cursor: zoom-out;
+    }
   }
 }
 

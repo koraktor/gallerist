@@ -81,6 +81,7 @@ $(function(){
       video[0].pause();
     }
 
+    photoModal.removeClass("full");
     $('body').removeClass("no-scroll");
 
     fadeAndHide(photoModal)
@@ -140,6 +141,9 @@ $(function(){
     var display = function() {
       viewContainer.find('img, video').remove();
       viewContainer.prepend(fullView);
+      fullView.click(function() {
+        photoModal.toggleClass("full")
+      });
 
       photoModal.trigger('show');
     };
