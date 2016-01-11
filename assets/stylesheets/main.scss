@@ -119,6 +119,12 @@
   color: $navbar-inverse-brand-color;
 }
 
+.no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100vw;
+}
+
 .face {
   border-radius: 50%;
   box-shadow: $gray-base 0 0 8px;

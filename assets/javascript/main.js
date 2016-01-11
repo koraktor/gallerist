@@ -45,6 +45,10 @@ $(function(){
   });
 
   var photoModal = $('#photo-modal');
+  photoModal.on('show', function() {
+    $('body').addClass("no-scroll");
+    fadeIn(photoModal);
+  });
 
   $(document).keydown(function(e) {
     if (!photoModal.hasClass('in')) {
@@ -77,6 +81,8 @@ $(function(){
       video[0].pause();
     }
 
+    $('body').removeClass("no-scroll");
+
     fadeAndHide(photoModal)
   };
   photoModal.find('.backdrop').click(hideModal);
@@ -98,7 +104,7 @@ $(function(){
     var url = link.attr('href');
 
     if (photoModal.data('current-url') == url) {
-      fadeIn(photoModal);
+      photoModal.trigger('show');
       return
     }
 
@@ -135,7 +141,7 @@ $(function(){
       viewContainer.find('img, video').remove();
       viewContainer.prepend(fullView);
 
-      fadeIn(photoModal);
+      photoModal.trigger('show');
     };
 
     var persons = $('.persons span');
