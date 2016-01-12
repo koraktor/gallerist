@@ -33,8 +33,9 @@ class Gallerist::Album < Gallerist::BaseModel
     "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
-  def key_photo
-    self[:key_photo] || photos.first
+  def key_photo_with_fallback
+    key_photo_without_fallback || photos.first
   end
+  alias_method_chain :key_photo, :fallback
 
 end
