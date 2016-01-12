@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 require 'bootstrap-sass'
 require 'jquery-cdn'
@@ -14,7 +14,7 @@ module Gallerist::App::Configuration
     end
   end
 
-  def self.registered(app)
+  def self.registered(_)
     configure do
       set :logging, ENV['VERBOSE'] ? ::Logger::WARN : ::Logger::INFO
 
@@ -29,10 +29,6 @@ module Gallerist::App::Configuration
       set :library, nil
       set :library_path, Gallerist.options[:library]
       set :views, File.join(root, 'views')
-
-      Sprockets.register_mime_type 'application/vnd.ms-fontobject', '.eot'
-      Sprockets.register_mime_type 'application/x-font-ttf', '.ttf'
-      Sprockets.register_mime_type 'application/font-woff', '.woff'
 
       set :sprockets, Sprockets::Environment.new(root)
 
