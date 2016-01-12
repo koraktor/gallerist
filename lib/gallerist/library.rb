@@ -1,13 +1,12 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 require 'sqlite3'
 
 class Gallerist::Library
 
-  attr_reader :app
   attr_reader :name
   attr_reader :path
 

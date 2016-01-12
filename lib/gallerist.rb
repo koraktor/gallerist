@@ -32,7 +32,7 @@ module Gallerist
 
   MODELS = {}
 
-  def self.model(name, file, type = :all)
+  def self.model(name, file)
     autoload name, "gallerist/models/#{file}"
 
     MODELS[name] = file
@@ -46,6 +46,7 @@ module Gallerist
         model_extension = "gallerist/models/#{library_type}_extensions/#{file}"
         require model_extension
       rescue LoadError
+        # ignored
       end
     end
   end

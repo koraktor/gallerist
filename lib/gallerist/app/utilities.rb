@@ -65,6 +65,8 @@ module Gallerist::App::Utilities
     @navbar = []
     navbar_item library.name, '/'
 
+    return if obj == :root
+
     case obj
     when :all_photos
       navbar_item 'All photos', '/photos'
@@ -85,6 +87,7 @@ module Gallerist::App::Utilities
     when Gallerist::Tag, Gallerist::MultiTag
       navbar_item 'Tags', '/tags'
       navbar_item obj.name, '/tags/%s', obj.simple_name
+    else raise ArgumentError
     end
   end
 

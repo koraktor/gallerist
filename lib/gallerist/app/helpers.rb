@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 module Gallerist::App::Helpers
 
@@ -52,6 +52,7 @@ module Gallerist::App::Helpers
       "/photos/#{obj.id}"
     when Gallerist::Tag
       "/tags/#{URI.encode obj.simple_name}"
+    else raise ArgumentError
     end
   end
 
@@ -81,6 +82,7 @@ module Gallerist::App::Helpers
       classes << 'label' << 'tag'
       classes << (current?(obj) ? 'label-info' : 'label-primary')
       link = obj.name
+    else raise ArgumentError
     end
 
     link_to obj, classes, link
