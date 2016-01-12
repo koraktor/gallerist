@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 require 'active_record'
 require 'font-awesome-sass'
@@ -29,8 +29,8 @@ class Gallerist::App < Sinatra::Base
   get '/' do
     @title = library.name
 
-    @albums = library.albums.visible.nonempty.order :date
-    @persons = library.persons
+    @albums = library.albums.visible.nonempty.order(:date).includes :key_photo
+    @persons = library.persons.includes key_face: :photo
     @tags = library.tags.nonempty.order 'photos_count desc'
 
     navbar_for :root
