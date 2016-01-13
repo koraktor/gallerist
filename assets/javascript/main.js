@@ -24,18 +24,10 @@ HTMLVideoElement.prototype.isLoaded = function() {
 };
 
 function fadeAndHide(elem) {
-  var callback = function() { elem.hide() };
-
-  $.support.transition ?
-    elem.one('bsTransitionEnd', callback).emulateTransitionEnd(300) :
-    callback();
-
   elem.removeClass('in');
 }
 
 function fadeIn(elem) {
-  elem.show();
-  var _ = elem[0].offsetWidth;
   elem.addClass('in');
 }
 

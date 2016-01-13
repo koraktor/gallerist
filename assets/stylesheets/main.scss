@@ -16,7 +16,9 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: -1;
+
+  @include transition(z-index .15s linear .15s, opacity .15s linear);
 
   .backdrop {
     background: $modal-backdrop-bg;
@@ -33,8 +35,9 @@
     font-weight: bold;
     position: absolute;
     top: 50%;
-    transition: opacity 0.3s, visibility 0.3s;
+    z-index: -2;
 
+    @include transition(z-index .15s linear .15s, opacity .15s linear);
     @include user-select(none);
 
     .fa-stack-1x, .fa-stack-2x {
@@ -119,6 +122,11 @@
     max-width: 100%;
     transition: all 0.3s;
     transition-delay: 0.2s;
+  }
+
+  &.in, .in {
+    z-index: 1000;
+    @include transition(z-index .15s linear, opacity .15s linear .15s);
   }
 
   &.full {
