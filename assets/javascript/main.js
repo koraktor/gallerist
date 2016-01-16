@@ -164,6 +164,7 @@ $(function(){
     tags.empty();
 
     var metadata = link.data('meta');
+    $('.metadata-button').toggle(metadata.persons.length > 0 || metadata.tags.length > 0);
     if (metadata.persons.length) {
       metadata.persons.forEach(function(person, index) {
         if (index) {
