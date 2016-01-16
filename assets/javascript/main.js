@@ -2,7 +2,7 @@
  * This code is free software; you can redistribute it and/or modify it under
  * the terms of the new BSD License.
  *
- * Copyright (c) 2015, Sebastian Staudt
+ * Copyright (c) 2015-2016, Sebastian Staudt
  */
 
 //=require 'jquery'
@@ -73,8 +73,11 @@ $(function(){
       video[0].pause();
     }
 
-    photoModal.removeClass("full");
-    $('body').removeClass("no-scroll");
+    photoModal.removeClass('full');
+
+    var body = $('body');
+    body.removeClass("no-scroll");
+    history.pushState(null, '', body.data('base-url'));
 
     fadeAndHide(photoModal)
   };
@@ -94,9 +97,16 @@ $(function(){
     e.preventDefault();
 
     var link = $(this);
-    var url = link.attr('href');
+    var imageUrl = link.attr('href');
 
-    if (photoModal.data('current-url') == url) {
+    var url = $('body').data('base-url') + '/view/' + link.data('id');
+    if (photoModal.hasClass('full')) {
+      history.pushState(null, '', url + '/full');
+    } else {
+      history.pushState(null, '', url);
+    }
+
+    if (photoModal.data('current-url') == imageUrl) {
       photoModal.trigger('show');
       return
     }
@@ -104,15 +114,15 @@ $(function(){
     var fullView;
     var viewContainer = photoModal.find('.view-container');
 
-    photoModal.data('current-url', url);
+    photoModal.data('current-url', imageUrl);
     if (link.data('type') == 'image') {
       fullView = $('<img>');
-      fullView.attr('src', url);
+      fullView.attr('src', imageUrl);
     } else {
       var source = $('<source>');
-      source.attr('src', url);
+      source.attr('src', imageUrl);
       fullView = $('<video controls>');
-      fullView.attr('poster', url.replace('photos', 'previews'));
+      fullView.attr('poster', imageUrl.replace('photos', 'previews'));
       fullView.append(source);
     }
 
@@ -134,7 +144,14 @@ $(function(){
       viewContainer.find('img, video').remove();
       viewContainer.prepend(fullView);
       fullView.click(function() {
-        photoModal.toggleClass("full")
+        if (photoModal.hasClass('full')) {
+          photoModal.removeClass('full');
+          history.pushState(null, '', url);
+        } else {
+          photoModal.addClass('full');
+          var fullUrl = url + '/full';
+          history.pushState(null, '', fullUrl)
+        }
       });
 
       photoModal.trigger('show');
@@ -197,5 +214,11 @@ $(function(){
       infoBg.removeClass('fa-circle').addClass('fa-circle-o');
       info.removeClass('fa-inverse')
     }
-  })
+  });
+
+  var currentPhoto = $('a.thumbnail.current');
+  if (currentPhoto.length == 1) {
+    currentPhoto.click();
+    currentPhoto[0].scrollIntoView()
+  }
 });

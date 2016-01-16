@@ -18,6 +18,16 @@ class Gallerist::App < Sinatra::Base
   register BaseExtensions, Sinatra::Sprockets::Helpers, Configuration
   helpers Helpers, Utilities
 
+  before '*/full' do
+    @full = true
+    request.path_info.chomp! '/full'
+  end
+
+  before '*/view/:id' do
+    @current = params[:id].to_i
+    request.path_info.sub! /\/view\/\d+\z/, ''
+  end
+
   error 500 do |error|
     @title = 'Error'
 

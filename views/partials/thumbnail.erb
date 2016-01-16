@@ -1,5 +1,6 @@
 <div class="col-md-3 col-sm-6">
-  <a href="<%= url_for(photo) %>" class="thumbnail photo"
+  <a href="<%= url_for(photo) %>" class="thumbnail photo<% if @current == photo.id%> current<% end %>"
+     data-id="<%= photo.id %>"
      data-meta='<%= photo.metadata.to_json %>'
      data-type="<%= photo.video? ? 'video' : 'image' %>">
     <div class="thumbnail-container">

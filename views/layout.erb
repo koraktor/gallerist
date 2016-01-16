@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <script src="<%= javascript_path 'main' %>" type="application/javascript"></script>
 </head>
-<body>
+<body data-base-url="<%= request.path_info %>">
   <nav class="navbar navbar-default navbar-inverse navbar-static-top">
     <div class="container-fluid">
       <div class="navbar-header">
