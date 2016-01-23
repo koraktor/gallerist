@@ -53,6 +53,10 @@ $(function(){
         photoModal.find('.modal-prev').click();
         e.preventDefault();
         break;
+      case 70: // F
+        photoModal.find('img, video').click();
+        e.preventDefault();
+        break;
       case 73: // I
         photoModal.find('.metadata-button').click();
         e.preventDefault()
