@@ -64,11 +64,7 @@ $(function(){
   });
 
   var hideModal = function() {
-    var video = photoModal.find('video');
-    if (video.length > 0) {
-      video[0].pause();
-    }
-
+    photoModal.find('video').each(HTMLMediaElement.prototype.pause);
     photoModal.removeClass('full');
 
     var body = $('body');
