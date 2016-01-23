@@ -23,14 +23,6 @@ HTMLVideoElement.prototype.isLoaded = function() {
   return this.readyState == 4
 };
 
-function fadeAndHide(elem) {
-  elem.removeClass('in');
-}
-
-function fadeIn(elem) {
-  elem.addClass('in');
-}
-
 $(function(){
   var layzr = new Layzr({
     threshold: 5
@@ -39,7 +31,7 @@ $(function(){
   var photoModal = $('#photo-modal');
   photoModal.on('show', function() {
     $('body').addClass("no-scroll");
-    fadeIn(photoModal);
+    photoModal.addClass('in')
   });
 
   $(document).keydown(function(e) {
@@ -79,7 +71,7 @@ $(function(){
     body.removeClass("no-scroll");
     history.pushState(null, '', body.data('base-url'));
 
-    fadeAndHide(photoModal)
+    photoModal.removeClass('in')
   };
   photoModal.find('.backdrop').click(hideModal);
 
@@ -126,19 +118,8 @@ $(function(){
       fullView.append(source);
     }
 
-    var nextButton = photoModal.find('.modal-next');
-    if (link.parent().next().length) {
-      fadeIn(nextButton)
-    } else {
-      fadeAndHide(nextButton)
-    }
-
-    var prevButton = photoModal.find('.modal-prev');
-    if (link.parent().prev().length) {
-      fadeIn(prevButton)
-    } else {
-      fadeAndHide(prevButton)
-    }
+    photoModal.find('.modal-next').toggleClass('in', link.parent().next().length == 1);
+    photoModal.find('.modal-prev').toggleClass('in', link.parent().prev().length == 1);
 
     var display = function() {
       viewContainer.find('img, video').remove();
