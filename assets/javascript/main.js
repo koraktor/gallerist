@@ -40,20 +40,20 @@ $(function(){
     }
 
     switch (e.which) {
-      case 27:
+      case 27: // ESC
         photoModal.find('.backdrop').click();
         e.preventDefault();
         break;
-      case 32:
-      case 39:
+      case 32: // SPACE
+      case 39: // ->
         photoModal.find('.modal-next').click();
         e.preventDefault();
         break;
-      case 37:
+      case 37: // <-
         photoModal.find('.modal-prev').click();
         e.preventDefault();
         break;
-      case 73:
+      case 73: // I
         photoModal.find('.metadata-button').click();
         e.preventDefault()
     }
