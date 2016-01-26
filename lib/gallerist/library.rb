@@ -76,7 +76,7 @@ class Gallerist::Library
   end
 
   def person_db
-    File.join db_path, iphoto? ? 'Faces.db' : 'Person.db'
+    file db_path, iphoto? ? 'Faces.db' : 'Person.db'
   end
 
   def persons
