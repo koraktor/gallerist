@@ -7,10 +7,10 @@
       <div class="thumbnail-wrapper">
         <div class="thumbnail-boundary">
           <img data-layzr="/thumbs/<%= photo.id %>">
-          <% if photo.is_favorite? %>
+          <% if photo.is_favorite? && request.path != '/favorites' %>
             <i class="fa fa-heart fa-lg top-left"></i>
           <% end %>
-          <% if photo.video? %>
+          <% if photo.video? && request.path != '/movies' %>
             <i class="fa fa-film fa-lg bottom-right"></i>
           <% end %>
         </div>
