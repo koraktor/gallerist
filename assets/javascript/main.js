@@ -63,8 +63,12 @@ $(function(){
     }
   });
 
-  var hideModal = function() {
+  var pauseVideo = function() {
     photoModal.find('video').each(HTMLMediaElement.prototype.pause);
+  };
+
+  var hideModal = function() {
+    pauseVideo();
     photoModal.removeClass('full');
 
     var body = $('body');
@@ -77,11 +81,13 @@ $(function(){
 
   photoModal.find('.modal-next').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
+    pauseVideo();
     $("a[href='" + currentUrl + "']").parent().next().find('a.thumbnail').click();
   });
 
   photoModal.find('.modal-prev').click(function() {
     var currentUrl = $('#photo-modal').data('current-url');
+    pauseVideo();
     $("a[href='" + currentUrl + "']").parent().prev().find('a.thumbnail').click();
   });
 
