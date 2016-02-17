@@ -57,16 +57,13 @@ module Gallerist::App::Utilities
     raise
   end
 
-  def navbar_item(name, url, *args)
-    url = url % args unless args.empty?
+  def navbar_item(name, url)
     @navbar << [ url, name ]
   end
 
   def navbar_for(obj)
     @navbar = []
     navbar_item library.name, '/'
-
-    return if obj == :root
 
     case obj
     when :all_photos
@@ -81,14 +78,15 @@ module Gallerist::App::Utilities
       navbar_item 'Tags', '/tags'
     when Gallerist::Album
       navbar_item 'Albums', '/albums'
-      navbar_item obj.name, '/albums/%d', obj.id
     when Gallerist::Person
       navbar_item 'Persons', '/persons'
-      navbar_item obj.name, '/persons/%d', obj.id
     when Gallerist::Tag, Gallerist::MultiTag
       navbar_item 'Tags', '/tags'
-      navbar_item obj.name, '/tags/%s', obj.simple_name
-    else raise ArgumentError
+    else #ignore
+    end
+
+    unless obj.is_a? Symbol
+      navbar_item obj.name, url_for(obj)
     end
   end
 

@@ -50,7 +50,7 @@ module Gallerist::App::Helpers
       "/persons/#{obj.id}"
     when Gallerist::Photo
       "/photos/#{obj.id}"
-    when Gallerist::Tag
+    when Gallerist::Tag, Gallerist::MultiTag
       "/tags/#{URI.encode obj.simple_name}"
     else raise ArgumentError
     end
