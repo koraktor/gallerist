@@ -1,0 +1,19 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+  eslint:
+    enabled: true
+  rubocop:
+    enabled: true
+  scss-lint:
+    enabled: true
+exclude_paths:
+- assets/javascript/layzr.js
+ratings:
+  - assets/**/*
+  - bin/*
+  - lib/**/*
