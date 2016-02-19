@@ -56,13 +56,10 @@ module Gallerist::App::Helpers
     end
   end
 
-  def widget_for(obj, classes = nil)
-    classes = [ classes ].compact
+  def widget_for(obj)
+    classes = []
 
     case obj
-    when Gallerist::Album
-      link = '<img data-layzr="/thumbs/%d"><span>%s</span>' %
-              [ obj.key_photo.id, obj.name ]
     when Gallerist::Person
       classes << 'label' << 'person'
       classes << (current?(obj) ? 'label-info' : 'label-primary')
@@ -75,9 +72,6 @@ module Gallerist::App::Helpers
       link = '<span class="face" data-layzr="/photos/%d" data-layzr-bg
               style="background-position: %f%% %f%%; background-size: %s"></span> %s' %
               [ obj.key_photo.id, obj.key_face.position_x, obj.key_face.position_y, size, obj.name ]
-    when Gallerist::Photo
-      classes << 'thumbnail'
-      link = '<img data-layzr="/thumbs/%s">' % [ obj.id ]
     when Gallerist::Tag
       classes << 'label' << 'tag'
       classes << (current?(obj) ? 'label-info' : 'label-primary')
