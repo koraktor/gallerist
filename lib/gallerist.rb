@@ -11,6 +11,8 @@ module Gallerist
   autoload :Library, 'gallerist/library'
   autoload :LibraryInUseError, 'gallerist/errors'
   autoload :LibraryNonExistant, 'gallerist/errors'
+  autoload :LoggingInitializationError, 'gallerist/errors'
+  autoload :Logging, 'gallerist/logging'
   autoload :MultiTag, 'gallerist/multi_tag'
   autoload :RaiseWarmupExceptions, 'gallerist/middleware/raise_warmup_exceptions'
 

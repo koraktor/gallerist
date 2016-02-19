@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 require 'unicorn'
 
@@ -16,6 +16,7 @@ module Rack::Handler::Unicorn
 
         unicorn_options = {
           listeners: [ '%s:%d' % [ options[:Host], options[:Port] ] ],
+          logger: options[:logger],
           worker_processes: options[:worker_processes] || 1
         }
 

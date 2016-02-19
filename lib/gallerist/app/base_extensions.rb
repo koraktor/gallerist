@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2016, Sebastian Staudt
 
 module Gallerist::App::BaseExtensions
 
@@ -10,7 +10,11 @@ module Gallerist::App::BaseExtensions
     builder.use Sinatra::ShowExceptions if development?
     builder.use Gallerist::RaiseWarmupExceptions
 
-    setup_logging builder
+    Gallerist::Logging.prepare
+    Gallerist::Logging.level = logging
+
+    builder.use Sinatra::CommonLogger, Gallerist::Logging.access_logger
+    builder.use Rack::Logger, logging
   end
 
 end

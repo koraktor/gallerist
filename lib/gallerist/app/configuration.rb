@@ -49,10 +49,8 @@ module Gallerist::App::Configuration
     configure :development do
       set :logging, ::Logger::DEBUG
 
-      debug_logger = ::Logger.new($stdout, ::Logger::DEBUG)
-
-      sprockets.logger = debug_logger
-      ActiveRecord::Base.logger = debug_logger
+      sprockets.logger = Gallerist::Logging.app_logger
+      ActiveRecord::Base.logger = Gallerist::Logging.app_logger
     end
 
     configure :production do

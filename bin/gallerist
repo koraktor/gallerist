@@ -30,6 +30,9 @@ opts = OptionParser.new do |opts|
   opts.on('-d', '--debug', 'Enable debug mode') do
     ENV['RACK_ENV'] = 'development'
   end
+  opts.on('-l', '--log-dir DIR') do |log_dir|
+    Gallerist.options[:log_dir] = log_dir
+  end
   opts.on('-n', '--no-copy', 'Disable temporary copies of the library databases') do
     Gallerist.options[:nocopy] = 'true'
   end
@@ -49,7 +52,10 @@ if Gallerist.options[:library].nil?
 end
 
 begin
+  Gallerist::Logging.prepare
+
   Rack::Server.start config: config_path,
+                     logger: Gallerist::Logging.server_logger,
                      server: :unicorn,
                      Port: Gallerist.options[:port],
                      worker_processes: 4
@@ -59,6 +65,8 @@ rescue Gallerist::LibraryInUseError
 rescue Gallerist::LibraryNonExistant
   $stderr.puts 'There’s no library at "%s".' % [ Gallerist.options[:library] ] <<
                ' Is the path correct?'
+rescue Gallerist::LoggingInitializationError
+  $stderr.puts 'Failed to initialize logging: %s' % [ $!.short_message ]
 rescue Errno::EADDRINUSE
   $stderr.puts ('Port %d is already in use.' % [ Gallerist.options[:port] ]) <<
                 ' Maybe another instance of Gallerist is already running.' <<

@@ -18,3 +18,19 @@ class Gallerist::LibraryNonExistant < StandardError
   end
 
 end
+
+class Gallerist::LoggingInitializationError < StandardError
+
+  def initialize(error)
+    super 'Logging could not be initialized: %s' % [ error.message ]
+  end
+
+  def short_message
+    if cause.is_a? Errno::EACCES
+      'No permission'
+    else
+      cause.message
+    end
+  end
+
+end
