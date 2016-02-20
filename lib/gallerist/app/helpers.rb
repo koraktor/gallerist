@@ -57,12 +57,11 @@ module Gallerist::App::Helpers
   end
 
   def widget_for(obj)
-    classes = []
+    classes = %w{label label-primary}
 
     case obj
     when Gallerist::Person
-      classes << 'label' << 'person'
-      classes << (current?(obj) ? 'label-info' : 'label-primary')
+      classes << 'person'
       if obj.key_face.source_width > obj.key_face.source_height
         size = '%f%% auto'
       else
@@ -73,8 +72,7 @@ module Gallerist::App::Helpers
               style="background-position: %f%% %f%%; background-size: %s"></span> %s' %
               [ obj.key_photo.id, obj.key_face.position_x, obj.key_face.position_y, size, obj.name ]
     when Gallerist::Tag
-      classes << 'label' << 'tag'
-      classes << (current?(obj) ? 'label-info' : 'label-primary')
+      classes << 'tag'
       link = obj.name
     else raise ArgumentError
     end
