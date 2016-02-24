@@ -7,6 +7,8 @@ engines:
       - javascript
   eslint:
     enabled: true
+  reek:
+    enabled: true
   rubocop:
     enabled: true
   scss-lint:
