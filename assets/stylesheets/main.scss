@@ -27,7 +27,8 @@
     position: absolute;
     width: 100%;
     z-index: -1;
-    transition: opacity 0.3s;
+
+    @include transition(opacity 0.3s);
   }
 
   .modal-next, .modal-prev {
@@ -41,7 +42,7 @@
     @include user-select(none);
 
     .fa-stack-1x, .fa-stack-2x {
-      transition: color 0.5s;
+      @include transition(color 0.5s);
     }
 
     .fa-stack-2x {
@@ -49,7 +50,8 @@
                     2px -2px 0 $carousel-control-color,
                    -2px  2px 0 $carousel-control-color,
                    -2px -2px 0 $carousel-control-color;
-      transition: text-shadow 0.3s;
+
+      @include transition(text-shadow 0.3s);
     }
 
     &:hover {
@@ -80,7 +82,8 @@
     left: 100%;
     position: absolute;
     width: 100%;
-    transition: left 0.5s ease-in-out;
+
+    @include transition(left 0.5s ease-in-out);
 
     p {
       padding: 0.5em 0.5em 0 0.5em;
@@ -111,8 +114,9 @@
     max-height: 95vh;
     overflow: hidden;
     position: relative;
-    transition: all 0.3s;
-    transition-delay: 0.2s;
+
+    @include transition(all 0.3s);
+    @include transition-delay(0.2s);
   }
 
   img, video {
@@ -120,8 +124,9 @@
     display: block;
     max-height: 95vh;
     max-width: 100%;
-    transition: all 0.3s;
-    transition-delay: 0.2s;
+
+    @include transition(all 0.3s);
+    @include transition-delay(0.2s);
   }
 
   &.in, .in {
@@ -185,7 +190,8 @@ h3 .face {
   display: inline-block;
   margin-right: 1pt;
   text-shadow: $gray-darker 2px 2px;
-  transition: background-color 0.2s ease-in-out;
+
+  @include transition(background-color 0.2s ease-in-out);
 }
 
 .selected-tags {
@@ -283,6 +289,7 @@ h3 .face {
                   1px -1px 1px $label-color,
                  -1px  1px 1px $label-color,
                  -1px -1px 1px $label-color;
-    transition: color 0.2s ease-in-out;
+
+    @include transition(color 0.2s ease-in-out);
   }
 }
