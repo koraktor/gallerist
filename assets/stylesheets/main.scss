@@ -188,6 +188,43 @@ h3 .face {
   transition: background-color 0.2s ease-in-out;
 }
 
+.selected-tags {
+  bottom: 5px;
+  max-height: 197px;
+  padding-right: 30px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .btn {
+    margin-right: 5px;
+    @include transition(background-color 0.2s ease-in-out, border 0.2s ease-in-out, opacity .15s linear);
+  }
+
+  .panel {
+    height: 100%;
+  }
+
+  .panel-body {
+    max-height: 64px;
+  }
+}
+
+.tag-selection {
+  padding-bottom: 197px;;
+}
+
+.tag-selector {
+  color: $link-color;
+  cursor: copy;
+  @include transition(color 0.2s ease-in-out);
+  margin-left: 15px;
+
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+
 .thumbnail {
   .bottom-right {
     bottom: 1em;

@@ -1,7 +1,36 @@
 <h1>Tags</h1>
 
-<ul class="list-group">
+<div class="list-group">
   <% @tags.each do |tag| %>
-    <li class="list-group-item"><%= link_to tag %> (<%= tag.photos.count :all %>)</li>
+    <a class="list-group-item" href="<%= url_for tag %>">
+      <h4 class="list-group-item-heading"><%= tag.name %>
+        <i class="fa fa-plus-square-o tag-selector" data-name="<%= tag.name %>"
+           data-tag="<%= tag.simple_name %>"></i>
+      </h4>
+      <span class="list-group-item-text">
+        <%= tag.photos.count :all %> items
+      </span>
+    </a>
   <% end %>
-</ul>
+</div>
+
+<div class="collapse selected-tags" data-spy="affix">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h5>
+        Selected tags
+        <button type="button" class="close">&times;</button>
+      </h5>
+    </div>
+    <div id="selected-tags" class="panel-body">
+    </div>
+    <div class="panel-footer">
+      <button id="tag-selection-all" class="btn btn-info">
+        <i class="fa fa-tags"></i> All
+      </button>
+      <button id="tag-selection-one" class="btn btn-warning">
+        <i class="fa fa-tag"></i> At least one
+      </button>
+    </div>
+  </div>
+</div>
