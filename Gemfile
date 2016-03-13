@@ -9,7 +9,7 @@ gemspec
 
 group :development do
   gem 'coveralls', '~> 0.8', require: false
-  gem 'rake', '~> 10.4'
+  gem 'rake', '~> 11.0'
   gem 'rspec', '~> 3.2'
   gem 'rspec-activemodel-mocks', '~> 1.0'
 end
