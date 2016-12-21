@@ -1,6 +1,8 @@
 Gallerist
 =========
 
+[![Join the chat at https://gitter.im/koraktor/gallerist](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/koraktor/gallerist?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Gem Version](https://badge.fury.io/rb/gallerist.svg)](http://badge.fury.io/rb/gallerist)
 [![Build Status](https://travis-ci.org/koraktor/gallerist.svg)](https://travis-ci.org/koraktor/gallerist)
 [![Dependency Status](https://gemnasium.com/koraktor/gallerist.svg)](https://gemnasium.com/koraktor/gallerist)
