@@ -150,12 +150,12 @@ describe Gallerist::Library do
   context 'its file helper' do
 
     before do
-      allow(Dir).to receive(:glob) { |file, _| file }
+      allow(Dir).to receive(:glob) { |file| [ file ] }
     end
 
     it 'should fail gracefully' do
       allow(Dir).to \
-        receive(:glob).with('/some/file', File::FNM_CASEFOLD).
+        receive(:glob).with('/some/**/*').
         and_return []
 
       expect(library.file '/some', 'file').to eq('/some/file')
@@ -163,7 +163,7 @@ describe Gallerist::Library do
 
     it 'should return the first matching path' do
       allow(Dir).to \
-        receive(:glob).with('/some/file', File::FNM_CASEFOLD).
+        receive(:glob).with('/some/**/*').
         and_return [ '/some/FILE' ]
 
       expect(library.file '/some', 'file').to eq('/some/FILE')

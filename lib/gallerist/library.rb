@@ -52,7 +52,11 @@ class Gallerist::Library
 
   def file(*path_components)
     path = File.expand_path File.join(*path_components)
-    Dir.glob(path, File::FNM_CASEFOLD).first || path
+    Dir.glob(File.join File.dirname(path), '**', '*').each do |file|
+      return file if File.fnmatch? file, path, File::FNM_CASEFOLD
+    end
+
+    path
   end
 
   def iphoto?
