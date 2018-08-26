@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-sass', '~> 3.3'
   s.add_dependency 'font-awesome-sass', '~> 4.3'
   s.add_dependency 'jquery-cdn', '~> 2.1'
+  s.add_dependency 'puma', '~> 3.12'
   s.add_dependency 'rack', '~> 1.6'
   s.add_dependency 'sinatra', '~> 1.4', '>= 1.4.6'
   s.add_dependency 'sprockets-helpers', '~> 1.1'
   s.add_dependency 'sqlite3', '~> 1.3'
   s.add_dependency 'uglifier', '~> 3.0'
-  s.add_dependency 'unicorn', '~> 5.0'
 
   s.executables   = [ 'gallerist' ]
   s.files         = `git ls-files`.split

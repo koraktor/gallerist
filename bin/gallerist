@@ -56,9 +56,9 @@ begin
 
   Rack::Server.start config: config_path,
                      logger: Gallerist::Logging.server_logger,
-                     server: :unicorn,
+                     server: :puma,
                      Port: Gallerist.options[:port],
-                     worker_processes: 4
+                     Silent: true
 rescue Gallerist::LibraryInUseError
   $stderr.puts 'The library is currently in use.' <<
                ' Is it currently opened in Photos?'
