@@ -14,7 +14,7 @@ It is built on top of [Sinatra][sinatra].
 
  * One or more Photos or iPhoto libraries (`.photoslibrary` or `.photolibrary`
    directories)
- * Ruby 2.x
+ * Ruby 2.2+
 
 OS X 10.9 and above ship with Ruby 2.0. You can use [Homebrew][brew] to install
 a current Ruby version on older versions of OS X.
