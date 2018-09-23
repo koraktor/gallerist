@@ -1,13 +1,13 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2016, Sebastian Staudt
+# Copyright (c) 2016-2018, Sebastian Staudt
 
 require 'active_record'
 require 'rspec/active_model/mocks'
 
-require 'coveralls'
-Coveralls.wear!
+require 'simplecov'
+SimpleCov.start
 
 require 'gallerist'
 include Gallerist

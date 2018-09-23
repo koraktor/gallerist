@@ -8,7 +8,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :development do
-  gem 'coveralls', '~> 0.8', require: false
+  gem 'simplecov', require: false
   gem 'rake', '~> 12.3'
   gem 'rspec', '~> 3.2'
   gem 'rspec-activemodel-mocks', '~> 1.0'
