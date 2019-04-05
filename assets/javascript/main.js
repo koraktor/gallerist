@@ -7,6 +7,7 @@
 
 //=require 'jquery'
 //=require 'bootstrap-sprockets'
+//=require 'hammer'
 //=require 'layzr'
 
 HTMLImageElement.prototype.isLoaded = function() {
@@ -190,6 +191,15 @@ $(function(){
 
       photoModal.trigger('show');
     };
+
+    var swipe = new Hammer.Manager(photoModal[0], { recognizers: [[ Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL } ]] });
+    swipe.on('swipeleft', function() {
+      photoModal.find('.modal-prev').click()
+    });
+    swipe.on('swiperight', function() {
+      photoModal.find('.modal-next').click()
+    });
+    swipe.set({ enable: true });
 
     var persons = $('.persons span');
     var tags = $('.tags span');
