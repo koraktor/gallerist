@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 module Gallerist::PhotosExtensions::Person
 
@@ -16,6 +16,7 @@ module Gallerist::PhotosExtensions::Person
 
     default_scope do
       select(:modelId, :name, :representativeFaceId).
+      where.not(name: nil).
       order(person_type: :desc, manual_order: :asc)
     end
   end
