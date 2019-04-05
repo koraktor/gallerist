@@ -8,7 +8,7 @@ class Gallerist::Album < Gallerist::BaseModel
   self.table_name = 'RKAlbum'
 
   has_many :album_photos, primary_key: 'modelId', foreign_key: 'albumId'
-  has_one :key_photo, class_name: Gallerist::Photo, primary_key: 'posterVersionUuid', foreign_key: 'uuid'
+  has_one :key_photo, class_name: Gallerist::Photo.to_s, primary_key: 'posterVersionUuid', foreign_key: 'uuid'
   has_many :photos, through: :album_photos
 
   alias_attribute :date, :createDate
@@ -34,8 +34,7 @@ class Gallerist::Album < Gallerist::BaseModel
   end
 
   def key_photo_with_fallback
-    key_photo_without_fallback || photos.first
+    key_photo || photos.first
   end
-  alias_method_chain :key_photo, :fallback
 
 end

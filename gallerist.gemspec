@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 $LOAD_PATH << File.join(__dir__, 'lib')
 
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.summary     = 'A web application to browse Apple Photos and iPhoto libraries'
   s.description = 'View Photos and iPhoto libraries in your browser'
 
-  s.add_dependency 'activerecord', '~> 4.2'
+  s.add_dependency 'activerecord', '~> 5.2.0'
   s.add_dependency 'bootstrap-sass', '~> 3.3'
   s.add_dependency 'font-awesome-sass', '~> 4.3'
   s.add_dependency 'jquery-cdn', '~> 2.1'

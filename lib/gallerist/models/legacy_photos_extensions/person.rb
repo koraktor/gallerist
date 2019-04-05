@@ -8,7 +8,7 @@ module Gallerist::PhotosExtensions::Person
   def __extend
     self.table_name = 'RKPerson'
 
-    has_one :key_face, class_name: Gallerist::Face, primary_key: 'representativeFaceId', foreign_key: 'modelId'
+    has_one :key_face, class_name: Gallerist::Face.to_s, primary_key: 'representativeFaceId', foreign_key: 'modelId'
     has_many :person_photos, primary_key: 'modelId', foreign_key: 'personId'
 
     alias_attribute :person_type, :personType
