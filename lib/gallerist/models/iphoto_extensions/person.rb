@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 module Gallerist::IphotoExtensions::Person
 
@@ -15,6 +15,12 @@ module Gallerist::IphotoExtensions::Person
     default_scope do
       select(:modelId, :name, :faceKey, :keyVersionUuid).order(:manual_order)
     end
+  end
+
+  # ActiveRecord does not support has_many-through associations across
+  # different databases, so we have to query the photos manually
+  def photos
+    Gallerist::Photo.where modelId: person_photos.map(&:photo_id)
   end
 
 end

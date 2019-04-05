@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 class Gallerist::Person < Gallerist::PersonModel
 
@@ -11,10 +11,8 @@ class Gallerist::Person < Gallerist::PersonModel
     "#<#{self.class} id=#{id} name='#{name}'>"
   end
 
-  # ActiveRecord does not support has_many-through associations across
-  # different databases, so we have to query the photos manually
-  def photos
-    Gallerist::Photo.where modelId: person_photos.map(&:photo_id)
+  def favorite?
+    person_type == 1
   end
 
   def as_json(*)

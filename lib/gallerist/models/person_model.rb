@@ -1,11 +1,10 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 class Gallerist::PersonModel < Gallerist::BaseModel
 
   self.abstract_class = true
-  self.database = :person_db
 
 end

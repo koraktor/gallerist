@@ -44,7 +44,7 @@ describe Gallerist::Library do
   end
 
   it 'should be able to copy the main database to a temporary location' do
-    expect(library).to receive(:copy_tmp_db).with 'Library.apdb'
+    expect(library).to receive(:copy_tmp_db).with 'photos.db'
 
     library.copy_base_db
   end
@@ -65,7 +65,7 @@ describe Gallerist::Library do
   it 'should know its database paths' do
     expect(library.db_path).to eq('/some/library.photoslibrary/Database')
     expect(library.image_proxies_db).to eq('/some/library.photoslibrary/Database/ImageProxies.apdb')
-    expect(library.library_db).to eq('/some/library.photoslibrary/Database/Library.apdb')
+    expect(library.library_db).to eq('/some/library.photoslibrary/Database/photos.db')
   end
 
   it 'should have a human-readable text representation' do
@@ -97,6 +97,7 @@ describe Gallerist::Library do
 
     before do
       library.instance_variable_set :@app_id, 'com.apple.iPhoto'
+      library.instance_variable_set :@legacy, true
     end
 
     it 'should be able to copy extra databases to a temporary location' do
@@ -120,6 +121,34 @@ describe Gallerist::Library do
 
   end
 
+  context 'for a legacy Photos library' do
+
+    before do
+      library.instance_variable_set :@app_id, 'com.apple.Photos'
+      library.instance_variable_set :@legacy, true
+    end
+
+    it 'should be able to copy extra databases to a temporary location' do
+      expect(library).to receive(:copy_tmp_db).with 'ImageProxies.apdb'
+      expect(library).to receive(:copy_tmp_db).with 'Person.db'
+
+      library.copy_extra_dbs
+    end
+
+    it 'should not be an iPhoto library' do
+      expect(library.iphoto?).to be_falsey
+    end
+
+    it 'should know the path of the person database' do
+      expect(library.person_db).to eq('/some/library.photoslibrary/Database/Person.db')
+    end
+
+    it 'should have a type of :photos' do
+      expect(library.type).to eq(:legacy_photos)
+    end
+
+  end
+
   context 'for a Photos library' do
 
     before do
@@ -127,8 +156,7 @@ describe Gallerist::Library do
     end
 
     it 'should be able to copy extra databases to a temporary location' do
-      expect(library).to receive(:copy_tmp_db).with 'ImageProxies.apdb'
-      expect(library).to receive(:copy_tmp_db).with 'Person.db'
+      expect(library).not_to receive(:copy_tmp_db)
 
       library.copy_extra_dbs
     end

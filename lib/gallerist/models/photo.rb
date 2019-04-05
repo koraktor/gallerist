@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 class Gallerist::Photo < Gallerist::BaseModel
 
@@ -16,6 +16,7 @@ class Gallerist::Photo < Gallerist::BaseModel
 
   alias_attribute :date, :imageDate
   alias_attribute :file_name, :fileName
+  alias_attribute :previews_adjustment_uuid, :previewsAdjustmentUuid
   alias_attribute :show_in_library, :showInLibrary
 
   delegate :thumbnail_available?, to: :image_proxy_state, allow_nil: true
@@ -44,10 +45,6 @@ class Gallerist::Photo < Gallerist::BaseModel
     dir_name = File.dirname master.path
     image_name = File.basename(master.path, '.*') + '.jpg'
     File.join 'Previews', dir_name, image_name
-  end
-
-  def small_thumbnail_path
-    File.join 'Thumbnails', image_proxy_state.small_thumbnail_path
   end
 
 end

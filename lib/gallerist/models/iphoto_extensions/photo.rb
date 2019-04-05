@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 module Gallerist::IphotoExtensions::Photo
 
@@ -32,6 +32,10 @@ module Gallerist::IphotoExtensions::Photo
 
   def persons
     Gallerist::Person.where faceKey: person_photos.map(&:person_id)
+  end
+
+  def small_thumbnail_path
+    File.join 'Thumbnails', image_proxy_state.small_thumbnail_path
   end
 
   def video?

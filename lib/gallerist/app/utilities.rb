@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015-2016, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 module Gallerist::App::Utilities
 
@@ -46,8 +46,14 @@ module Gallerist::App::Utilities
       model.setup_for library.type
     end
 
-    Gallerist::ImageProxiesModel.use_library library
-    Gallerist::PersonModel.use_library library
+    if library.legacy?
+      logger.warn "  Legacy library versions are not fully supported and may cause problems."
+
+      Gallerist::ImageProxiesModel.database = :image_proxies_db
+      Gallerist::ImageProxiesModel.use_library library
+      Gallerist::PersonModel.database = :person_db
+      Gallerist::PersonModel.use_library library
+    end
 
     library
   rescue ActiveRecord::StatementInvalid
