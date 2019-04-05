@@ -24,6 +24,19 @@ HTMLVideoElement.prototype.isLoaded = function() {
   return this.readyState == 4
 };
 
+var slideshowEnabled = false;
+function slideshow() {
+  slideshowEnabled = true;
+  var thumbnails = $('.thumbnail');
+  var nextImage = function() {
+    thumbnails.eq(Math.floor(Math.random() * thumbnails.length)).click();
+    if (slideshowEnabled) {
+      setTimeout(nextImage, 5000);
+    }
+  };
+  nextImage()
+}
+
 $(function(){
   var layzr = new Layzr({
     threshold: 5
@@ -107,6 +120,10 @@ $(function(){
         break;
       case 73: // I
         photoModal.find('.metadata-button').click();
+        e.preventDefault();
+        break;
+      case 83: // S
+        slideshow();
         e.preventDefault()
     }
   });
