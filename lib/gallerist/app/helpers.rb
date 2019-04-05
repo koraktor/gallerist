@@ -1,7 +1,7 @@
 # This code is free software; you can redistribute it and/or modify it under
 # the terms of the new BSD License.
 #
-# Copyright (c) 2015-2016, Sebastian Staudt
+# Copyright (c) 2015-2019, Sebastian Staudt
 
 module Gallerist::App::Helpers
 
@@ -61,6 +61,8 @@ module Gallerist::App::Helpers
 
     case obj
     when Gallerist::Person
+      return if obj.key_face.nil? || obj.key_photo.nil?
+
       classes << 'person'
       if obj.key_face.source_width > obj.key_face.source_height
         size = '%f%% auto'
