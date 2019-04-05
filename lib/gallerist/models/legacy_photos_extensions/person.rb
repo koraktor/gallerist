@@ -16,7 +16,7 @@ module Gallerist::PhotosExtensions::Person
 
     default_scope do
       select(:modelId, :name, :representativeFaceId).
-      where.not(name: nil).
+      where.not(name: nil).where.not(name: '').
       order(person_type: :desc, manual_order: :asc)
     end
   end
