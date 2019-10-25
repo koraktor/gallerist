@@ -57,7 +57,7 @@ module Gallerist::App::Utilities
 
     library
   rescue ActiveRecord::StatementInvalid
-    if $!.original_exception.is_a? SQLite3::BusyException
+    if $!.cause.is_a? SQLite3::BusyException
       raise Gallerist::LibraryInUseError, settings.library_path
     end
     raise
